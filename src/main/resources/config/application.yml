@@ -1,0 +1,27 @@
+server:
+  port: 8080
+
+# 配置文件
+spring:
+  profiles:
+    active: dev
+
+
+# pagehelper
+pagehelper:
+    helperDialect: mysql
+    reasonable: false # 如果没有数据  返回空 而非最后一页的数据
+    supportMethodsArguments: true
+    params: count=countSql
+    returnPageInfo: check
+
+
+# 日志
+logging:
+  level:
+    com:
+      authorization:
+        privilege:
+          mapper: debug
+
+

@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.authorization.privilege.mapper.dsprivilegeread.system.SysSystemMapperRead" >
+
+  <resultMap id="BaseResultMap" type="com.authorization.privilege.entity.dsprivelege.system.SysSystem" >
+    <id column="sid" property="sid" jdbcType="VARCHAR" />
+    <result column="system_name" property="systemName" jdbcType="VARCHAR" />
+    <result column="system_key" property="systemKey" jdbcType="VARCHAR" />
+    <result column="description" property="description" jdbcType="VARCHAR" />
+    <result column="state" property="state" jdbcType="INTEGER" />
+    <result column="creator_id" property="creatorId" jdbcType="VARCHAR" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="updater_id" property="updaterId" jdbcType="VARCHAR" />
+    <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+
+
+  <!-- 查询系统分页列表返回MAP -->
+  <resultMap id="SelectSysSystemPageMap" type="com.authorization.privilege.vo.system.SysSystemVO">
+    <id column="sid" property="sid" jdbcType="VARCHAR" />
+    <result column="system_name" property="systemName" jdbcType="VARCHAR" />
+    <result column="system_key" property="systemKey" jdbcType="VARCHAR" />
+    <result column="creator_id" property="creatorId" jdbcType="VARCHAR" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+
+
+  <sql id="Base_Column_List" >
+    sid, system_name, system_key, description, state, creator_id, create_time, updater_id, update_time
+  </sql>
+
+
+  <!-- 根据主键查询系统对象 -->
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    SELECT
+        <include refid="Base_Column_List" />
+    FROM
+        sys_system
+    WHERE
+        sid = #{sid,jdbcType=VARCHAR}
+  </select>
+
+
+  <!-- 查询系统分页列表 -->
+  <select id="selectSysSystemPage" parameterType="com.authorization.privilege.vo.system.SysSystemVO"
+          resultMap="SelectSysSystemPageMap">
+    SELECT
+        s.sid, s.system_name, s.system_key, s.creator_id, s.create_time
+    FROM
+        sys_system AS s
+    <trim suffix="WHERE" prefixOverrides="AND|OR">
+        <if test="state != null">
+          AND s.state = 1
+        </if>
+    </trim>
+    ORDER BY s.create_time DESC
+  </select>
+
+
+
+</mapper>

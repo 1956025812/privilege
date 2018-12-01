@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.authorization.privilege.mapper.dsprivilegewrite.system.SysSystemMapperWrite" >
+
+  <resultMap id="BaseResultMap" type="com.authorization.privilege.entity.dsprivelege.system.SysSystem" >
+    <id column="sid" property="sid" jdbcType="VARCHAR" />
+    <result column="system_name" property="systemName" jdbcType="VARCHAR" />
+    <result column="system_key" property="systemKey" jdbcType="VARCHAR" />
+    <result column="description" property="description" jdbcType="VARCHAR" />
+    <result column="state" property="state" jdbcType="INTEGER" />
+    <result column="creator_id" property="creatorId" jdbcType="VARCHAR" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="updater_id" property="updaterId" jdbcType="VARCHAR" />
+    <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+
+
+  <sql id="Base_Column_List" >
+    sid, system_name, system_key, description, state, creator_id, create_time, updater_id, update_time
+  </sql>
+
+
+  <!-- 新增系统对象 -->
+  <insert id="insertSelective" parameterType="com.authorization.privilege.entity.dsprivelege.system.SysSystem"
+      useGeneratedKeys="true" keyProperty="sid">
+    INSERT INTO sys_system
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="sid != null" >
+        sid,
+      </if>
+      <if test="systemName != null" >
+        system_name,
+      </if>
+      <if test="systemKey != null" >
+        system_key,
+      </if>
+      <if test="description != null" >
+        description,
+      </if>
+      <if test="state != null" >
+        state,
+      </if>
+      <if test="creatorId != null" >
+        creator_id,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="updaterId != null" >
+        updater_id,
+      </if>
+      <if test="updateTime != null" >
+        update_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="sid != null" >
+        #{sid,jdbcType=VARCHAR},
+      </if>
+      <if test="systemName != null" >
+        #{systemName,jdbcType=VARCHAR},
+      </if>
+      <if test="systemKey != null" >
+        #{systemKey,jdbcType=VARCHAR},
+      </if>
+      <if test="description != null" >
+        #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="state != null" >
+        #{state,jdbcType=INTEGER},
+      </if>
+      <if test="creatorId != null" >
+        #{creatorId,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updaterId != null" >
+        #{updaterId,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null" >
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+
+
+  <!-- 修改系统对象 -->
+  <update id="updateByPrimaryKeySelective" parameterType="com.authorization.privilege.entity.dsprivelege.system.SysSystem" >
+    UPDATE sys_system
+        <set >
+          <if test="systemName != null" >
+            system_name = #{systemName,jdbcType=VARCHAR},
+          </if>
+          <if test="systemKey != null" >
+            system_key = #{systemKey,jdbcType=VARCHAR},
+          </if>
+          <if test="description != null" >
+            description = #{description,jdbcType=VARCHAR},
+          </if>
+          <if test="state != null" >
+            state = #{state,jdbcType=INTEGER},
+          </if>
+          <if test="creatorId != null" >
+            creator_id = #{creatorId,jdbcType=VARCHAR},
+          </if>
+          <if test="createTime != null" >
+            create_time = #{createTime,jdbcType=TIMESTAMP},
+          </if>
+          <if test="updaterId != null" >
+            updater_id = #{updaterId,jdbcType=VARCHAR},
+          </if>
+          <if test="updateTime != null" >
+            update_time = #{updateTime,jdbcType=TIMESTAMP},
+          </if>
+        </set>
+    WHERE
+          sid = #{sid,jdbcType=VARCHAR}
+  </update>
+
+
+</mapper>
