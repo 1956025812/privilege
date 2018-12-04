@@ -40,6 +40,14 @@ public class SysSystemReadServiceImpl implements SysSystemReadService {
 
         return ResultVO.getSuccess("查询系统分页列表成功", pageVO);
     }
+
+
+    @Override
+    public ResultVO<SysSystemVO> selectSysSystemVODetail(SysSystemVO sysSystemVO) throws Exception {
+
+        SysSystemVO newSysSystemVO = this.sysSystemReadMapper.selectSysSystemVODetail(sysSystemVO);
+        return ResultVO.getSuccess("查询系统对象详情成功", newSysSystemVO);
+    }
 }
 
 

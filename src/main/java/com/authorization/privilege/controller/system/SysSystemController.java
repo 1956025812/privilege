@@ -42,7 +42,6 @@ public class SysSystemController extends BaseController {
     }
 
 
-
     @ApiOperation("查询系统分页列表")
     @ApiImplicitParams({
             @ApiImplicitParam(paramType = "query", dataType = "Long", name = "currentPage", value = "当前页码", required = true),
@@ -53,6 +52,16 @@ public class SysSystemController extends BaseController {
     @GetMapping(value = "/page")
     public ResultVO<PageVO<SysSystemVO>> selectSysSystemPage(@ApiIgnore SysSystemVO sysSystemVO) throws Exception {
         return this.sysSystemReadService.selectSysSystemPage(sysSystemVO);
+    }
+
+
+    @ApiOperation("查询系统对象详情")
+    @ApiImplicitParams({
+            @ApiImplicitParam(paramType = "query", dataType = "String", name = "sid", value = "系统对象ID", required = true)
+    })
+    @GetMapping(value = "/detail")
+    public ResultVO<SysSystemVO> selectSysSystemVODetail(@ApiIgnore SysSystemVO sysSystemVO) throws Exception {
+        return this.sysSystemReadService.selectSysSystemVODetail(sysSystemVO);
     }
 
 

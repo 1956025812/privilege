@@ -15,8 +15,18 @@ public interface SysSystemReadService {
      * 查询系统分页列表
      *
      * @param sysSystemVO
-     * @return ResultVO
+     * @return PageVO
      * @throws Exception
      */
     ResultVO<PageVO<SysSystemVO>> selectSysSystemPage(SysSystemVO sysSystemVO) throws Exception;
+
+
+    /**
+     * 查询系统对象详情
+     *
+     * @param sysSystemVO
+     * @return SysSystemVO
+     * @throws Exception
+     */
+    ResultVO<SysSystemVO> selectSysSystemVODetail(SysSystemVO sysSystemVO) throws Exception;
 }
