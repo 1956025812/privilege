@@ -1,5 +1,6 @@
 package com.authorization.privilege.vo;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
 import io.swagger.annotations.ApiModelProperty;
 
 /**
@@ -8,6 +9,7 @@ import io.swagger.annotations.ApiModelProperty;
  * @param <T> 类型
  */
 
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class ResultVO<T> {
 
     @ApiModelProperty("状态码 0失败 1成功 ")

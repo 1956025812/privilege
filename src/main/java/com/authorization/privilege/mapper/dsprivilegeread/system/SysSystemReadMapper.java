@@ -8,7 +8,7 @@ import java.util.List;
 /**
  * 系统类读接口
  */
-public interface SysSystemMapperRead {
+public interface SysSystemReadMapper {
 
     /**
      * 根据主键查询系统对象

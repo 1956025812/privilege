@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.authorization.privilege.mapper.dsprivilegewrite.system.SysSystemMapperWrite" >
+<mapper namespace="com.authorization.privilege.mapper.dsprivilegewrite.system.SysSystemWriteMapper" >
 
   <resultMap id="BaseResultMap" type="com.authorization.privilege.entity.dsprivelege.system.SysSystem" >
     <id column="sid" property="sid" jdbcType="VARCHAR" />

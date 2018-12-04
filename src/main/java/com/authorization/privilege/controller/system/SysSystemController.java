@@ -2,6 +2,7 @@ package com.authorization.privilege.controller.system;
 
 import com.authorization.privilege.controller.BaseController;
 import com.authorization.privilege.service.system.SysSystemReadService;
+import com.authorization.privilege.service.system.SysSystemWriteService;
 import com.authorization.privilege.vo.PageVO;
 import com.authorization.privilege.vo.ResultVO;
 import com.authorization.privilege.vo.system.SysSystemVO;
@@ -10,10 +11,7 @@ import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import springfox.documentation.annotations.ApiIgnore;
 
 /**
@@ -28,6 +26,21 @@ public class SysSystemController extends BaseController {
 
     @Autowired
     private SysSystemReadService sysSystemReadService;
+    @Autowired
+    private SysSystemWriteService sysSystemWriteService;
+
+
+    @ApiOperation("新增系统对象")
+    @ApiImplicitParams({
+            @ApiImplicitParam(paramType = "body", dataType = "String", name = "systemName", value = "系统名称", required = true),
+            @ApiImplicitParam(paramType = "body", dataType = "String", name = "systemKey", value = "系统标识", required = false),
+            @ApiImplicitParam(paramType = "body", dataType = "String", name = "description", value = "系统描述", required = false),
+    })
+    @PostMapping(value = "/save")
+    public ResultVO<Void> saveSysSystem(@RequestBody @ApiIgnore SysSystemVO sysSystemVO) throws Exception {
+        return this.sysSystemWriteService.saveSysSystem(sysSystemVO);
+    }
+
 
 
     @ApiOperation("查询系统分页列表")

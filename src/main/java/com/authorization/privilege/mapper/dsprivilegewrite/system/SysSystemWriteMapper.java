@@ -6,7 +6,7 @@ import com.authorization.privilege.entity.dsprivelege.system.SysSystem;
 /**
  * 系统类写接口
  */
-public interface SysSystemMapperWrite {
+public interface SysSystemWriteMapper {
 
 
     /**
