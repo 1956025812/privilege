@@ -8,15 +8,15 @@
     <result column="system_key" property="systemKey" jdbcType="VARCHAR" />
     <result column="description" property="description" jdbcType="VARCHAR" />
     <result column="state" property="state" jdbcType="INTEGER" />
-    <result column="creator_id" property="creatorId" jdbcType="VARCHAR" />
+    <result column="create_uid" property="createUid" jdbcType="VARCHAR" />
     <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
-    <result column="updater_id" property="updaterId" jdbcType="VARCHAR" />
+    <result column="update_uid" property="updateUid" jdbcType="VARCHAR" />
     <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
   </resultMap>
 
 
   <sql id="Base_Column_List" >
-    sid, system_name, system_key, description, state, creator_id, create_time, updater_id, update_time
+    sid, system_name, system_key, description, state, create_uid, create_time, update_uid, update_time
   </sql>
 
 
@@ -40,14 +40,14 @@
       <if test="state != null" >
         state,
       </if>
-      <if test="creatorId != null" >
-        creator_id,
+      <if test="createUid != null" >
+        create_uid,
       </if>
       <if test="createTime != null" >
         create_time,
       </if>
-      <if test="updaterId != null" >
-        updater_id,
+      <if test="updateUid != null" >
+        update_uid,
       </if>
       <if test="updateTime != null" >
         update_time,
@@ -69,14 +69,14 @@
       <if test="state != null" >
         #{state,jdbcType=INTEGER},
       </if>
-      <if test="creatorId != null" >
-        #{creatorId,jdbcType=VARCHAR},
+      <if test="createUid != null" >
+        #{createUid,jdbcType=VARCHAR},
       </if>
       <if test="createTime != null" >
         #{createTime,jdbcType=TIMESTAMP},
       </if>
-      <if test="updaterId != null" >
-        #{updaterId,jdbcType=VARCHAR},
+      <if test="updateUid != null" >
+        #{updateUid,jdbcType=VARCHAR},
       </if>
       <if test="updateTime != null" >
         #{updateTime,jdbcType=TIMESTAMP},
@@ -101,14 +101,14 @@
           <if test="state != null" >
             state = #{state,jdbcType=INTEGER},
           </if>
-          <if test="creatorId != null" >
-            creator_id = #{creatorId,jdbcType=VARCHAR},
+          <if test="createUid != null" >
+            create_uid = #{createUid,jdbcType=VARCHAR},
           </if>
           <if test="createTime != null" >
             create_time = #{createTime,jdbcType=TIMESTAMP},
           </if>
-          <if test="updaterId != null" >
-            updater_id = #{updaterId,jdbcType=VARCHAR},
+          <if test="updateUid != null" >
+            update_uid = #{updateUid,jdbcType=VARCHAR},
           </if>
           <if test="updateTime != null" >
             update_time = #{updateTime,jdbcType=TIMESTAMP},

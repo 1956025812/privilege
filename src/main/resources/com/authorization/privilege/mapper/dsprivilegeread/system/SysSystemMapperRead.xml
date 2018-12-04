@@ -8,9 +8,9 @@
     <result column="system_key" property="systemKey" jdbcType="VARCHAR" />
     <result column="description" property="description" jdbcType="VARCHAR" />
     <result column="state" property="state" jdbcType="INTEGER" />
-    <result column="creator_id" property="creatorId" jdbcType="VARCHAR" />
+    <result column="create_uid" property="createUid" jdbcType="VARCHAR" />
     <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
-    <result column="updater_id" property="updaterId" jdbcType="VARCHAR" />
+    <result column="update_uid" property="updaterUid" jdbcType="VARCHAR" />
     <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
   </resultMap>
 
@@ -20,13 +20,14 @@
     <id column="sid" property="sid" jdbcType="VARCHAR" />
     <result column="system_name" property="systemName" jdbcType="VARCHAR" />
     <result column="system_key" property="systemKey" jdbcType="VARCHAR" />
-    <result column="creator_id" property="creatorId" jdbcType="VARCHAR" />
+    <result column="create_uid" property="createUid" jdbcType="VARCHAR" />
     <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="creator_name" property="creatorName" jdbcType="VARCHAR" />
   </resultMap>
 
 
   <sql id="Base_Column_List" >
-    sid, system_name, system_key, description, state, creator_id, create_time, updater_id, update_time
+    sid, system_name, system_key, description, state, create_uid, create_time, update_uid, update_time
   </sql>
 
 
@@ -45,15 +46,24 @@
   <select id="selectSysSystemPage" parameterType="com.authorization.privilege.vo.system.SysSystemVO"
           resultMap="SelectSysSystemPageMap">
     SELECT
-        s.sid, s.system_name, s.system_key, s.creator_id, s.create_time
+        s.sid, s.system_name, s.system_key, s.create_uid, s.create_time,
+        u.nickname AS creator_name
     FROM
         sys_system AS s
-    <trim suffix="WHERE" prefixOverrides="AND|OR">
+        LEFT JOIN sys_user AS u ON u.uid = s.create_uid
+    <trim prefix="WHERE" prefixOverrides="AND|OR">
         <if test="state != null">
-          AND s.state = 1
+            AND s.state = #{state}
+        </if>
+        <if test="systemName != null and systemName != ''">
+            AND s.system_name LIKE CONCAT("%", #{systemName} ,"%")
+        </if>
+        <if test="systemKey != null and systemKey != ''">
+            AND s.system_key LIKE CONCAT("%", #{systemKey} ,"%")
         </if>
     </trim>
-    ORDER BY s.create_time DESC
+    ORDER BY
+        s.create_time DESC
   </select>
 
 

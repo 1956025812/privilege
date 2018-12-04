@@ -1,5 +1,6 @@
 package com.authorization.privilege.service.impl.system;
 
+import com.authorization.privilege.constant.system.SysSystemEnum;
 import com.authorization.privilege.mapper.dsprivilegeread.system.SysSystemMapperRead;
 import com.authorization.privilege.service.system.SysSystemReadService;
 import com.authorization.privilege.vo.PageVO;
@@ -28,6 +29,7 @@ public class SysSystemReadServiceImpl implements SysSystemReadService {
     public ResultVO<PageVO<SysSystemVO>> selectSysSystemPage(SysSystemVO sysSystemVO) throws Exception {
 
         PageHelper.startPage(sysSystemVO.getCurrentPage(), sysSystemVO.getPageSize());
+        sysSystemVO.setState(SysSystemEnum.STATE_NORMAL.getIntValue());
         List<SysSystemVO> sysSystemVOList = this.sysSystemMapperRead.selectSysSystemPage(sysSystemVO);
         PageInfo<SysSystemVO> pageInfo = new PageInfo<>(sysSystemVOList);
 

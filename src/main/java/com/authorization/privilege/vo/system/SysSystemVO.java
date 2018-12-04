@@ -18,6 +18,10 @@ public class SysSystemVO extends SysSystem {
     @ApiModelProperty("每页条数")
     private Integer pageSize;
 
+    @ApiModelProperty("创建人名称")
+    private String creatorName;
+
+
     public Integer getCurrentPage() {
         return currentPage;
     }
@@ -32,5 +36,13 @@ public class SysSystemVO extends SysSystem {
 
     public void setPageSize(Integer pageSize) {
         this.pageSize = pageSize;
+    }
+
+    public String getCreatorName() {
+        return creatorName;
+    }
+
+    public void setCreatorName(String creatorName) {
+        this.creatorName = creatorName;
     }
 }

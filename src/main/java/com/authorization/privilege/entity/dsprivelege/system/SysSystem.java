@@ -1,5 +1,6 @@
 package com.authorization.privilege.entity.dsprivelege.system;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import io.swagger.annotations.ApiModelProperty;
 
 import java.io.Serializable;
@@ -26,13 +27,13 @@ public class SysSystem implements Serializable {
     private Integer state;
 
     @ApiModelProperty("创建人ID")
-    private String creatorId;
+    private String createUid;
 
     @ApiModelProperty("创建时间")
     private Date createTime;
 
     @ApiModelProperty("修改人ID")
-    private String updaterId;
+    private String updateUid;
 
     @ApiModelProperty("修改时间")
     private Date updateTime;
@@ -77,14 +78,23 @@ public class SysSystem implements Serializable {
         this.state = state;
     }
 
-    public String getCreatorId() {
-        return creatorId;
+    public String getCreateUid() {
+        return createUid;
     }
 
-    public void setCreatorId(String creatorId) {
-        this.creatorId = creatorId == null ? null : creatorId.trim();
+    public void setCreateUid(String createUid) {
+        this.createUid = createUid;
     }
 
+    public String getUpdateUid() {
+        return updateUid;
+    }
+
+    public void setUpdateUid(String updateUid) {
+        this.updateUid = updateUid;
+    }
+
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
     public Date getCreateTime() {
         return createTime;
     }
@@ -93,14 +103,7 @@ public class SysSystem implements Serializable {
         this.createTime = createTime;
     }
 
-    public String getUpdaterId() {
-        return updaterId;
-    }
-
-    public void setUpdaterId(String updaterId) {
-        this.updaterId = updaterId == null ? null : updaterId.trim();
-    }
-
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
     public Date getUpdateTime() {
         return updateTime;
     }
