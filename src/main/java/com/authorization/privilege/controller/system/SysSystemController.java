@@ -36,7 +36,7 @@ public class SysSystemController extends BaseController {
             @ApiImplicitParam(paramType = "body", dataType = "String", name = "systemKey", value = "系统标识", required = false),
             @ApiImplicitParam(paramType = "body", dataType = "String", name = "description", value = "系统描述", required = false)
     })
-    @PostMapping(value = "/save")
+    @PostMapping("/save")
     public ResultVO<Void> saveSysSystem(@RequestBody @ApiIgnore SysSystemVO sysSystemVO) throws Exception {
         return this.sysSystemWriteService.saveSysSystem(sysSystemVO);
     }
@@ -48,9 +48,19 @@ public class SysSystemController extends BaseController {
             @ApiImplicitParam(paramType = "body", dataType = "String", name = "systemName", value = "系统名称", required = false),
             @ApiImplicitParam(paramType = "body", dataType = "String", name = "description", value = "系统描述", required = false)
     })
-    @PostMapping(value = "/update")
+    @PostMapping("/update")
     public ResultVO<Void> updateSysSystem(@RequestBody @ApiIgnore SysSystemVO sysSystemVO) throws Exception {
         return this.sysSystemWriteService.updateSysSystem(sysSystemVO);
+    }
+
+
+    @ApiOperation("删除系统")
+    @ApiImplicitParams({
+            @ApiImplicitParam(paramType = "body", dataType = "String", name = "sid", value = "系统对象ID", required = true)
+    })
+    @PostMapping("/del")
+    public ResultVO<Void> delSysSystem(@RequestBody @ApiIgnore SysSystemVO sysSystemVO) throws Exception {
+        return this.sysSystemWriteService.delSysSystem(sysSystemVO);
     }
 
 
@@ -61,7 +71,7 @@ public class SysSystemController extends BaseController {
             @ApiImplicitParam(paramType = "query", dataType = "String", name = "systemName", value = "系统名称", required = false),
             @ApiImplicitParam(paramType = "query", dataType = "String", name = "systemKey", value = "系统标识", required = false)
     })
-    @GetMapping(value = "/page")
+    @GetMapping("/page")
     public ResultVO<PageVO<SysSystemVO>> selectSysSystemPage(@ApiIgnore SysSystemVO sysSystemVO) throws Exception {
         return this.sysSystemReadService.selectSysSystemPage(sysSystemVO);
     }
@@ -71,12 +81,10 @@ public class SysSystemController extends BaseController {
     @ApiImplicitParams({
             @ApiImplicitParam(paramType = "query", dataType = "String", name = "sid", value = "系统对象ID", required = true)
     })
-    @GetMapping(value = "/detail")
+    @GetMapping("/detail")
     public ResultVO<SysSystemVO> selectSysSystemVODetail(@ApiIgnore SysSystemVO sysSystemVO) throws Exception {
         return this.sysSystemReadService.selectSysSystemVODetail(sysSystemVO);
     }
-
-
 
 
 }

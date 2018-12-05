@@ -29,4 +29,14 @@ public interface SysSystemWriteService {
      * @throws Exception
      */
     ResultVO<Void> updateSysSystem(SysSystemVO sysSystemVO) throws Exception;
+
+
+    /**
+     * 删除系统
+     *
+     * @param sysSystemVO
+     * @return VOID
+     * @throws Exception
+     */
+    ResultVO<Void> delSysSystem(SysSystemVO sysSystemVO) throws Exception;
 }
