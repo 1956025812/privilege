@@ -32,7 +32,8 @@ public class SysSystemController extends BaseController {
 
     @ApiOperation("新增系统对象")
     @ApiImplicitParams({
-            @ApiImplicitParam(paramType = "body", dataType = "String", name = "systemName", value = "系统名称", required = true),
+            @ApiImplicitParam(paramType = "body", dataType = "String", name = "loginUid", value = "登录用户ID", required = true),
+            @ApiImplicitParam(paramType = "body", dataType = "String", name = "systemName", value = "系统名称", required = false),
             @ApiImplicitParam(paramType = "body", dataType = "String", name = "systemKey", value = "系统标识", required = false),
             @ApiImplicitParam(paramType = "body", dataType = "String", name = "description", value = "系统描述", required = false)
     })
@@ -44,7 +45,8 @@ public class SysSystemController extends BaseController {
 
     @ApiOperation("修改系统对象")
     @ApiImplicitParams({
-            @ApiImplicitParam(paramType = "body", dataType = "String", name = "sid", value = "系统ID", required = true),
+            @ApiImplicitParam(paramType = "body", dataType = "String", name = "loginUid", value = "登录用户ID", required = true),
+            @ApiImplicitParam(paramType = "body", dataType = "String", name = "sid", value = "系统ID", required = false),
             @ApiImplicitParam(paramType = "body", dataType = "String", name = "systemName", value = "系统名称", required = false),
             @ApiImplicitParam(paramType = "body", dataType = "String", name = "description", value = "系统描述", required = false)
     })
@@ -56,7 +58,8 @@ public class SysSystemController extends BaseController {
 
     @ApiOperation("删除系统")
     @ApiImplicitParams({
-            @ApiImplicitParam(paramType = "body", dataType = "String", name = "sid", value = "系统对象ID", required = true)
+            @ApiImplicitParam(paramType = "body", dataType = "String", name = "loginUid", value = "登录用户ID", required = true),
+            @ApiImplicitParam(paramType = "body", dataType = "String", name = "sid", value = "系统对象ID", required = false)
     })
     @PostMapping("/del")
     public ResultVO<Void> delSysSystem(@RequestBody @ApiIgnore SysSystemVO sysSystemVO) throws Exception {
@@ -66,6 +69,7 @@ public class SysSystemController extends BaseController {
 
     @ApiOperation("查询系统分页列表")
     @ApiImplicitParams({
+            @ApiImplicitParam(paramType = "query", dataType = "String", name = "loginUid", value = "登录用户ID", required = true),
             @ApiImplicitParam(paramType = "query", dataType = "Long", name = "currentPage", value = "当前页码", required = true),
             @ApiImplicitParam(paramType = "query", dataType = "Long", name = "pageSize", value = "每页记录数", required = true),
             @ApiImplicitParam(paramType = "query", dataType = "String", name = "systemName", value = "系统名称", required = false),
@@ -79,6 +83,7 @@ public class SysSystemController extends BaseController {
 
     @ApiOperation("查询系统对象详情")
     @ApiImplicitParams({
+            @ApiImplicitParam(paramType = "query", dataType = "String", name = "loginUid", value = "登录用户ID", required = true),
             @ApiImplicitParam(paramType = "query", dataType = "String", name = "sid", value = "系统对象ID", required = true)
     })
     @GetMapping("/detail")

@@ -34,7 +34,7 @@ public class SysSystemWriteServiceImpl implements SysSystemWriteService {
         sysSystem.setSystemName(sysSystemVO.getSystemName());
         sysSystem.setSystemKey(sysSystemVO.getSystemKey());
         sysSystem.setDescription(sysSystemVO.getDescription());
-        sysSystem.setCreateUid("0");
+        sysSystem.setCreateUid(sysSystemVO.getLoginUid());
         sysSystem.setCreateTime(new Date());
         sysSystem.setState(SysSystemEnum.STATE_NORMAL.getIntValue());
         this.sysSystemWriteMapper.insertSelective(sysSystem);
@@ -51,7 +51,7 @@ public class SysSystemWriteServiceImpl implements SysSystemWriteService {
         sysSystem.setSid(sysSystemVO.getSid());
         sysSystem.setSystemName(sysSystemVO.getSystemName());
         sysSystem.setDescription(sysSystemVO.getDescription());
-        sysSystem.setUpdateUid("0");
+        sysSystem.setUpdateUid(sysSystemVO.getLoginUid());
         sysSystem.setUpdateTime(new Date());
         this.sysSystemWriteMapper.updateByPrimaryKeySelective(sysSystem);
 
@@ -66,6 +66,8 @@ public class SysSystemWriteServiceImpl implements SysSystemWriteService {
         SysSystem sysSystem = new SysSystem();
         sysSystem.setSid(sysSystemVO.getSid());
         sysSystem.setState(SysSystemEnum.STATE_DEL.getIntValue());
+        sysSystem.setUpdateUid(sysSystemVO.getLoginUid());
+        sysSystem.setUpdateTime(new Date());
         this.sysSystemWriteMapper.updateByPrimaryKeySelective(sysSystem);
 
         return ResultVO.getSuccess("删除系统成功");

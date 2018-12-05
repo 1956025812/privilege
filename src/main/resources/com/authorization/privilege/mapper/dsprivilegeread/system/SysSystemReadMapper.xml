@@ -2,70 +2,105 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.authorization.privilege.mapper.dsprivilegeread.system.SysSystemReadMapper" >
 
-  <resultMap id="BaseResultMap" type="com.authorization.privilege.entity.dsprivelege.system.SysSystem" >
-    <id column="sid" property="sid" jdbcType="VARCHAR" />
-    <result column="system_name" property="systemName" jdbcType="VARCHAR" />
-    <result column="system_key" property="systemKey" jdbcType="VARCHAR" />
-    <result column="description" property="description" jdbcType="VARCHAR" />
-    <result column="state" property="state" jdbcType="INTEGER" />
-    <result column="create_uid" property="createUid" jdbcType="VARCHAR" />
-    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
-    <result column="update_uid" property="updaterUid" jdbcType="VARCHAR" />
-    <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
-  </resultMap>
+    <resultMap id="BaseResultMap" type="com.authorization.privilege.entity.dsprivelege.system.SysSystem" >
+        <id column="sid" property="sid" jdbcType="VARCHAR" />
+        <result column="system_name" property="systemName" jdbcType="VARCHAR" />
+        <result column="system_key" property="systemKey" jdbcType="VARCHAR" />
+        <result column="description" property="description" jdbcType="VARCHAR" />
+        <result column="state" property="state" jdbcType="INTEGER" />
+        <result column="create_uid" property="createUid" jdbcType="VARCHAR" />
+        <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+        <result column="update_uid" property="updaterUid" jdbcType="VARCHAR" />
+        <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+    </resultMap>
 
 
-  <!-- 查询系统分页列表返回MAP -->
-  <resultMap id="SelectSysSystemPageMap" type="com.authorization.privilege.vo.system.SysSystemVO">
-    <id column="sid" property="sid" jdbcType="VARCHAR" />
-    <result column="system_name" property="systemName" jdbcType="VARCHAR" />
-    <result column="system_key" property="systemKey" jdbcType="VARCHAR" />
-    <result column="create_uid" property="createUid" jdbcType="VARCHAR" />
-    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
-    <result column="creator_name" property="creatorName" jdbcType="VARCHAR" />
-  </resultMap>
+    <!-- 查询系统分页列表返回MAP -->
+    <resultMap id="SelectSysSystemPageMap" type="com.authorization.privilege.vo.system.SysSystemVO">
+        <id column="sid" property="sid" jdbcType="VARCHAR" />
+        <result column="system_name" property="systemName" jdbcType="VARCHAR" />
+        <result column="system_key" property="systemKey" jdbcType="VARCHAR" />
+        <result column="create_uid" property="createUid" jdbcType="VARCHAR" />
+        <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+        <result column="create_name" property="createName" jdbcType="VARCHAR" />
+    </resultMap>
 
 
-  <sql id="Base_Column_List" >
+    <!-- 查询系统对象详情返回MAP -->
+    <resultMap id="SelectSysSystemVODetailMap" type="com.authorization.privilege.vo.system.SysSystemVO">
+        <id column="sid" property="sid" jdbcType="VARCHAR" />
+        <result column="system_name" property="systemName" jdbcType="VARCHAR" />
+        <result column="system_key" property="systemKey" jdbcType="VARCHAR" />
+        <result column="description" property="description" jdbcType="VARCHAR" />
+        <result column="state" property="state" jdbcType="INTEGER" />
+        <result column="create_uid" property="createUid" jdbcType="VARCHAR" />
+        <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+        <result column="update_uid" property="updateUid" jdbcType="VARCHAR" />
+        <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+        <result column="description" property="description" jdbcType="VARCHAR" />
+        <result column="create_name" property="createName" jdbcType="VARCHAR" />
+        <result column="update_name" property="updateName" jdbcType="VARCHAR" />
+    </resultMap>
+
+
+    <sql id="Base_Column_List" >
     sid, system_name, system_key, description, state, create_uid, create_time, update_uid, update_time
   </sql>
 
 
-  <!-- 根据主键查询系统对象 -->
-  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
-    SELECT
-        <include refid="Base_Column_List" />
-    FROM
-        sys_system
-    WHERE
-        sid = #{sid,jdbcType=VARCHAR}
-  </select>
+    <!-- 根据主键查询系统对象 -->
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+        SELECT
+            <include refid="Base_Column_List" />
+        FROM
+            sys_system
+        WHERE
+            sid = #{sid,jdbcType=VARCHAR}
+    </select>
 
 
-  <!-- 查询系统分页列表 -->
-  <select id="selectSysSystemPage" parameterType="com.authorization.privilege.vo.system.SysSystemVO"
-          resultMap="SelectSysSystemPageMap">
-    SELECT
-        s.sid, s.system_name, s.system_key, s.create_uid, s.create_time,
-        u.nickname AS creator_name
-    FROM
-        sys_system AS s
+    <!-- 查询系统分页列表 -->
+    <select id="selectSysSystemPage" parameterType="com.authorization.privilege.vo.system.SysSystemVO"
+            resultMap="SelectSysSystemPageMap">
+        SELECT
+            s.sid, s.system_name, s.system_key, s.create_uid, s.create_time,
+            u.nickname AS create_name
+        FROM
+            sys_system AS s
         LEFT JOIN sys_user AS u ON u.uid = s.create_uid
-    <trim prefix="WHERE" prefixOverrides="AND|OR">
-        <if test="state != null">
-            AND s.state = #{state}
-        </if>
-        <if test="systemName != null and systemName != ''">
-            AND s.system_name LIKE CONCAT("%", #{systemName} ,"%")
-        </if>
-        <if test="systemKey != null and systemKey != ''">
-            AND s.system_key LIKE CONCAT("%", #{systemKey} ,"%")
-        </if>
-    </trim>
-    ORDER BY
-        s.create_time DESC
-  </select>
+        <trim prefix="WHERE" prefixOverrides="AND|OR">
+            <if test="state != null">
+                AND s.state = #{state}
+            </if>
+            <if test="systemName != null and systemName != ''">
+                AND s.system_name LIKE CONCAT("%", #{systemName} ,"%")
+            </if>
+            <if test="systemKey != null and systemKey != ''">
+                AND s.system_key LIKE CONCAT("%", #{systemKey} ,"%")
+            </if>
+        </trim>
+        ORDER BY
+            s.create_time DESC
+    </select>
 
+
+    <!-- 查询系统对象详情 -->
+    <select id="selectSysSystemVODetail" parameterType="com.authorization.privilege.vo.system.SysSystemVO"
+            resultMap="SelectSysSystemVODetailMap">
+        SELECT
+            s.sid, s.system_name, s.system_key, s.create_uid, s.create_time, s.update_uid, s.update_time, s.description,
+            u1.nickname AS create_name,
+            u1.nickname AS update_name
+        FROM
+            sys_system AS s
+            LEFT JOIN sys_user AS u1 ON u1.uid = s.create_uid
+            LEFT JOIN sys_user AS u2 ON u2.uid = s.update_uid
+        <trim prefix="WHERE" prefixOverrides="AND|OR">
+            <if test="sid != null and sid != ''">
+                AND s.sid = #{sid}
+            </if>
+        </trim>
+    </select>
 
 
 </mapper>

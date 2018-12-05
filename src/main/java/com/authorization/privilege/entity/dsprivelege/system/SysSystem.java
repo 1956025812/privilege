@@ -94,7 +94,6 @@ public class SysSystem implements Serializable {
         this.updateUid = updateUid;
     }
 
-    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
     public Date getCreateTime() {
         return createTime;
     }
@@ -103,7 +102,6 @@ public class SysSystem implements Serializable {
         this.createTime = createTime;
     }
 
-    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
     public Date getUpdateTime() {
         return updateTime;
     }
