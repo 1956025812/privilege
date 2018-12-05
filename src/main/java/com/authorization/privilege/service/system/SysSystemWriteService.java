@@ -13,6 +13,7 @@ public interface SysSystemWriteService {
 
     /**
      * 新增系统
+     *
      * @param sysSystemVO
      * @return VOID
      * @throws Exception
@@ -20,4 +21,12 @@ public interface SysSystemWriteService {
     ResultVO<Void> saveSysSystem(SysSystemVO sysSystemVO) throws Exception;
 
 
+    /**
+     * 修改系统
+     *
+     * @param sysSystemVO
+     * @return VOID
+     * @throws Exception
+     */
+    ResultVO<Void> updateSysSystem(SysSystemVO sysSystemVO) throws Exception;
 }

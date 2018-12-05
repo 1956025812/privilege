@@ -34,11 +34,23 @@ public class SysSystemController extends BaseController {
     @ApiImplicitParams({
             @ApiImplicitParam(paramType = "body", dataType = "String", name = "systemName", value = "系统名称", required = true),
             @ApiImplicitParam(paramType = "body", dataType = "String", name = "systemKey", value = "系统标识", required = false),
-            @ApiImplicitParam(paramType = "body", dataType = "String", name = "description", value = "系统描述", required = false),
+            @ApiImplicitParam(paramType = "body", dataType = "String", name = "description", value = "系统描述", required = false)
     })
     @PostMapping(value = "/save")
     public ResultVO<Void> saveSysSystem(@RequestBody @ApiIgnore SysSystemVO sysSystemVO) throws Exception {
         return this.sysSystemWriteService.saveSysSystem(sysSystemVO);
+    }
+
+
+    @ApiOperation("修改系统对象")
+    @ApiImplicitParams({
+            @ApiImplicitParam(paramType = "body", dataType = "String", name = "sid", value = "系统ID", required = true),
+            @ApiImplicitParam(paramType = "body", dataType = "String", name = "systemName", value = "系统名称", required = false),
+            @ApiImplicitParam(paramType = "body", dataType = "String", name = "description", value = "系统描述", required = false)
+    })
+    @PostMapping(value = "/update")
+    public ResultVO<Void> updateSysSystem(@RequestBody @ApiIgnore SysSystemVO sysSystemVO) throws Exception {
+        return this.sysSystemWriteService.updateSysSystem(sysSystemVO);
     }
 
 
@@ -63,6 +75,8 @@ public class SysSystemController extends BaseController {
     public ResultVO<SysSystemVO> selectSysSystemVODetail(@ApiIgnore SysSystemVO sysSystemVO) throws Exception {
         return this.sysSystemReadService.selectSysSystemVODetail(sysSystemVO);
     }
+
+
 
 
 }

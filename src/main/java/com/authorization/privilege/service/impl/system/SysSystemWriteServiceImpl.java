@@ -41,4 +41,20 @@ public class SysSystemWriteServiceImpl implements SysSystemWriteService {
 
         return ResultVO.getSuccess("新增系统成功");
     }
+
+
+    @Transactional(rollbackFor = Exception.class)
+    @Override
+    public ResultVO<Void> updateSysSystem(SysSystemVO sysSystemVO) throws Exception {
+
+        SysSystem sysSystem = new SysSystem();
+        sysSystem.setSid(sysSystemVO.getSid());
+        sysSystem.setSystemName(sysSystemVO.getSystemName());
+        sysSystem.setDescription(sysSystemVO.getDescription());
+        sysSystem.setUpdateUid("0");
+        sysSystem.setUpdateTime(new Date());
+        this.sysSystemWriteMapper.updateByPrimaryKeySelective(sysSystem);
+
+        return ResultVO.getSuccess("修改系统成功");
+    }
 }
