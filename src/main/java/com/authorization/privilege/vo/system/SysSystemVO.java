@@ -19,10 +19,7 @@ public class SysSystemVO extends SysSystem {
     private Integer pageSize;
 
     @ApiModelProperty("创建人名称")
-    private String createName;
-
-    @ApiModelProperty("修改人名称")
-    private String updateName;
+    private String creatorName;
 
 
     public Integer getCurrentPage() {
@@ -41,19 +38,11 @@ public class SysSystemVO extends SysSystem {
         this.pageSize = pageSize;
     }
 
-    public String getCreateName() {
-        return createName;
+    public String getCreatorName() {
+        return creatorName;
     }
 
-    public void setCreateName(String createName) {
-        this.createName = createName;
-    }
-
-    public String getUpdateName() {
-        return updateName;
-    }
-
-    public void setUpdateName(String updateName) {
-        this.updateName = updateName;
+    public void setCreatorName(String creatorName) {
+        this.creatorName = creatorName;
     }
 }

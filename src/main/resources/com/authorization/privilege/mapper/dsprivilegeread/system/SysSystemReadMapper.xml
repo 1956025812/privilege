@@ -22,23 +22,7 @@
     <result column="system_key" property="systemKey" jdbcType="VARCHAR" />
     <result column="create_uid" property="createUid" jdbcType="VARCHAR" />
     <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
-    <result column="create_name" property="createName" jdbcType="VARCHAR" />
-  </resultMap>
-
-
-  <!-- 查询系统对象详情返回MAP -->
-  <resultMap id="SelectSysSystemVODetailMap" type="com.authorization.privilege.vo.system.SysSystemVO">
-      <id column="sid" property="sid" jdbcType="VARCHAR" />
-      <result column="system_name" property="systemName" jdbcType="VARCHAR" />
-      <result column="system_key" property="systemKey" jdbcType="VARCHAR" />
-      <result column="description" property="description" jdbcType="VARCHAR" />
-      <result column="state" property="state" jdbcType="INTEGER" />
-      <result column="create_uid" property="createUid" jdbcType="VARCHAR" />
-      <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
-      <result column="update_uid" property="updateUid" jdbcType="VARCHAR" />
-      <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
-      <result column="create_name" property="createName" jdbcType="VARCHAR" />
-      <result column="update_name" property="updateName" jdbcType="VARCHAR" />
+    <result column="creator_name" property="creatorName" jdbcType="VARCHAR" />
   </resultMap>
 
 
@@ -63,7 +47,7 @@
           resultMap="SelectSysSystemPageMap">
     SELECT
         s.sid, s.system_name, s.system_key, s.create_uid, s.create_time,
-        u.nickname AS create_name
+        u.nickname AS creator_name
     FROM
         sys_system AS s
         LEFT JOIN sys_user AS u ON u.uid = s.create_uid
@@ -82,24 +66,6 @@
         s.create_time DESC
   </select>
 
-
-  <!-- 查询系统对象详情 -->
-  <select id="selectSysSystemVODetail" parameterType="com.authorization.privilege.vo.system.SysSystemVO"
-          resultMap="SelectSysSystemVODetailMap">
-      SELECT
-        s.sid, s.system_name, s.system_key, s.create_uid, s.create_time, s.update_uid, s.update_time,
-        u1.nickname AS create_name,
-        u1.nickname AS update_name
-      FROM
-        sys_system AS s
-        LEFT JOIN sys_user AS u1 ON u1.uid = s.create_uid
-        LEFT JOIN sys_user AS u2 ON u2.uid = s.update_uid
-      <trim prefix="WHERE" prefixOverrides="AND|OR">
-          <if test="sid != null and sid != ''">
-              AND s.sid = #{sid}
-          </if>
-      </trim>
-  </select>
 
 
 </mapper>

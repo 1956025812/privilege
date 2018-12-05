@@ -30,11 +30,4 @@ public interface SysSystemReadMapper {
     List<SysSystemVO> selectSysSystemPage(SysSystemVO sysSystemVO) throws Exception;
 
 
-    /**
-     * 查询系统对象详情
-     * @param sysSystemVO
-     * @return SysSystemVO
-     * @throws Exception
-     */
-    SysSystemVO selectSysSystemVODetail(SysSystemVO sysSystemVO) throws Exception;
 }
