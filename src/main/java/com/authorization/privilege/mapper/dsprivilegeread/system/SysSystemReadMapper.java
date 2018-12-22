@@ -6,7 +6,7 @@ import com.authorization.privilege.vo.system.SysSystemVO;
 import java.util.List;
 
 /**
- * 系统类读接口
+ * 系统读MAPPER接口
  */
 public interface SysSystemReadMapper {
 
