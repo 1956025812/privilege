@@ -1,6 +1,7 @@
 package com.authorization.privilege.mapper.dsprivilegeread.user;
 
 import com.authorization.privilege.entity.dsprivelege.user.User;
+import com.authorization.privilege.vo.user.UserVO;
 
 /**
  * @author duxuebo
@@ -19,4 +20,12 @@ public interface UserReadMapper {
     User selectByPrimaryKey(String uid) throws Exception;
 
 
+    /**
+     * 查询用户VO对象
+     *
+     * @param userVO
+     * @return UserVO
+     * @throws Exception
+     */
+    UserVO selectUserVO(UserVO userVO) throws Exception;
 }

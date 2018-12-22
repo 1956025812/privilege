@@ -20,6 +20,14 @@
   </resultMap>
 
 
+  <!-- 查询用户VO对象返回MAP -->
+  <resultMap id="SelectUserVOMap" type="com.authorization.privilege.vo.user.UserVO">
+    <id column="uid" property="uid" jdbcType="VARCHAR" />
+    <result column="username" property="username" jdbcType="VARCHAR" />
+    <result column="nickname" property="nickname" jdbcType="VARCHAR" />
+  </resultMap>
+
+
   <sql id="Base_Column_List" >
     uid, username, password, nickname, email, phone, qq, wx, state, create_uid, create_time, 
     update_uid, update_time
@@ -35,6 +43,23 @@
         sys_user
     WHERE
         uid = #{uid,jdbcType=VARCHAR}
+  </select>
+
+
+  <!-- 查询用户VO对象 -->
+  <select id="selectUserVO" parameterType="com.authorization.privilege.vo.user.UserVO" resultMap="SelectUserVOMap">
+    SELECT
+        U.uid, U.username, U.nickname
+    FROM
+        sys_user AS U
+	<trim prefix="WHERE" prefixOverrides="AND|OR">
+        <if test="username != null and username != ''">
+            AND U.username = #{username}
+        </if>
+        <if test="password != null and password != ''">
+            AND U.password = #{password}
+        </if>
+    </trim>
   </select>
 
 
