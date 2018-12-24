@@ -18,5 +18,5 @@ public interface UserReadService {
      * @return UserVO
      * @throws Exception
      */
-    ResultVO<UserVO> selectUserVO(UserVO userVO) throws Exception;
+    ResultVO<UserVO> denglu(UserVO userVO) throws Exception;
 }

@@ -33,9 +33,9 @@ public class UserController extends BaseController {
             @ApiImplicitParam(paramType = "query", dataType = "String", name = "username", value = "账号", required = true),
             @ApiImplicitParam(paramType = "query", dataType = "String", name = "password", value = "密码", required = true)
     })
-    @GetMapping("/login")
+    @GetMapping("/denglu")
     public ResultVO<UserVO> login(@ApiIgnore UserVO userVO) throws Exception {
-        return this.userReadService.selectUserVO(userVO);
+        return this.userReadService.denglu(userVO);
     }
 
 

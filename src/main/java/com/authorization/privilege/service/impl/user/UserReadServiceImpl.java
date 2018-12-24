@@ -20,9 +20,17 @@ public class UserReadServiceImpl implements UserReadService {
 
 
     @Override
-    public ResultVO<UserVO> selectUserVO(UserVO userVO) throws Exception {
+    public ResultVO<UserVO> denglu(UserVO userVO) throws Exception {
+
+        ResultVO resultVO = null;
 
         UserVO newUserVO = this.userReadMapper.selectUserVO(userVO);
-        return ResultVO.getSuccess("查询用户成功", newUserVO);
+        if (null != newUserVO) {
+            resultVO = ResultVO.getSuccess("查询用户成功", newUserVO);
+        } else {
+            resultVO = ResultVO.getFailed("账号或密码错误，请重新输入");
+        }
+
+        return resultVO;
     }
 }
