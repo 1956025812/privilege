@@ -3,6 +3,7 @@ package com.authorization.privilege.vo;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import io.swagger.annotations.ApiModelProperty;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import java.util.Date;
 
@@ -88,11 +89,13 @@ public class BaseVO {
         this.loginUid = loginUid;
     }
 
+
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
     public Date getStartTime() {
         return startTime;
     }
 
+    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     public void setStartTime(Date startTime) {
         this.startTime = startTime;
     }
@@ -102,6 +105,7 @@ public class BaseVO {
         return endTime;
     }
 
+    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     public void setEndTime(Date endTime) {
         this.endTime = endTime;
     }
@@ -111,6 +115,7 @@ public class BaseVO {
         return startDate;
     }
 
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     public void setStartDate(Date startDate) {
         this.startDate = startDate;
     }
@@ -120,6 +125,7 @@ public class BaseVO {
         return endDate;
     }
 
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     public void setEndDate(Date endDate) {
         this.endDate = endDate;
     }
@@ -129,6 +135,7 @@ public class BaseVO {
         return startMonth;
     }
 
+    @DateTimeFormat(pattern = "yyyy-MM")
     public void setStartMonth(Date startMonth) {
         this.startMonth = startMonth;
     }
@@ -138,6 +145,7 @@ public class BaseVO {
         return endMonth;
     }
 
+    @DateTimeFormat(pattern = "yyyy-MM")
     public void setEndMonth(Date endMonth) {
         this.endMonth = endMonth;
     }

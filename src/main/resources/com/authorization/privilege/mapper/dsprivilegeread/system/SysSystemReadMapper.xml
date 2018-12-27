@@ -69,6 +69,7 @@
             sys_system AS s
         LEFT JOIN sys_user AS u ON u.uid = s.create_uid
         <trim prefix="WHERE" prefixOverrides="AND|OR">
+            AND s.state > 0
             <if test="state != null">
                 AND s.state = #{state}
             </if>
@@ -77,6 +78,12 @@
             </if>
             <if test="systemKey != null and systemKey != ''">
                 AND s.system_key LIKE CONCAT("%", #{systemKey} ,"%")
+            </if>
+            <if test="startTime != null">
+                AND s.create_time >= #{startTime}
+            </if>
+            <if test="endTime != null">
+                AND s.create_time <![CDATA[ <= ]]> #{endTime}
             </if>
         </trim>
         ORDER BY
