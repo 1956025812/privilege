@@ -86,6 +86,22 @@
 
 
   <!-- 修改系统对象 -->
+  <update id="updateByPrimaryKey" parameterType="com.authorization.privilege.entity.dsprivelege.system.SysSystem" >
+    UPDATE sys_system
+    SET system_name = #{systemName,jdbcType=VARCHAR},
+      system_key = #{systemKey,jdbcType=VARCHAR},
+      description = #{description,jdbcType=VARCHAR},
+      state = #{state,jdbcType=INTEGER},
+      create_uid = #{createUid,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_uid = #{updateUid,jdbcType=VARCHAR},
+      update_time = #{updateTime,jdbcType=TIMESTAMP}
+    WHERE
+      sid = #{sid,jdbcType=VARCHAR}
+  </update>
+
+
+  <!-- 修改系统对象(可选) -->
   <update id="updateByPrimaryKeySelective" parameterType="com.authorization.privilege.entity.dsprivelege.system.SysSystem" >
     UPDATE sys_system
         <set >

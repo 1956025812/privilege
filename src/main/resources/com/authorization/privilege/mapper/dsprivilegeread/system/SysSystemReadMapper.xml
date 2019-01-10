@@ -10,7 +10,7 @@
         <result column="state" property="state" jdbcType="INTEGER" />
         <result column="create_uid" property="createUid" jdbcType="VARCHAR" />
         <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
-        <result column="update_uid" property="updaterUid" jdbcType="VARCHAR" />
+        <result column="update_uid" property="updateUid" jdbcType="VARCHAR" />
         <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
     </resultMap>
 
