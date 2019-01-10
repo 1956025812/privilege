@@ -3,6 +3,8 @@ package com.authorization.privilege.mapper.dsprivilegeread.user;
 import com.authorization.privilege.entity.dsprivelege.user.User;
 import com.authorization.privilege.vo.user.UserVO;
 
+import java.util.List;
+
 /**
  * @author duxuebo
  * @date 2018/12/4
@@ -28,4 +30,14 @@ public interface UserReadMapper {
      * @throws Exception
      */
     UserVO selectUserVO(UserVO userVO) throws Exception;
+
+
+    /**
+     * 查询用户ID和名称列表
+     *
+     * @param userVO
+     * @return UserVO集合
+     * @throws Exception
+     */
+    List<UserVO> selectUserIdAndNameList(UserVO userVO) throws Exception;
 }

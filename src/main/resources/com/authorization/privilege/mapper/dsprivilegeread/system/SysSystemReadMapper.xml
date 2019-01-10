@@ -22,7 +22,6 @@
         <result column="system_key" property="systemKey" jdbcType="VARCHAR" />
         <result column="create_uid" property="createUid" jdbcType="VARCHAR" />
         <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
-        <result column="create_name" property="createName" jdbcType="VARCHAR" />
     </resultMap>
 
 
@@ -63,31 +62,26 @@
     <select id="selectSysSystemPage" parameterType="com.authorization.privilege.vo.system.SysSystemVO"
             resultMap="SelectSysSystemPageMap">
         SELECT
-            s.sid, s.system_name, s.system_key, s.create_uid, s.create_time,
-            u.nickname AS create_name
+            S.sid, S.system_name, S.system_key, S.create_uid, S.create_time
         FROM
-            sys_system AS s
-        LEFT JOIN sys_user AS u ON u.uid = s.create_uid
+            sys_system AS S
         <trim prefix="WHERE" prefixOverrides="AND|OR">
-            AND s.state > 0
-            <if test="state != null">
-                AND s.state = #{state}
-            </if>
+            AND S.state > 0
             <if test="systemName != null and systemName != ''">
-                AND s.system_name LIKE CONCAT("%", #{systemName} ,"%")
+                AND S.system_name LIKE CONCAT("%", #{systemName} ,"%")
             </if>
             <if test="systemKey != null and systemKey != ''">
-                AND s.system_key LIKE CONCAT("%", #{systemKey} ,"%")
+                AND S.system_key LIKE CONCAT("%", #{systemKey} ,"%")
             </if>
             <if test="startTime != null">
-                AND s.create_time >= #{startTime}
+                AND S.create_time >= #{startTime}
             </if>
             <if test="endTime != null">
-                AND s.create_time <![CDATA[ <= ]]> #{endTime}
+                AND S.create_time <![CDATA[ <= ]]> #{endTime}
             </if>
         </trim>
         ORDER BY
-            s.create_time DESC
+            S.create_time DESC
     </select>
 
 
@@ -95,16 +89,16 @@
     <select id="selectSysSystemVODetail" parameterType="com.authorization.privilege.vo.system.SysSystemVO"
             resultMap="SelectSysSystemVODetailMap">
         SELECT
-            s.sid, s.system_name, s.system_key, s.create_uid, s.create_time, s.update_uid, s.update_time, s.description,
+            S.sid, S.system_name, S.system_key, S.create_uid, S.create_time, S.update_uid, S.update_time, S.description,
             u1.nickname AS create_name,
             u1.nickname AS update_name
         FROM
-            sys_system AS s
+            sys_system AS S
             LEFT JOIN sys_user AS u1 ON u1.uid = s.create_uid
             LEFT JOIN sys_user AS u2 ON u2.uid = s.update_uid
         <trim prefix="WHERE" prefixOverrides="AND|OR">
             <if test="sid != null and sid != ''">
-                AND s.sid = #{sid}
+                AND S.sid = #{sid}
             </if>
         </trim>
     </select>

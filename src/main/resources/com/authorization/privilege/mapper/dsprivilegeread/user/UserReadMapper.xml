@@ -28,6 +28,13 @@
   </resultMap>
 
 
+ <!-- 查询用户ID和名称列表返回MAP -->
+ <resultMap id="SelectUserIdAndNameListMap" type="com.authorization.privilege.vo.user.UserVO">
+     <id column="uid" property="uid" jdbcType="VARCHAR" />
+     <result column="nickname" property="nickname" jdbcType="VARCHAR" />
+ </resultMap>
+
+
   <sql id="Base_Column_List" >
     uid, username, password, nickname, email, phone, qq, wx, state, create_uid, create_time, 
     update_uid, update_time
@@ -61,6 +68,18 @@
         </if>
     </trim>
   </select>
+
+
+  <!-- 查询用户ID和名称列表 -->
+  <select id="selectUserIdAndNameList" parameterType="com.authorization.privilege.vo.user.UserVO" resultMap="SelectUserIdAndNameListMap">
+    SELECT
+        U.uid, U.nickname
+    FROM
+        sys_user AS U
+    WHERE
+        U.state > 0
+  </select>
+
 
 
 </mapper>
