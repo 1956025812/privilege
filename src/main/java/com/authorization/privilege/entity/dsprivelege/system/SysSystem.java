@@ -1,5 +1,6 @@
 package com.authorization.privilege.entity.dsprivelege.system;
 
+import com.authorization.privilege.vo.BaseVO;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import io.swagger.annotations.ApiModelProperty;
 
@@ -7,9 +8,11 @@ import java.io.Serializable;
 import java.util.Date;
 
 /**
- * 系统类对象
+ * @author duxuebo
+ * @date 2018/12/1
+ * @description 系统对象类
  */
-public class SysSystem implements Serializable {
+public class SysSystem extends BaseVO implements Serializable {
 
     @ApiModelProperty("系统ID")
     private String sid;
@@ -94,6 +97,7 @@ public class SysSystem implements Serializable {
         this.updateUid = updateUid;
     }
 
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
     public Date getCreateTime() {
         return createTime;
     }
@@ -102,6 +106,7 @@ public class SysSystem implements Serializable {
         this.createTime = createTime;
     }
 
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
     public Date getUpdateTime() {
         return updateTime;
     }
