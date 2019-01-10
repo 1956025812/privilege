@@ -13,6 +13,7 @@ import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
+import org.springframework.util.StringUtils;
 
 import java.util.List;
 
@@ -75,8 +76,28 @@ public class SysSystemReadServiceImpl implements SysSystemReadService {
     @Override
     public ResultVO<SysSystemVO> selectSysSystemVODetail(SysSystemVO sysSystemVO) throws Exception {
 
-        SysSystemVO newSysSystemVO = this.sysSystemReadMapper.selectSysSystemVODetail(sysSystemVO);
-        return ResultVO.getSuccess("查询系统对象详情成功", newSysSystemVO);
+        // 查询系统对象
+        SysSystemVO detailSysSystemVO = this.sysSystemReadMapper.selectSysSystemVODetail(sysSystemVO);
+
+        if (null != detailSysSystemVO) {
+
+            // 处理创建人昵称和修改人昵称字段
+            UserVO userVO = new UserVO();
+            List<UserVO> userIdAndNameList = this.userReadMapper.selectUserIdAndNameList(userVO);
+            if (!CollectionUtils.isEmpty(userIdAndNameList)) {
+                for (UserVO eachUserVO : userIdAndNameList) {
+                    if (eachUserVO.getUid().equals(detailSysSystemVO.getCreateUid())) {
+                        detailSysSystemVO.setCreateName(eachUserVO.getNickname());
+                    }
+                    if (!StringUtils.isEmpty(detailSysSystemVO.getUpdateUid())
+                            && detailSysSystemVO.getUpdateUid().equals(eachUserVO.getUid())) {
+                        detailSysSystemVO.setUpdateName(eachUserVO.getNickname());
+                    }
+                }
+            }
+        }
+
+        return ResultVO.getSuccess("查询系统对象详情成功", detailSysSystemVO);
     }
 }
 

@@ -30,15 +30,11 @@
         <id column="sid" property="sid" jdbcType="VARCHAR" />
         <result column="system_name" property="systemName" jdbcType="VARCHAR" />
         <result column="system_key" property="systemKey" jdbcType="VARCHAR" />
-        <result column="description" property="description" jdbcType="VARCHAR" />
-        <result column="state" property="state" jdbcType="INTEGER" />
         <result column="create_uid" property="createUid" jdbcType="VARCHAR" />
         <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
         <result column="update_uid" property="updateUid" jdbcType="VARCHAR" />
         <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
         <result column="description" property="description" jdbcType="VARCHAR" />
-        <result column="create_name" property="createName" jdbcType="VARCHAR" />
-        <result column="update_name" property="updateName" jdbcType="VARCHAR" />
     </resultMap>
 
 
@@ -89,13 +85,9 @@
     <select id="selectSysSystemVODetail" parameterType="com.authorization.privilege.vo.system.SysSystemVO"
             resultMap="SelectSysSystemVODetailMap">
         SELECT
-            S.sid, S.system_name, S.system_key, S.create_uid, S.create_time, S.update_uid, S.update_time, S.description,
-            u1.nickname AS create_name,
-            u1.nickname AS update_name
+            S.sid, S.system_name, S.system_key, S.create_uid, S.create_time, S.update_uid, S.update_time, S.description
         FROM
             sys_system AS S
-            LEFT JOIN sys_user AS u1 ON u1.uid = s.create_uid
-            LEFT JOIN sys_user AS u2 ON u2.uid = s.update_uid
         <trim prefix="WHERE" prefixOverrides="AND|OR">
             <if test="sid != null and sid != ''">
                 AND S.sid = #{sid}
