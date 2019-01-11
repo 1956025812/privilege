@@ -28,6 +28,14 @@
   </resultMap>
 
 
+  <!-- 查询用户ID和用户VO对象MAP返回MAP -->
+  <resultMap id="SelectUserIdAndUserVOMapMap" type="com.authorization.privilege.vo.user.UserVO">
+      <id column="uid" property="uid" jdbcType="VARCHAR" />
+      <result column="username" property="username" jdbcType="VARCHAR" />
+  </resultMap>
+
+
+
   <sql id="Base_Column_List" >
     uid, username, password, nickname, email, phone, qq, wx, state, create_uid, create_time, 
     update_uid, update_time
@@ -63,8 +71,8 @@
   </select>
 
 
-  <!-- 查询用户ID和名称MAP -->
-  <select id="selectUserIdAndNameMap" parameterType="com.authorization.privilege.vo.user.UserVO" resultType="java.util.Map">
+  <!-- 查询用户ID和用户VO对象MAP -->
+  <select id="selectUserIdAndUserVOMap" parameterType="com.authorization.privilege.vo.user.UserVO" resultMap="SelectUserIdAndUserVOMapMap">
     SELECT
         U.uid, U.nickname
     FROM

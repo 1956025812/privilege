@@ -1,6 +1,5 @@
 package com.authorization.privilege.service.impl.system;
 
-import com.authorization.privilege.constant.system.SysSystemEnum;
 import com.authorization.privilege.mapper.dsprivilegeread.system.SysSystemReadMapper;
 import com.authorization.privilege.mapper.dsprivilegeread.user.UserReadMapper;
 import com.authorization.privilege.service.system.SysSystemReadService;
@@ -13,7 +12,6 @@ import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
-import org.springframework.util.StringUtils;
 
 import java.util.List;
 import java.util.Map;
@@ -36,9 +34,9 @@ public class SysSystemReadServiceImpl implements SysSystemReadService {
     @Override
     public ResultVO<PageVO<SysSystemVO>> selectSysSystemPage(SysSystemVO sysSystemVO) throws Exception {
 
-        // 查询用户ID和名称列表
+        // 查询用户ID和用户VO对象MAP
         UserVO userVO = new UserVO();
-        Map<String, String> userIdAndNameMap = this.userReadMapper.selectUserIdAndNameMap(userVO);
+        Map<String, UserVO> userIdAndUserVOMap = this.userReadMapper.selectUserIdAndUserVOMap(userVO);
 
         // 查询系统分页列表
         PageHelper.startPage(sysSystemVO.getCurrentPage(), sysSystemVO.getPageSize());
@@ -50,9 +48,9 @@ public class SysSystemReadServiceImpl implements SysSystemReadService {
             sysSystemVOList.forEach(eachSysSystemVO -> {
 
                 // 处理创建人名称
-                if (!CollectionUtils.isEmpty(userIdAndNameMap)) {
-                    eachSysSystemVO.setCreateName(userIdAndNameMap.get(eachSysSystemVO.getCreateUid()) == null ?
-                            null : userIdAndNameMap.get(eachSysSystemVO.getCreateUid()));
+                if (!CollectionUtils.isEmpty(userIdAndUserVOMap)) {
+                    UserVO createUserVO = userIdAndUserVOMap.get(eachSysSystemVO.getCreateUid());
+                    eachSysSystemVO.setCreateName(createUserVO == null ? null : createUserVO.getNickname());
                 }
             });
         }
@@ -79,12 +77,14 @@ public class SysSystemReadServiceImpl implements SysSystemReadService {
 
             // 处理创建人昵称和修改人昵称字段
             UserVO userVO = new UserVO();
-            Map<String, String> userIdAndNameMap = this.userReadMapper.selectUserIdAndNameMap(userVO);
-            if (!CollectionUtils.isEmpty(userIdAndNameMap)) {
-                detailSysSystemVO.setCreateName(userIdAndNameMap.get(detailSysSystemVO.getCreateUid()) == null ?
-                        null : userIdAndNameMap.get(detailSysSystemVO.getCreateUid()));
-                detailSysSystemVO.setUpdateName(userIdAndNameMap.get(detailSysSystemVO.getUpdateUid()) == null ?
-                        null : userIdAndNameMap.get(detailSysSystemVO.getUpdateUid()));
+            Map<String, UserVO> userIdAndUserVOMap = this.userReadMapper.selectUserIdAndUserVOMap(userVO);
+            if (!CollectionUtils.isEmpty(userIdAndUserVOMap)) {
+
+                UserVO createUserVO = userIdAndUserVOMap.get(detailSysSystemVO.getCreateUid());
+                detailSysSystemVO.setCreateName(createUserVO == null ? null : createUserVO.getNickname());
+                UserVO updateUserVO = userIdAndUserVOMap.get(detailSysSystemVO.getUpdateUid());
+                detailSysSystemVO.setUpdateName(updateUserVO == null ? null :
+                        (updateUserVO.getNickname() == null ? null : updateUserVO.getNickname()));
             }
         }
 

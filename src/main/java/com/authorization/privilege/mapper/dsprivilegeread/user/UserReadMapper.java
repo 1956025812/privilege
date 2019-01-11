@@ -2,8 +2,9 @@ package com.authorization.privilege.mapper.dsprivilegeread.user;
 
 import com.authorization.privilege.entity.dsprivelege.user.User;
 import com.authorization.privilege.vo.user.UserVO;
+import org.apache.ibatis.annotations.MapKey;
 
-import java.util.Map;
+import java.util.HashMap;
 
 /**
  * @author duxuebo
@@ -33,11 +34,12 @@ public interface UserReadMapper {
 
 
     /**
-     * 查询用户ID和名称MAP
+     * 查询用户ID和用户VO对象MAP
      *
      * @param userVO
-     * @return 用户ID和名称MAP
+     * @return 用户ID和用户VO对象MAP
      * @throws Exception
      */
-    Map<String, String> selectUserIdAndNameMap(UserVO userVO) throws Exception;
+    @MapKey("uid")
+    HashMap<String, UserVO> selectUserIdAndUserVOMap(UserVO userVO) throws Exception;
 }
