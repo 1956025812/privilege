@@ -3,7 +3,7 @@ package com.authorization.privilege.mapper.dsprivilegeread.user;
 import com.authorization.privilege.entity.dsprivelege.user.User;
 import com.authorization.privilege.vo.user.UserVO;
 
-import java.util.List;
+import java.util.Map;
 
 /**
  * @author duxuebo
@@ -33,11 +33,11 @@ public interface UserReadMapper {
 
 
     /**
-     * 查询用户ID和名称列表
+     * 查询用户ID和名称MAP
      *
      * @param userVO
-     * @return UserVO集合
+     * @return 用户ID和名称MAP
      * @throws Exception
      */
-    List<UserVO> selectUserIdAndNameList(UserVO userVO) throws Exception;
+    Map<String, String> selectUserIdAndNameMap(UserVO userVO) throws Exception;
 }

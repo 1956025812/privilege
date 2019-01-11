@@ -16,6 +16,7 @@ import org.springframework.util.CollectionUtils;
 import org.springframework.util.StringUtils;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * @author duxuebo
@@ -37,7 +38,7 @@ public class SysSystemReadServiceImpl implements SysSystemReadService {
 
         // 查询用户ID和名称列表
         UserVO userVO = new UserVO();
-        List<UserVO> userIdAndNameList = this.userReadMapper.selectUserIdAndNameList(userVO);
+        Map<String, String> userIdAndNameMap = this.userReadMapper.selectUserIdAndNameMap(userVO);
 
         // 查询系统分页列表
         PageHelper.startPage(sysSystemVO.getCurrentPage(), sysSystemVO.getPageSize());
@@ -46,19 +47,14 @@ public class SysSystemReadServiceImpl implements SysSystemReadService {
 
         // 处理列表冗余字段
         if (!CollectionUtils.isEmpty(sysSystemVOList)) {
-            for (SysSystemVO eachSysSystemVO : sysSystemVOList) {
+            sysSystemVOList.forEach(eachSysSystemVO -> {
 
                 // 处理创建人名称
-                String createUid = eachSysSystemVO.getCreateUid();
-                if (!CollectionUtils.isEmpty(userIdAndNameList)) {
-                    for (UserVO eachUserVO : userIdAndNameList) {
-                        if (createUid.equals(eachUserVO.getUid())) {
-                            eachSysSystemVO.setCreateName(eachUserVO.getNickname());
-                            break;
-                        }
-                    }
+                if (!CollectionUtils.isEmpty(userIdAndNameMap)) {
+                    eachSysSystemVO.setCreateName(userIdAndNameMap.get(eachSysSystemVO.getCreateUid()) == null ?
+                            null : userIdAndNameMap.get(eachSysSystemVO.getCreateUid()));
                 }
-            }
+            });
         }
 
 
@@ -83,17 +79,12 @@ public class SysSystemReadServiceImpl implements SysSystemReadService {
 
             // 处理创建人昵称和修改人昵称字段
             UserVO userVO = new UserVO();
-            List<UserVO> userIdAndNameList = this.userReadMapper.selectUserIdAndNameList(userVO);
-            if (!CollectionUtils.isEmpty(userIdAndNameList)) {
-                for (UserVO eachUserVO : userIdAndNameList) {
-                    if (eachUserVO.getUid().equals(detailSysSystemVO.getCreateUid())) {
-                        detailSysSystemVO.setCreateName(eachUserVO.getNickname());
-                    }
-                    if (!StringUtils.isEmpty(detailSysSystemVO.getUpdateUid())
-                            && detailSysSystemVO.getUpdateUid().equals(eachUserVO.getUid())) {
-                        detailSysSystemVO.setUpdateName(eachUserVO.getNickname());
-                    }
-                }
+            Map<String, String> userIdAndNameMap = this.userReadMapper.selectUserIdAndNameMap(userVO);
+            if (!CollectionUtils.isEmpty(userIdAndNameMap)) {
+                detailSysSystemVO.setCreateName(userIdAndNameMap.get(detailSysSystemVO.getCreateUid()) == null ?
+                        null : userIdAndNameMap.get(detailSysSystemVO.getCreateUid()));
+                detailSysSystemVO.setUpdateName(userIdAndNameMap.get(detailSysSystemVO.getUpdateUid()) == null ?
+                        null : userIdAndNameMap.get(detailSysSystemVO.getUpdateUid()));
             }
         }
 
