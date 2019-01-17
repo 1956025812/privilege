@@ -72,12 +72,13 @@ public class SysSystemWriteServiceImpl implements SysSystemWriteService {
     @Override
     public ResultVO<Void> delSysSystem(SysSystemVO sysSystemVO) throws Exception {
 
-        SysSystem sysSystem = new SysSystem();
-        sysSystem.setSid(sysSystemVO.getSid());
-        sysSystem.setState(SysSystemEnum.STATE_DEL.getIntValue());
-        sysSystem.setUpdateUid(sysSystemVO.getLoginUid());
-        sysSystem.setUpdateTime(new Date());
-        this.sysSystemWriteMapper.updateByPrimaryKeySelective(sysSystem);
+        SysSystemVO newSysSystemVO = new SysSystemVO();
+        newSysSystemVO.setSid(sysSystemVO.getSid());
+        newSysSystemVO.setSids(sysSystemVO.getSids());
+        newSysSystemVO.setState(SysSystemEnum.STATE_DEL.getIntValue());
+        newSysSystemVO.setUpdateUid(sysSystemVO.getLoginUid());
+        newSysSystemVO.setUpdateTime(new Date());
+        this.sysSystemWriteMapper.delSysSystem(newSysSystemVO);
 
         return ResultVO.getSuccess("删除系统成功");
     }

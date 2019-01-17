@@ -11,6 +11,8 @@ import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.util.CollectionUtils;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 import springfox.documentation.annotations.ApiIgnore;
 
@@ -59,10 +61,16 @@ public class SysSystemController extends BaseController {
     @ApiOperation("删除系统")
     @ApiImplicitParams({
             @ApiImplicitParam(paramType = "body", dataType = "String", name = "loginUid", value = "登录用户ID", required = true),
-            @ApiImplicitParam(paramType = "body", dataType = "String", name = "sid", value = "系统对象ID", required = false)
+            @ApiImplicitParam(paramType = "body", dataType = "String", name = "sid", value = "系统对象ID", required = false),
+            @ApiImplicitParam(paramType = "body", dataType = "String", name = "sids", value = "系统对象ID集合", required = false)
     })
     @PostMapping("/del")
     public ResultVO<Void> delSysSystem(@RequestBody @ApiIgnore SysSystemVO sysSystemVO) throws Exception {
+
+        if (StringUtils.isEmpty(sysSystemVO.getSid()) && CollectionUtils.isEmpty(sysSystemVO.getSids())) {
+            return ResultVO.getFailed("请先选中记录后再进行删除操作");
+        }
+
         return this.sysSystemWriteService.delSysSystem(sysSystemVO);
     }
 

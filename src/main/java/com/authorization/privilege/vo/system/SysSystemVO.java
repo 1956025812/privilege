@@ -7,6 +7,7 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import io.swagger.annotations.ApiModelProperty;
 
 import java.util.Date;
+import java.util.List;
 
 /**
  * @author duxuebo
@@ -16,5 +17,15 @@ import java.util.Date;
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class SysSystemVO extends SysSystem {
 
+    @ApiModelProperty("系统ID集合")
+    private List<String> sids;
 
+
+    public List<String> getSids() {
+        return sids;
+    }
+
+    public void setSids(List<String> sids) {
+        this.sids = sids;
+    }
 }

@@ -1,6 +1,7 @@
 package com.authorization.privilege.mapper.dsprivilegewrite.system;
 
 import com.authorization.privilege.entity.dsprivelege.system.SysSystem;
+import com.authorization.privilege.vo.system.SysSystemVO;
 
 
 /**
@@ -36,5 +37,11 @@ public interface SysSystemWriteMapper {
     void updateByPrimaryKeySelective(SysSystem sysSystem) throws Exception;
 
 
-
+    /**
+     * 删除系统
+     *
+     * @param newSysSystemVO
+     * @throws Exception
+     */
+    void delSysSystem(SysSystemVO newSysSystemVO) throws Exception;
 }

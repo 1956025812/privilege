@@ -135,4 +135,26 @@
   </update>
 
 
+  <!-- 删除系统 -->
+  <update id="delSysSystem" parameterType="com.authorization.privilege.vo.system.SysSystemVO">
+    <if test="(sid != null and sid != '') or (sids != null and sids.size > 0)">
+      UPDATE
+        sys_system
+      SET
+        state = #{state}
+      <trim prefix="WHERE" prefixOverrides="AND|OR">
+        <if test="sid != null and sid != ''">
+          AND sid = #{sid}
+        </if>
+        <if test="sids != null and sids.size > 0">
+          AND sid IN
+          <foreach collection="sids" item="eachSid" separator="," open="(" close=")">
+            #{eachSid}
+          </foreach>
+        </if>
+      </trim>
+    </if>
+  </update>
+
+
 </mapper>
