@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.authorization.privilege.mapper.dsprivilegeread.menu.SysMenuReadMapper" >
+
+
+  <resultMap id="BaseResultMap" type="com.authorization.privilege.entity.dsprivelege.menu.SysMenu" >
+    <id column="mid" property="mid" jdbcType="VARCHAR" />
+    <result column="system_key" property="systemKey" jdbcType="VARCHAR" />
+    <result column="menu_name" property="menuName" jdbcType="VARCHAR" />
+    <result column="type" property="type" jdbcType="INTEGER" />
+    <result column="level" property="level" jdbcType="INTEGER" />
+    <result column="url" property="url" jdbcType="VARCHAR" />
+    <result column="parent_mid" property="parentMid" jdbcType="VARCHAR" />
+    <result column="sort" property="sort" jdbcType="INTEGER" />
+    <result column="state" property="state" jdbcType="INTEGER" />
+    <result column="description" property="description" jdbcType="VARCHAR" />
+    <result column="creator_id" property="creatorId" jdbcType="VARCHAR" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="updater_id" property="updaterId" jdbcType="VARCHAR" />
+    <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+
+
+  <sql id="Base_Column_List" >
+    mid, system_key, menu_name, type, level, url, parent_mid, sort, state, description, 
+    creator_id, create_time, updater_id, update_time
+  </sql>
+
+
+  <!-- 根据主键查询菜单 -->
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    SELECT
+        <include refid="Base_Column_List" />
+    FROM
+        sys_menu
+    WHERE
+        mid = #{mid,jdbcType=VARCHAR}
+  </select>
+
+</mapper>
