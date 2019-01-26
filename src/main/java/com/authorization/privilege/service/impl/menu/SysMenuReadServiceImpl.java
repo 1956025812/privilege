@@ -1,8 +1,17 @@
 package com.authorization.privilege.service.impl.menu;
 
+import com.authorization.privilege.mapper.dsprivilegeread.menu.SysMenuReadMapper;
+import com.authorization.privilege.mapper.dsprivilegeread.system.SysSystemReadMapper;
 import com.authorization.privilege.service.menu.SysMenuReadService;
+import com.authorization.privilege.vo.ResultVO;
+import com.authorization.privilege.vo.menu.SysMenuVO;
+import com.authorization.privilege.vo.system.SysSystemVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.util.CollectionUtils;
+
+import java.util.HashMap;
+import java.util.List;
 
 /**
  * @author duxuebo
@@ -13,6 +22,33 @@ import org.springframework.stereotype.Service;
 public class SysMenuReadServiceImpl implements SysMenuReadService {
 
     @Autowired
-    private SysMenuReadService sysMenuReadService;
+    private SysMenuReadMapper sysMenuReadMapper;
 
+    @Autowired
+    private SysSystemReadMapper sysSystemReadMapper;
+
+
+    @Override
+    public ResultVO<List<SysMenuVO>> selectSysMenuVOList(SysMenuVO sysMenuVO) throws Exception {
+
+        // 查询菜单列表集合
+        List<SysMenuVO> sysMenuVOList = this.sysMenuReadMapper.selectSysMenuVOList(sysMenuVO);
+
+        // 查询系统KEY和系统VO对象MAP
+        SysSystemVO sysSystemVO = new SysSystemVO();
+        HashMap<String, SysSystemVO> systemKeyAndSystemVOMap = this.sysSystemReadMapper.selectSystemKeyAndSystemVOMap(sysSystemVO);
+
+        if (!CollectionUtils.isEmpty(sysMenuVOList)) {
+            sysMenuVOList.forEach(eachSysMenuVO -> {
+
+                // 处理系统名称
+                if (!CollectionUtils.isEmpty(systemKeyAndSystemVOMap)) {
+                    SysSystemVO eachSysSystemVO = systemKeyAndSystemVOMap.get(eachSysMenuVO.getSystemKey());
+                    eachSysMenuVO.setSystemName(eachSysSystemVO == null ? null : eachSysSystemVO.getSystemName());
+                }
+            });
+        }
+
+        return ResultVO.getSuccess("查询菜单列表成功", sysMenuVOList);
+    }
 }

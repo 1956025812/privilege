@@ -21,6 +21,17 @@
   </resultMap>
 
 
+  <!-- 查询菜单VO对象集合返回MAP -->
+  <resultMap id="SelectSysMenuVOListMap" type="com.authorization.privilege.vo.menu.SysMenuVO">
+    <id column="mid" property="mid" jdbcType="VARCHAR" />
+    <result column="system_key" property="systemKey" jdbcType="VARCHAR" />
+    <result column="menu_name" property="menuName" jdbcType="VARCHAR" />
+    <result column="level" property="level" jdbcType="INTEGER" />
+    <result column="url" property="url" jdbcType="VARCHAR" />
+    <result column="parent_mid" property="parentMid" jdbcType="VARCHAR" />
+  </resultMap>
+
+
   <sql id="Base_Column_List" >
     mid, system_key, menu_name, type, level, url, parent_mid, sort, state, description, 
     creator_id, create_time, updater_id, update_time
@@ -35,6 +46,20 @@
         sys_menu
     WHERE
         mid = #{mid,jdbcType=VARCHAR}
+  </select>
+
+
+  <!-- 查询菜单VO对象集合 -->
+  <select id="selectSysMenuVOList" parameterType="com.authorization.privilege.vo.menu.SysMenuVO" resultMap="SelectSysMenuVOListMap">
+    SELECT
+        M.mid, M.system_key, M.menu_name, M.`level`, M.url, M.parent_mid
+    FROM
+        sys_menu AS M
+    WHERE
+        M.state = 1
+        <if test="type != null">
+          AND M.type = #{type}
+        </if>
   </select>
 
 </mapper>

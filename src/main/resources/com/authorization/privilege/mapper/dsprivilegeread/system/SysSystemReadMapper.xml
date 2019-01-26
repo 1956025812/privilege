@@ -38,6 +38,13 @@
     </resultMap>
 
 
+    <!-- 查询系统KEY和系统VO对象MAP返回MAP -->
+    <resultMap id="SelectSystemKeyAndSystemVOMapMap" type="com.authorization.privilege.vo.system.SysSystemVO">
+        <id column="system_key" property="systemKey" jdbcType="VARCHAR" />
+        <result column="system_name" property="systemName" jdbcType="VARCHAR" />
+    </resultMap>
+
+
     <sql id="Base_Column_List" >
     sid, system_name, system_key, description, state, create_uid, create_time, update_uid, update_time
   </sql>
@@ -94,6 +101,18 @@
             </if>
         </trim>
     </select>
+
+
+    <!-- 查询系统KEY和系统VO对象MAP -->
+    <select id="selectSystemKeyAndSystemVOMap" parameterType="com.authorization.privilege.vo.system.SysSystemVO" resultMap="SelectSystemKeyAndSystemVOMapMap">
+        SELECT
+            S.system_key, S.system_name
+        FROM
+            sys_system AS S
+        WHERE
+            S.state > 0
+    </select>
+
 
 
 </mapper>

@@ -2,7 +2,9 @@ package com.authorization.privilege.mapper.dsprivilegeread.system;
 
 import com.authorization.privilege.entity.dsprivelege.system.SysSystem;
 import com.authorization.privilege.vo.system.SysSystemVO;
+import org.apache.ibatis.annotations.MapKey;
 
+import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -39,4 +41,14 @@ public interface SysSystemReadMapper {
      */
     SysSystemVO selectSysSystemVODetail(SysSystemVO sysSystemVO) throws Exception;
 
+
+    /**
+     * 查询系统KEY和系统VO对象MAP
+     *
+     * @param sysSystemVO
+     * @return 系统KEY和系统VO对象MAP
+     * @throws Exception
+     */
+    @MapKey("systemKey")
+    HashMap<String, SysSystemVO> selectSystemKeyAndSystemVOMap(SysSystemVO sysSystemVO) throws Exception;
 }
