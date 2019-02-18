@@ -51,4 +51,14 @@ public interface SysSystemReadMapper {
      */
     @MapKey("systemKey")
     HashMap<String, SysSystemVO> selectSystemKeyAndSystemVOMap(SysSystemVO sysSystemVO) throws Exception;
+
+
+    /**
+     * 查询系统VO对象列表
+     *
+     * @param sysSystemVO
+     * @return SysSystemVO集合
+     * @throws Exception
+     */
+    List<SysSystemVO> selectSysSystemVOList(SysSystemVO sysSystemVO) throws Exception;
 }

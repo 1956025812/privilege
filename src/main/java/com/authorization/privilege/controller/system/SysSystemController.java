@@ -20,6 +20,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import springfox.documentation.annotations.ApiIgnore;
 
+import java.util.List;
+
 /**
  * @author duxuebo
  * @date 2018/12/1
@@ -103,6 +105,16 @@ public class SysSystemController extends BaseController {
     @GetMapping("/detail")
     public ResultVO<SysSystemVO> selectSysSystemVODetail(@ApiIgnore SysSystemVO sysSystemVO) throws Exception {
         return this.sysSystemReadService.selectSysSystemVODetail(sysSystemVO);
+    }
+
+
+    @ApiOperation("查询系统列表")
+    @ApiImplicitParams({
+            @ApiImplicitParam(paramType = "query", dataType = "String", name = "loginUid", value = "登录用户ID", required = true)
+    })
+    @GetMapping("/list")
+    public ResultVO<List<SysSystemVO>> selectSysSystemVOList(@ApiIgnore SysSystemVO sysSystemVO) throws Exception {
+        return this.sysSystemReadService.selectSysSystemVOList(sysSystemVO);
     }
 
 

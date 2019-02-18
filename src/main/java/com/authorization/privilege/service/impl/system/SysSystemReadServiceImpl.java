@@ -90,6 +90,15 @@ public class SysSystemReadServiceImpl implements SysSystemReadService {
 
         return ResultVO.getSuccess("查询系统对象详情成功", detailSysSystemVO);
     }
+
+
+    @Override
+    public ResultVO<List<SysSystemVO>> selectSysSystemVOList(SysSystemVO sysSystemVO) throws Exception {
+
+        List<SysSystemVO> sysSystemVOList = this.sysSystemReadMapper.selectSysSystemVOList(sysSystemVO);
+
+        return ResultVO.getSuccess("查询系统列表成功", sysSystemVOList);
+    }
 }
 
 

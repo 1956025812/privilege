@@ -4,6 +4,8 @@ import com.authorization.privilege.vo.PageVO;
 import com.authorization.privilege.vo.ResultVO;
 import com.authorization.privilege.vo.system.SysSystemVO;
 
+import java.util.List;
+
 /**
  * @author duxuebo
  * @date 2018/12/1
@@ -29,4 +31,14 @@ public interface SysSystemReadService {
      * @throws Exception
      */
     ResultVO<SysSystemVO> selectSysSystemVODetail(SysSystemVO sysSystemVO) throws Exception;
+
+
+    /**
+     * 查询系统列表
+     *
+     * @param sysSystemVO
+     * @return SysSystemVO集合
+     * @throws Exception
+     */
+    ResultVO<List<SysSystemVO>> selectSysSystemVOList(SysSystemVO sysSystemVO) throws Exception;
 }

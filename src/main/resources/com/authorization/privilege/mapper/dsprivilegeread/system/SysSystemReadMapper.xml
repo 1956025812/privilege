@@ -45,6 +45,13 @@
     </resultMap>
 
 
+    <!-- 查询系统VO对象列表 -->
+    <resultMap id="SelectSysSystemVOListMap" type="com.authorization.privilege.vo.system.SysSystemVO">
+        <id column="system_key" property="systemKey" jdbcType="VARCHAR" />
+        <result column="system_name" property="systemName" jdbcType="VARCHAR" />
+    </resultMap>
+
+
     <sql id="Base_Column_List" >
     sid, system_name, system_key, description, state, create_uid, create_time, update_uid, update_time
   </sql>
@@ -113,6 +120,16 @@
             S.state > 0
     </select>
 
+
+    <!-- 查询系统VO对象列表 -->
+    <select id="selectSysSystemVOList" parameterType="com.authorization.privilege.vo.system.SysSystemVO" resultMap="SelectSysSystemVOListMap">
+        SELECT
+            S.system_key, S.system_name
+        FROM
+            sys_system AS S
+        WHERE
+            S.state > 0
+    </select>
 
 
 </mapper>
