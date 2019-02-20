@@ -34,21 +34,6 @@ public class SysMenuReadServiceImpl implements SysMenuReadService {
         // 查询菜单列表集合
         List<SysMenuVO> sysMenuVOList = this.sysMenuReadMapper.selectSysMenuVOList(sysMenuVO);
 
-        // 查询系统KEY和系统VO对象MAP
-        SysSystemVO sysSystemVO = new SysSystemVO();
-        HashMap<String, SysSystemVO> systemKeyAndSystemVOMap = this.sysSystemReadMapper.selectSystemKeyAndSystemVOMap(sysSystemVO);
-
-        if (!CollectionUtils.isEmpty(sysMenuVOList)) {
-            sysMenuVOList.forEach(eachSysMenuVO -> {
-
-                // 处理系统名称
-                if (!CollectionUtils.isEmpty(systemKeyAndSystemVOMap)) {
-                    SysSystemVO eachSysSystemVO = systemKeyAndSystemVOMap.get(eachSysMenuVO.getSystemKey());
-                    eachSysMenuVO.setSystemName(eachSysSystemVO == null ? null : eachSysSystemVO.getSystemName());
-                }
-            });
-        }
-
         return ResultVO.getSuccess("查询菜单列表成功", sysMenuVOList);
     }
 }

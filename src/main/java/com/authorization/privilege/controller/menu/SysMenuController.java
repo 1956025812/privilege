@@ -34,7 +34,8 @@ public class SysMenuController extends BaseController {
     @ApiOperation("查询菜单列表")
     @ApiImplicitParams({
             @ApiImplicitParam(paramType = "query", dataType = "String", name = "loginUid", value = "登录用户ID", required = true),
-            @ApiImplicitParam(paramType = "query", dataType = "String", name = "type", value = "类型: 1：菜单; 2：按钮", required = false)
+            @ApiImplicitParam(paramType = "query", dataType = "String", name = "type", value = "类型: 1：菜单; 2：按钮", required = false),
+            @ApiImplicitParam(paramType = "query", dataType = "String", name = "systemKey", value = "系统KEY", required = false)
     })
     @GetMapping("/list")
     public ResultVO<List<SysMenuVO>> selectSysMenuVOList(@ApiIgnore SysMenuVO sysMenuVO) throws Exception {

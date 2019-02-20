@@ -129,6 +129,7 @@
             sys_system AS S
         WHERE
             S.state > 0
+        ORDER BY S.system_key ASC
     </select>
 
 

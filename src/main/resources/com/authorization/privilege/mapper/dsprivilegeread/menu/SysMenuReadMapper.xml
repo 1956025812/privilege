@@ -60,6 +60,10 @@
         <if test="type != null">
           AND M.type = #{type}
         </if>
+        <if test="systemKey != null and systemKey != ''">
+          AND M.system_key = #{systemKey}
+        </if>
+    ORDER BY M.system_key ASC, M.level ASC, M.menu_name ASC
   </select>
 
 </mapper>
