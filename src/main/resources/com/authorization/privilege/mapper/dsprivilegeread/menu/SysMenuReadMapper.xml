@@ -29,6 +29,7 @@
     <result column="level" property="level" jdbcType="INTEGER" />
     <result column="url" property="url" jdbcType="VARCHAR" />
     <result column="parent_mid" property="parentMid" jdbcType="VARCHAR" />
+    <result column="type" property="type" jdbcType="INTEGER" />
   </resultMap>
 
 
@@ -52,7 +53,7 @@
   <!-- 查询菜单VO对象集合 -->
   <select id="selectSysMenuVOList" parameterType="com.authorization.privilege.vo.menu.SysMenuVO" resultMap="SelectSysMenuVOListMap">
     SELECT
-        M.mid, M.system_key, M.menu_name, M.`level`, M.url, M.parent_mid
+        M.mid, M.system_key, M.menu_name, M.`level`, M.url, M.parent_mid, M.`type`
     FROM
         sys_menu AS M
     WHERE
@@ -62,6 +63,9 @@
         </if>
         <if test="systemKey != null and systemKey != ''">
           AND M.system_key = #{systemKey}
+        </if>
+        <if test="parentMid != null and parentMid != ''">
+          AND M.parent_mid = #{parentMid}
         </if>
     ORDER BY M.system_key ASC, M.level ASC, M.menu_name ASC
   </select>
