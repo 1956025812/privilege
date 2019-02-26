@@ -106,6 +106,9 @@
             <if test="sid != null and sid != ''">
                 AND S.sid = #{sid}
             </if>
+            <if test="systemKey != null and systemKey != ''">
+                AND S.system_key = #{systemKey}
+            </if>
         </trim>
     </select>
 

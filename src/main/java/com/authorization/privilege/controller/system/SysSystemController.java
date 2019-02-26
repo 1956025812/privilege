@@ -100,7 +100,8 @@ public class SysSystemController extends BaseController {
     @ApiOperation("查询系统对象详情")
     @ApiImplicitParams({
             @ApiImplicitParam(paramType = "query", dataType = "String", name = "loginUid", value = "登录用户ID", required = true),
-            @ApiImplicitParam(paramType = "query", dataType = "String", name = "sid", value = "系统对象ID", required = true)
+            @ApiImplicitParam(paramType = "query", dataType = "String", name = "sid", value = "系统对象ID", required = false),
+            @ApiImplicitParam(paramType = "query", dataType = "String", name = "systemKey", value = "系统标识", required = false),
     })
     @GetMapping("/detail")
     public ResultVO<SysSystemVO> selectSysSystemVODetail(@ApiIgnore SysSystemVO sysSystemVO) throws Exception {
