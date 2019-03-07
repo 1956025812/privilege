@@ -44,4 +44,15 @@ public class SysMenuController extends BaseController {
     }
 
 
+    @ApiOperation("查询菜单详情")
+    @ApiImplicitParams({
+            @ApiImplicitParam(paramType = "query", dataType = "String", name = "loginUid", value = "登录用户ID", required = true),
+            @ApiImplicitParam(paramType = "query", dataType = "String", name = "mid", value = "菜单ID", required = true)
+    })
+    @GetMapping("/detail")
+    public ResultVO<SysMenuVO> selectSysMenuVODetail(@ApiIgnore SysMenuVO sysMenuVO) throws Exception {
+        return this.sysMenuReadService.selectSysMenuVODetail(sysMenuVO);
+    }
+
+
 }

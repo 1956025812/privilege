@@ -15,6 +15,9 @@ public class SysMenuVO extends SysMenu {
     @ApiModelProperty("系统名称")
     private String systemName;
 
+    @ApiModelProperty("上级菜单名称")
+    private String parentMenuName;
+
 
     public String getSystemName() {
         return systemName;
@@ -22,5 +25,13 @@ public class SysMenuVO extends SysMenu {
 
     public void setSystemName(String systemName) {
         this.systemName = systemName;
+    }
+
+    public String getParentMenuName() {
+        return parentMenuName;
+    }
+
+    public void setParentMenuName(String parentMenuName) {
+        this.parentMenuName = parentMenuName;
     }
 }

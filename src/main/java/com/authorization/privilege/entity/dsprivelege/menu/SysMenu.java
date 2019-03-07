@@ -16,6 +16,9 @@ public class SysMenu extends BaseVO implements Serializable {
     @ApiModelProperty("菜单ID")
     private String mid;
 
+    @ApiModelProperty("系统ID")
+    private String systemId;
+
     @ApiModelProperty("系统标识")
     private String systemKey;
 
@@ -44,13 +47,13 @@ public class SysMenu extends BaseVO implements Serializable {
     private String description;
 
     @ApiModelProperty("创建人ID")
-    private String creatorId;
+    private String createUid;
 
     @ApiModelProperty("创建时间")
     private Date createTime;
 
     @ApiModelProperty("修改人ID")
-    private String updaterId;
+    private String updateUid;
 
     @ApiModelProperty("修改时间")
     private Date updateTime;
@@ -61,6 +64,14 @@ public class SysMenu extends BaseVO implements Serializable {
 
     public void setMid(String mid) {
         this.mid = mid == null ? null : mid.trim();
+    }
+
+    public String getSystemId() {
+        return systemId;
+    }
+
+    public void setSystemId(String systemId) {
+        this.systemId = systemId;
     }
 
     public String getSystemKey() {
@@ -135,13 +146,6 @@ public class SysMenu extends BaseVO implements Serializable {
         this.description = description == null ? null : description.trim();
     }
 
-    public String getCreatorId() {
-        return creatorId;
-    }
-
-    public void setCreatorId(String creatorId) {
-        this.creatorId = creatorId == null ? null : creatorId.trim();
-    }
 
     public Date getCreateTime() {
         return createTime;
@@ -151,12 +155,20 @@ public class SysMenu extends BaseVO implements Serializable {
         this.createTime = createTime;
     }
 
-    public String getUpdaterId() {
-        return updaterId;
+    public String getCreateUid() {
+        return createUid;
     }
 
-    public void setUpdaterId(String updaterId) {
-        this.updaterId = updaterId == null ? null : updaterId.trim();
+    public void setCreateUid(String createUid) {
+        this.createUid = createUid;
+    }
+
+    public String getUpdateUid() {
+        return updateUid;
+    }
+
+    public void setUpdateUid(String updateUid) {
+        this.updateUid = updateUid;
     }
 
     public Date getUpdateTime() {

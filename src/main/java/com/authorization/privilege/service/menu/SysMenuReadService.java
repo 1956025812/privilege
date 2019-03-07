@@ -21,4 +21,14 @@ public interface SysMenuReadService {
      * @throws Exception
      */
     ResultVO<List<SysMenuVO>> selectSysMenuVOList(SysMenuVO sysMenuVO) throws Exception;
+
+
+    /**
+     * 查询菜单详情
+     *
+     * @param sysMenuVO
+     * @return SysMenuVO
+     * @throws Exception
+     */
+    ResultVO<SysMenuVO> selectSysMenuVODetail(SysMenuVO sysMenuVO) throws Exception;
 }

@@ -28,4 +28,15 @@ public interface SysMenuReadMapper {
      * @throws Exception
      */
     List<SysMenuVO> selectSysMenuVOList(SysMenuVO sysMenuVO) throws Exception;
+
+
+
+    /**
+     * 查询菜单详情
+     *
+     * @param sysMenuVO
+     * @return SysMenuVO
+     * @throws Exception
+     */
+    SysMenuVO selectSysMenuVODetail(SysMenuVO sysMenuVO) throws Exception;
 }
