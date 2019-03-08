@@ -2,6 +2,7 @@ package com.authorization.privilege.controller.menu;
 
 import com.authorization.privilege.controller.BaseController;
 import com.authorization.privilege.service.menu.SysMenuReadService;
+import com.authorization.privilege.service.menu.SysMenuWriteService;
 import com.authorization.privilege.vo.ResultVO;
 import com.authorization.privilege.vo.menu.SysMenuVO;
 import io.swagger.annotations.Api;
@@ -10,6 +11,8 @@ import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import springfox.documentation.annotations.ApiIgnore;
@@ -29,6 +32,25 @@ public class SysMenuController extends BaseController {
 
     @Autowired
     private SysMenuReadService sysMenuReadService;
+
+    @Autowired
+    private SysMenuWriteService sysMenuWriteService;
+
+
+    @ApiOperation("修改菜单")
+    @ApiImplicitParams({
+            @ApiImplicitParam(paramType = "body", dataType = "String", name = "loginUid", value = "登录用户ID", required = true),
+            @ApiImplicitParam(paramType = "body", dataType = "String", name = "mid", value = "菜单ID", required = true),
+            @ApiImplicitParam(paramType = "body", dataType = "String", name = "menuName", value = "菜单名称", required = false),
+            @ApiImplicitParam(paramType = "body", dataType = "String", name = "url", value = "菜单链接", required = false),
+            @ApiImplicitParam(paramType = "body", dataType = "String", name = "sort", value = "菜单排序", required = false),
+            @ApiImplicitParam(paramType = "body", dataType = "String", name = "description", value = "菜单描述", required = false)
+    })
+    @PostMapping("/update")
+    public ResultVO<Void> updateSysMenuVO(@ApiIgnore @RequestBody SysMenuVO sysMenuVO) throws Exception {
+        return this.sysMenuWriteService.updateSysMenuVO(sysMenuVO);
+    }
+
 
 
     @ApiOperation("查询菜单列表")
@@ -53,6 +75,7 @@ public class SysMenuController extends BaseController {
     public ResultVO<SysMenuVO> selectSysMenuVODetail(@ApiIgnore SysMenuVO sysMenuVO) throws Exception {
         return this.sysMenuReadService.selectSysMenuVODetail(sysMenuVO);
     }
+
 
 
 }

@@ -1,6 +1,7 @@
 package com.authorization.privilege.entity.dsprivelege.menu;
 
 import com.authorization.privilege.vo.BaseVO;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import io.swagger.annotations.ApiModelProperty;
 
 import java.io.Serializable;
@@ -146,7 +147,7 @@ public class SysMenu extends BaseVO implements Serializable {
         this.description = description == null ? null : description.trim();
     }
 
-
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
     public Date getCreateTime() {
         return createTime;
     }
@@ -171,6 +172,7 @@ public class SysMenu extends BaseVO implements Serializable {
         this.updateUid = updateUid;
     }
 
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
     public Date getUpdateTime() {
         return updateTime;
     }
