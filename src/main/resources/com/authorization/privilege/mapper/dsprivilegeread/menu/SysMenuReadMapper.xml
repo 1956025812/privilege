@@ -32,6 +32,7 @@
     <result column="url" property="url" jdbcType="VARCHAR" />
     <result column="parent_mid" property="parentMid" jdbcType="VARCHAR" />
     <result column="type" property="type" jdbcType="INTEGER" />
+    <result column="sort" property="sort" jdbcType="INTEGER" />
   </resultMap>
 
 
@@ -74,7 +75,7 @@
   <!-- 查询菜单VO对象集合 -->
   <select id="selectSysMenuVOList" parameterType="com.authorization.privilege.vo.menu.SysMenuVO" resultMap="SelectSysMenuVOListMap">
     SELECT
-        M.mid, M.system_id, M.system_key, M.menu_name, M.`level`, M.url, M.parent_mid, M.`type`
+        M.mid, M.system_id, M.system_key, M.menu_name, M.`level`, M.url, M.parent_mid, M.`type`, M.sort
     FROM
         sys_menu AS M
     WHERE
