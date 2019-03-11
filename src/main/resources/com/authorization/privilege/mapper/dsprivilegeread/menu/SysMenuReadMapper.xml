@@ -91,6 +91,9 @@
         <if test="parentMid != null and parentMid != ''">
           AND M.parent_mid = #{parentMid}
         </if>
+        <if test="level != null">
+          AND M.level = #{level}
+        </if>
     ORDER BY M.system_key ASC, M.level ASC, M.menu_name ASC
   </select>
 
