@@ -61,4 +61,14 @@ public interface SysSystemReadMapper {
      * @throws Exception
      */
     List<SysSystemVO> selectSysSystemVOList(SysSystemVO sysSystemVO) throws Exception;
+
+
+    /**
+     * 查询系统VO对象列表数量
+     *
+     * @param sysSystemVO
+     * @return VO对象列表数量
+     * @throws Exception
+     */
+    Integer selectCountSysSystemVOList(SysSystemVO sysSystemVO) throws Exception;
 }

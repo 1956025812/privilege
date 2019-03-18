@@ -134,10 +134,49 @@
             S.system_key, S.system_name, S.description, S.state, S.create_uid, S.create_time
         FROM
             sys_system AS S
-        WHERE
-            S.state > 0
-        ORDER BY S.system_key ASC
+        <trim prefix="WHERE" prefixOverrides="AND|OR">
+            AND S.state > 0
+            <if test="systemName != null and systemName != ''">
+                AND S.system_name LIKE CONCAT("%", #{systemName} ,"%")
+            </if>
+            <if test="systemKey != null and systemKey != ''">
+                AND S.system_key LIKE CONCAT("%", #{systemKey} ,"%")
+            </if>
+            <if test="startTime != null">
+                AND S.create_time >= #{startTime}
+            </if>
+            <if test="endTime != null">
+                AND S.create_time <![CDATA[ <= ]]> #{endTime}
+            </if>
+        </trim>
+        ORDER BY
+            S.system_key ASC
     </select>
+
+
+    <!-- 查询系统VO对象列表数量 -->
+    <select id="selectCountSysSystemVOList" parameterType="com.authorization.privilege.vo.system.SysSystemVO" resultType="java.lang.Integer">
+        SELECT
+            COUNT(1)
+        FROM
+            sys_system AS S
+        <trim prefix="WHERE" prefixOverrides="AND|OR">
+            AND S.state > 0
+            <if test="systemName != null and systemName != ''">
+                AND S.system_name LIKE CONCAT("%", #{systemName} ,"%")
+            </if>
+            <if test="systemKey != null and systemKey != ''">
+                AND S.system_key LIKE CONCAT("%", #{systemKey} ,"%")
+            </if>
+            <if test="startTime != null">
+                AND S.create_time >= #{startTime}
+            </if>
+            <if test="endTime != null">
+                AND S.create_time <![CDATA[ <= ]]> #{endTime}
+            </if>
+        </trim>
+    </select>
+
 
 
 </mapper>
