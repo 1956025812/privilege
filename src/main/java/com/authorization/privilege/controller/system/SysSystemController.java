@@ -119,4 +119,18 @@ public class SysSystemController extends BaseController {
     }
 
 
+    @ApiOperation("导出系统列表EXCEL")
+    @ApiImplicitParams({
+            @ApiImplicitParam(paramType = "query", dataType = "String", name = "loginUid", value = "登录用户ID", required = true),
+            @ApiImplicitParam(paramType = "query", dataType = "String", name = "systemName", value = "系统名称", required = false),
+            @ApiImplicitParam(paramType = "query", dataType = "String", name = "systemKey", value = "系统标识", required = false),
+            @ApiImplicitParam(paramType = "query", dataType = "String", name = "startTime", value = "创建开始时间", required = false),
+            @ApiImplicitParam(paramType = "query", dataType = "String", name = "endTime", value = "创建结束时间", required = false)
+    })
+    @GetMapping("/export")
+    public ResultVO<Void> exportSysSystemExcel(@ApiIgnore SysSystemVO sysSystemVO) throws Exception {
+        return this.sysSystemReadService.exportSysSystemExcel(sysSystemVO);
+    }
+
+
 }

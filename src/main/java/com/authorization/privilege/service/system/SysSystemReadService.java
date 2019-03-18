@@ -41,4 +41,14 @@ public interface SysSystemReadService {
      * @throws Exception
      */
     ResultVO<List<SysSystemVO>> selectSysSystemVOList(SysSystemVO sysSystemVO) throws Exception;
+
+
+    /**
+     * 导出系统列表EXCEL
+     *
+     * @param sysSystemVO
+     * @return VOID
+     * @throws Exception
+     */
+    ResultVO<Void> exportSysSystemExcel(SysSystemVO sysSystemVO) throws Exception;
 }

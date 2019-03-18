@@ -99,6 +99,16 @@ public class SysSystemReadServiceImpl implements SysSystemReadService {
 
         return ResultVO.getSuccess("查询系统列表成功", sysSystemVOList);
     }
+
+
+    @Override
+    public ResultVO<Void> exportSysSystemExcel(SysSystemVO sysSystemVO) throws Exception {
+
+
+
+
+        return ResultVO.getSuccess("导出系统列表EXCEL成功");
+    }
 }
 
 
