@@ -17,6 +17,9 @@ public class SysSystemVO extends SysSystem {
     @ApiModelProperty("系统ID集合")
     private List<String> sids;
 
+    @ApiModelProperty("状态名称：0:删除, 1:正常")
+    private String stateName;
+
 
     public List<String> getSids() {
         return sids;
@@ -24,5 +27,13 @@ public class SysSystemVO extends SysSystem {
 
     public void setSids(List<String> sids) {
         this.sids = sids;
+    }
+
+    public String getStateName() {
+        return stateName;
+    }
+
+    public void setStateName(String stateName) {
+        this.stateName = stateName;
     }
 }

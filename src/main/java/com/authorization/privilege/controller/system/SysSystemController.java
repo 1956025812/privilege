@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import springfox.documentation.annotations.ApiIgnore;
 
+import javax.servlet.http.HttpServletResponse;
 import java.util.List;
 
 /**
@@ -128,8 +129,8 @@ public class SysSystemController extends BaseController {
             @ApiImplicitParam(paramType = "query", dataType = "String", name = "endTime", value = "创建结束时间", required = false)
     })
     @GetMapping("/export")
-    public ResultVO<Void> exportSysSystemExcel(@ApiIgnore SysSystemVO sysSystemVO) throws Exception {
-        return this.sysSystemReadService.exportSysSystemExcel(sysSystemVO);
+    public ResultVO<Void> exportSysSystemExcel(@ApiIgnore SysSystemVO sysSystemVO, HttpServletResponse response) throws Exception {
+        return this.sysSystemReadService.exportSysSystemExcel(sysSystemVO, response);
     }
 
 

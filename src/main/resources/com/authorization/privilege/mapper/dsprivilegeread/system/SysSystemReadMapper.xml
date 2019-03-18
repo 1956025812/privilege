@@ -49,6 +49,10 @@
     <resultMap id="SelectSysSystemVOListMap" type="com.authorization.privilege.vo.system.SysSystemVO">
         <id column="system_key" property="systemKey" jdbcType="VARCHAR" />
         <result column="system_name" property="systemName" jdbcType="VARCHAR" />
+        <result column="description" property="description" jdbcType="VARCHAR" />
+        <result column="state" property="state" jdbcType="INTEGER" />
+        <result column="create_uid" property="createUid" jdbcType="VARCHAR" />
+        <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
     </resultMap>
 
 
@@ -127,7 +131,7 @@
     <!-- 查询系统VO对象列表 -->
     <select id="selectSysSystemVOList" parameterType="com.authorization.privilege.vo.system.SysSystemVO" resultMap="SelectSysSystemVOListMap">
         SELECT
-            S.system_key, S.system_name
+            S.system_key, S.system_name, S.description, S.state, S.create_uid, S.create_time
         FROM
             sys_system AS S
         WHERE

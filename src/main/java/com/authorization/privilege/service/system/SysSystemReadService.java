@@ -4,6 +4,7 @@ import com.authorization.privilege.vo.PageVO;
 import com.authorization.privilege.vo.ResultVO;
 import com.authorization.privilege.vo.system.SysSystemVO;
 
+import javax.servlet.http.HttpServletResponse;
 import java.util.List;
 
 /**
@@ -47,8 +48,9 @@ public interface SysSystemReadService {
      * 导出系统列表EXCEL
      *
      * @param sysSystemVO
+     * @param response
      * @return VOID
      * @throws Exception
      */
-    ResultVO<Void> exportSysSystemExcel(SysSystemVO sysSystemVO) throws Exception;
+    ResultVO<Void> exportSysSystemExcel(SysSystemVO sysSystemVO, HttpServletResponse response) throws Exception;
 }

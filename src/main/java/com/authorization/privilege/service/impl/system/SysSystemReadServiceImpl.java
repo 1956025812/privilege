@@ -1,5 +1,9 @@
 package com.authorization.privilege.service.impl.system;
 
+import com.alibaba.excel.ExcelWriter;
+import com.alibaba.excel.metadata.Sheet;
+import com.alibaba.excel.metadata.Table;
+import com.alibaba.excel.support.ExcelTypeEnum;
 import com.authorization.privilege.mapper.dsprivilegeread.system.SysSystemReadMapper;
 import com.authorization.privilege.mapper.dsprivilegeread.user.UserReadMapper;
 import com.authorization.privilege.service.system.SysSystemReadService;
@@ -13,6 +17,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
 
+import javax.servlet.ServletOutputStream;
+import javax.servlet.http.HttpServletResponse;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -101,11 +111,75 @@ public class SysSystemReadServiceImpl implements SysSystemReadService {
     }
 
 
+
+    /*
+    // 方式1： 一次性查询所有的数据进行导出下载，适用于数据量小的情况并且一次查询出来的数据量不会内存溢出
     @Override
-    public ResultVO<Void> exportSysSystemExcel(SysSystemVO sysSystemVO) throws Exception {
+    public ResultVO<Void> exportSysSystemExcel(SysSystemVO sysSystemVO, HttpServletResponse response) throws Exception {
+
+        ServletOutputStream out = null;
+        try {
+            out = response.getOutputStream();
+            ExcelWriter writer = new ExcelWriter(out, ExcelTypeEnum.XLSX);
+
+            // 设置EXCEL名称
+            String fileName = new String(("SystemExcel").getBytes(), "UTF-8");
+
+            // 设置SHEET名称
+            Sheet sheet = new Sheet(1, 0);
+            sheet.setSheetName("系统列表sheet1");
+
+            // 设置标题
+            Table table = new Table(1);
+            List<List<String>> titles = new ArrayList<List<String>>();
+            titles.add(Arrays.asList("系统名称"));
+            titles.add(Arrays.asList("系统标识"));
+            titles.add(Arrays.asList("描述"));
+            titles.add(Arrays.asList("状态"));
+            titles.add(Arrays.asList("创建人"));
+            titles.add(Arrays.asList("创建时间"));
+            table.setHead(titles);
+
+            // 查数据写EXCEL
+            List<List<String>> dataList = new ArrayList<>();
+            List<SysSystemVO> sysSystemVOList = this.sysSystemReadMapper.selectSysSystemVOList(sysSystemVO);
+            if (!CollectionUtils.isEmpty(sysSystemVOList)) {
+                sysSystemVOList.forEach(eachSysSystemVO -> {
+                    dataList.add(Arrays.asList(
+                            eachSysSystemVO.getSystemName(),
+                            eachSysSystemVO.getSystemKey(),
+                            eachSysSystemVO.getDescription(),
+                            eachSysSystemVO.getState().toString(),
+                            eachSysSystemVO.getCreateUid(),
+                            eachSysSystemVO.getCreateTime().toString()
+                    ));
+                });
+            }
+            writer.write0(dataList, sheet, table);
+
+            // 下载EXCEL
+            response.setHeader("Content-disposition", "attachment;filename=" + fileName + ".xlsx");
+            response.setContentType("multipart/form-data");
+            response.setCharacterEncoding("utf-8");
+            writer.finish();
+            out.flush();
+
+        } finally {
+            if (out != null) {
+                try {
+                    out.close();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+
+        return ResultVO.getSuccess("导出系统列表EXCEL成功");
+    }*/
 
 
-
+    @Override
+    public ResultVO<Void> exportSysSystemExcel(SysSystemVO sysSystemVO, HttpServletResponse response) throws Exception {
 
         return ResultVO.getSuccess("导出系统列表EXCEL成功");
     }
