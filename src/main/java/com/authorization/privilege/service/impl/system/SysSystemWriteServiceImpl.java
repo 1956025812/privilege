@@ -40,7 +40,7 @@ public class SysSystemWriteServiceImpl implements SysSystemWriteService {
         sysSystem.setDescription(sysSystemVO.getDescription());
         sysSystem.setCreateUid(sysSystemVO.getLoginUid());
         sysSystem.setCreateTime(new Date());
-        sysSystem.setState(SysSystemEnum.STATE_NORMAL.getIntValue());
+        sysSystem.setState(SysSystemEnum.STATE_NORMAL.getIntIndex());
         this.sysSystemWriteMapper.insertSelective(sysSystem);
 
         return ResultVO.getSuccess("新增系统成功");
@@ -75,7 +75,7 @@ public class SysSystemWriteServiceImpl implements SysSystemWriteService {
         SysSystemVO newSysSystemVO = new SysSystemVO();
         newSysSystemVO.setSid(sysSystemVO.getSid());
         newSysSystemVO.setSids(sysSystemVO.getSids());
-        newSysSystemVO.setState(SysSystemEnum.STATE_DEL.getIntValue());
+        newSysSystemVO.setState(SysSystemEnum.STATE_DEL.getIntIndex());
         newSysSystemVO.setUpdateUid(sysSystemVO.getLoginUid());
         newSysSystemVO.setUpdateTime(new Date());
         this.sysSystemWriteMapper.delSysSystem(newSysSystemVO);

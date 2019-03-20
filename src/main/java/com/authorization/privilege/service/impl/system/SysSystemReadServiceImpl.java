@@ -5,6 +5,7 @@ import com.alibaba.excel.metadata.Sheet;
 import com.alibaba.excel.metadata.Table;
 import com.alibaba.excel.support.ExcelTypeEnum;
 import com.authorization.privilege.constant.ExcelConstant;
+import com.authorization.privilege.constant.system.SysSystemEnum;
 import com.authorization.privilege.mapper.dsprivilegeread.system.SysSystemReadMapper;
 import com.authorization.privilege.mapper.dsprivilegeread.user.UserReadMapper;
 import com.authorization.privilege.service.system.SysSystemReadService;
@@ -121,7 +122,7 @@ public class SysSystemReadServiceImpl implements SysSystemReadService {
      * @return
      * @throws Exception
      */
-    /*@Override
+    @Override
     public ResultVO<Void> exportSysSystemExcel(SysSystemVO sysSystemVO, HttpServletResponse response) throws Exception {
 
         ServletOutputStream out = null;
@@ -156,7 +157,7 @@ public class SysSystemReadServiceImpl implements SysSystemReadService {
                             eachSysSystemVO.getSystemName(),
                             eachSysSystemVO.getSystemKey(),
                             eachSysSystemVO.getDescription(),
-                            eachSysSystemVO.getState().toString(),
+                            SysSystemEnum.getName(eachSysSystemVO.getState()),
                             eachSysSystemVO.getCreateUid(),
                             eachSysSystemVO.getCreateTime().toString()
                     ));
@@ -182,7 +183,7 @@ public class SysSystemReadServiceImpl implements SysSystemReadService {
         }
 
         return ResultVO.getSuccess("导出系统列表EXCEL成功");
-    }*/
+    }
 
 
 
@@ -264,7 +265,17 @@ public class SysSystemReadServiceImpl implements SysSystemReadService {
 
         return ResultVO.getSuccess("导出系统列表EXCEL成功");
     }*/
-    @Override
+
+
+    /**
+     * 方式3： 分批查询所有的数据进行分SHEET导出下载，适用于数据量适中在百万级别的情况并且一次查询出来的数据量不会内存溢出
+     *
+     * @param sysSystemVO
+     * @param response
+     * @return VOID
+     * @throws Exception
+     */
+    /*@Override
     public ResultVO<Void> exportSysSystemExcel(SysSystemVO sysSystemVO, HttpServletResponse response) throws Exception {
 
         ServletOutputStream out = null;
@@ -347,7 +358,7 @@ public class SysSystemReadServiceImpl implements SysSystemReadService {
         }
 
         return ResultVO.getSuccess("导出系统列表EXCEL成功");
-    }
+    }*/
 }
 
 
