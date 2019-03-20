@@ -25,6 +25,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -148,6 +149,9 @@ public class SysSystemReadServiceImpl implements SysSystemReadService {
             titles.add(Arrays.asList("创建时间"));
             table.setHead(titles);
 
+            // 准备冗余字段
+            HashMap<String, UserVO> userIdAndUserVOMap = this.userReadMapper.selectUserIdAndUserVOMap(new UserVO());
+
             // 查数据写EXCEL
             List<List<String>> dataList = new ArrayList<>();
             List<SysSystemVO> sysSystemVOList = this.sysSystemReadMapper.selectSysSystemVOList(sysSystemVO);
@@ -158,7 +162,9 @@ public class SysSystemReadServiceImpl implements SysSystemReadService {
                             eachSysSystemVO.getSystemKey(),
                             eachSysSystemVO.getDescription(),
                             SysSystemEnum.getName(eachSysSystemVO.getState()),
-                            eachSysSystemVO.getCreateUid(),
+                            CollectionUtils.isEmpty(userIdAndUserVOMap) ? null :
+                                    (userIdAndUserVOMap.get(eachSysSystemVO.getCreateUid()) == null ? null :
+                                            userIdAndUserVOMap.get(eachSysSystemVO.getCreateUid()).getNickname()),
                             eachSysSystemVO.getCreateTime().toString()
                     ));
                 });
