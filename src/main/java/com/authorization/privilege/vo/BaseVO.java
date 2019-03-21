@@ -8,7 +8,6 @@ import org.springframework.format.annotation.DateTimeFormat;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.YearMonth;
-import java.util.Date;
 
 /**
  * @author duxuebo
@@ -97,6 +96,7 @@ public class BaseVO {
         return startTime;
     }
 
+    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     public void setStartTime(LocalDateTime startTime) {
         this.startTime = startTime;
     }
@@ -106,6 +106,7 @@ public class BaseVO {
         return endTime;
     }
 
+    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     public void setEndTime(LocalDateTime endTime) {
         this.endTime = endTime;
     }
@@ -115,6 +116,7 @@ public class BaseVO {
         return startDate;
     }
 
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     public void setStartDate(LocalDate startDate) {
         this.startDate = startDate;
     }
@@ -124,6 +126,7 @@ public class BaseVO {
         return endDate;
     }
 
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     public void setEndDate(LocalDate endDate) {
         this.endDate = endDate;
     }
@@ -133,6 +136,7 @@ public class BaseVO {
         return startMonth;
     }
 
+    @DateTimeFormat(pattern = "yyyy-MM")
     public void setStartMonth(YearMonth startMonth) {
         this.startMonth = startMonth;
     }
@@ -142,6 +146,7 @@ public class BaseVO {
         return endMonth;
     }
 
+    @DateTimeFormat(pattern = "yyyy-MM")
     public void setEndMonth(YearMonth endMonth) {
         this.endMonth = endMonth;
     }
