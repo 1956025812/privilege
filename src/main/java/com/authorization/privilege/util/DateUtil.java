@@ -17,6 +17,23 @@ import java.time.temporal.ChronoUnit;
  */
 public class DateUtil {
 
+    public static final String YYYY_MM_DD_HH_MM_SS = "yyyy-MM-dd HH:mm:ss";
+
+
+    /**
+     * 日期转字符串
+     *
+     * @param localDateTime 要转换的日期
+     * @param style         格式化字符串 使用DateUtil的常量定义形式
+     * @return 日期字符串
+     */
+    public static String date2String(LocalDateTime localDateTime, String style) {
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern(style);
+        return localDateTime.format(dtf);
+    }
+
+
+
     public static void main(String[] args) {
 
         LocalDate currentDate = LocalDate.now();
@@ -72,11 +89,7 @@ public class DateUtil {
         System.out.println("日期转换为字符串为：" + dateString3);
 
         // 字符串与日期互转
-        LocalDateTime ldt = LocalDateTime.now();
-        System.out.println(ldt);
-        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy年MM月dd日 HH:mm:ss");
-        String format = ldt.format(dtf);
-        System.out.println(format);
+        System.out.println("日期转自定义格式字符串：" + DateUtil.date2String(LocalDateTime.now(), DateUtil.YYYY_MM_DD_HH_MM_SS));
 
 
         String str1 = "2018-07-05 12:24:12";
@@ -84,8 +97,6 @@ public class DateUtil {
         LocalDateTime parse = LocalDateTime.parse(str1, dtf2);
         System.out.println(parse);
 
-
-        // Date与LocalDateTime、LocalDate、LocalTime互转
 
     }
 

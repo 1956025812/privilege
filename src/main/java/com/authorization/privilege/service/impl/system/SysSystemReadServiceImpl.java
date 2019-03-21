@@ -8,6 +8,7 @@ import com.authorization.privilege.constant.system.SysSystemEnum;
 import com.authorization.privilege.mapper.dsprivilegeread.system.SysSystemReadMapper;
 import com.authorization.privilege.mapper.dsprivilegeread.user.UserReadMapper;
 import com.authorization.privilege.service.system.SysSystemReadService;
+import com.authorization.privilege.util.DateUtil;
 import com.authorization.privilege.vo.PageVO;
 import com.authorization.privilege.vo.ResultVO;
 import com.authorization.privilege.vo.system.SysSystemVO;
@@ -162,7 +163,7 @@ public class SysSystemReadServiceImpl implements SysSystemReadService {
                             CollectionUtils.isEmpty(userIdAndUserVOMap) ? null :
                                     (userIdAndUserVOMap.get(eachSysSystemVO.getCreateUid()) == null ? null :
                                             userIdAndUserVOMap.get(eachSysSystemVO.getCreateUid()).getNickname()),
-                            eachSysSystemVO.getCreateTime().toString()
+                            DateUtil.date2String(eachSysSystemVO.getCreateTime(), DateUtil.YYYY_MM_DD_HH_MM_SS)
                     ));
                 });
             }
