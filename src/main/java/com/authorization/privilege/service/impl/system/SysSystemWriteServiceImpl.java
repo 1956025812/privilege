@@ -12,7 +12,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.Date;
+import java.time.LocalDateTime;
+
 
 /**
  * @author duxuebo
@@ -39,7 +40,7 @@ public class SysSystemWriteServiceImpl implements SysSystemWriteService {
         sysSystem.setSystemKey(sysSystemVO.getSystemKey());
         sysSystem.setDescription(sysSystemVO.getDescription());
         sysSystem.setCreateUid(sysSystemVO.getLoginUid());
-        sysSystem.setCreateTime(new Date());
+        sysSystem.setCreateTime(LocalDateTime.now());
         sysSystem.setState(SysSystemEnum.STATE_NORMAL.getIntIndex());
         this.sysSystemWriteMapper.insertSelective(sysSystem);
 
@@ -61,7 +62,7 @@ public class SysSystemWriteServiceImpl implements SysSystemWriteService {
         sysSystem.setSystemName(sysSystemVO.getSystemName());
         sysSystem.setDescription(sysSystemVO.getDescription());
         sysSystem.setUpdateUid(sysSystemVO.getLoginUid());
-        sysSystem.setUpdateTime(new Date());
+        sysSystem.setUpdateTime(LocalDateTime.now());
         this.sysSystemWriteMapper.updateByPrimaryKey(sysSystem);
 
         return ResultVO.getSuccess("修改系统成功");
@@ -77,7 +78,7 @@ public class SysSystemWriteServiceImpl implements SysSystemWriteService {
         newSysSystemVO.setSids(sysSystemVO.getSids());
         newSysSystemVO.setState(SysSystemEnum.STATE_DEL.getIntIndex());
         newSysSystemVO.setUpdateUid(sysSystemVO.getLoginUid());
-        newSysSystemVO.setUpdateTime(new Date());
+        newSysSystemVO.setUpdateTime(LocalDateTime.now());
         this.sysSystemWriteMapper.delSysSystem(newSysSystemVO);
 
         return ResultVO.getSuccess("删除系统成功");

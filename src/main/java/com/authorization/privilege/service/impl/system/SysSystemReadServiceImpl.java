@@ -4,7 +4,6 @@ import com.alibaba.excel.ExcelWriter;
 import com.alibaba.excel.metadata.Sheet;
 import com.alibaba.excel.metadata.Table;
 import com.alibaba.excel.support.ExcelTypeEnum;
-import com.authorization.privilege.constant.ExcelConstant;
 import com.authorization.privilege.constant.system.SysSystemEnum;
 import com.authorization.privilege.mapper.dsprivilegeread.system.SysSystemReadMapper;
 import com.authorization.privilege.mapper.dsprivilegeread.user.UserReadMapper;
@@ -21,10 +20,8 @@ import org.springframework.util.CollectionUtils;
 
 import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletResponse;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;

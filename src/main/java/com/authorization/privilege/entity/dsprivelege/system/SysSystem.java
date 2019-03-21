@@ -5,7 +5,7 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import io.swagger.annotations.ApiModelProperty;
 
 import java.io.Serializable;
-import java.util.Date;
+import java.time.LocalDateTime;
 
 /**
  * @author duxuebo
@@ -33,13 +33,13 @@ public class SysSystem extends BaseVO implements Serializable {
     private String createUid;
 
     @ApiModelProperty("创建时间")
-    private Date createTime;
+    private LocalDateTime createTime;
 
     @ApiModelProperty("修改人ID")
     private String updateUid;
 
     @ApiModelProperty("修改时间")
-    private Date updateTime;
+    private LocalDateTime updateTime;
 
     public String getSid() {
         return sid;
@@ -98,20 +98,20 @@ public class SysSystem extends BaseVO implements Serializable {
     }
 
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
-    public Date getCreateTime() {
+    public LocalDateTime getCreateTime() {
         return createTime;
     }
 
-    public void setCreateTime(Date createTime) {
+    public void setCreateTime(LocalDateTime createTime) {
         this.createTime = createTime;
     }
 
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
-    public Date getUpdateTime() {
+    public LocalDateTime getUpdateTime() {
         return updateTime;
     }
 
-    public void setUpdateTime(Date updateTime) {
+    public void setUpdateTime(LocalDateTime updateTime) {
         this.updateTime = updateTime;
     }
 }

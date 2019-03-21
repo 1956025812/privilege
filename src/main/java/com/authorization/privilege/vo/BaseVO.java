@@ -5,6 +5,9 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import io.swagger.annotations.ApiModelProperty;
 import org.springframework.format.annotation.DateTimeFormat;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.YearMonth;
 import java.util.Date;
 
 /**
@@ -31,22 +34,22 @@ public class BaseVO {
     private String updateName;
 
     @ApiModelProperty("开始时间 格式：yyyy-MM-dd HH:mm:ss")
-    private Date startTime;
+    private LocalDateTime startTime;
 
     @ApiModelProperty("结束时间 格式：yyyy-MM-dd HH:mm:ss")
-    private Date endTime;
+    private LocalDateTime endTime;
 
     @ApiModelProperty("开始日期 格式：yyyy-MM-dd")
-    private Date startDate;
+    private LocalDate startDate;
 
     @ApiModelProperty("结束日期 格式：yyyy-MM-dd")
-    private Date endDate;
+    private LocalDate endDate;
 
     @ApiModelProperty("开始月份 格式：yyyy-MM")
-    private Date startMonth;
+    private YearMonth startMonth;
 
     @ApiModelProperty("结束月份 格式：yyyy-MM")
-    private Date endMonth;
+    private YearMonth endMonth;
 
 
     public Integer getCurrentPage() {
@@ -89,64 +92,57 @@ public class BaseVO {
         this.loginUid = loginUid;
     }
 
-
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
-    public Date getStartTime() {
+    public LocalDateTime getStartTime() {
         return startTime;
     }
 
-    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
-    public void setStartTime(Date startTime) {
+    public void setStartTime(LocalDateTime startTime) {
         this.startTime = startTime;
     }
 
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
-    public Date getEndTime() {
+    public LocalDateTime getEndTime() {
         return endTime;
     }
 
-    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
-    public void setEndTime(Date endTime) {
+    public void setEndTime(LocalDateTime endTime) {
         this.endTime = endTime;
     }
 
     @JsonFormat(pattern = "yyyy-MM-dd", timezone = "GMT+8")
-    public Date getStartDate() {
+    public LocalDate getStartDate() {
         return startDate;
     }
 
-    @DateTimeFormat(pattern = "yyyy-MM-dd")
-    public void setStartDate(Date startDate) {
+    public void setStartDate(LocalDate startDate) {
         this.startDate = startDate;
     }
 
     @JsonFormat(pattern = "yyyy-MM-dd", timezone = "GMT+8")
-    public Date getEndDate() {
+    public LocalDate getEndDate() {
         return endDate;
     }
 
-    @DateTimeFormat(pattern = "yyyy-MM-dd")
-    public void setEndDate(Date endDate) {
+    public void setEndDate(LocalDate endDate) {
         this.endDate = endDate;
     }
 
     @JsonFormat(pattern = "yyyy-MM", timezone = "GMT+8")
-    public Date getStartMonth() {
+    public YearMonth getStartMonth() {
         return startMonth;
     }
 
-    @DateTimeFormat(pattern = "yyyy-MM")
-    public void setStartMonth(Date startMonth) {
+    public void setStartMonth(YearMonth startMonth) {
         this.startMonth = startMonth;
     }
 
     @JsonFormat(pattern = "yyyy-MM", timezone = "GMT+8")
-    public Date getEndMonth() {
+    public YearMonth getEndMonth() {
         return endMonth;
     }
 
-    @DateTimeFormat(pattern = "yyyy-MM")
-    public void setEndMonth(Date endMonth) {
+    public void setEndMonth(YearMonth endMonth) {
         this.endMonth = endMonth;
     }
 }
