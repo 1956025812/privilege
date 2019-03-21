@@ -9,7 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.Date;
+import java.time.LocalDateTime;
 
 /**
  * @author duxuebo
@@ -34,7 +34,7 @@ public class SysMenuWriteServiceImpl implements SysMenuWriteService {
         sysMenu.setSort(sysMenuVO.getSort());
         sysMenu.setDescription(sysMenuVO.getDescription());
         sysMenu.setUpdateUid(sysMenuVO.getLoginUid());
-        sysMenu.setUpdateTime(new Date());
+        sysMenu.setUpdateTime(LocalDateTime.now());
         this.sysMenuWriteMapper.updateByPrimaryKeySelective(sysMenu);
 
         return ResultVO.getSuccess("修改菜单成功");
