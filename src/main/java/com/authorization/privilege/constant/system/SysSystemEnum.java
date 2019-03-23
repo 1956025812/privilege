@@ -5,7 +5,7 @@ package com.authorization.privilege.constant.system;
  * @date 2018/12/4
  * @description 系统对象枚举类
  */
-public enum SysSystemEnum {
+public enum SysSystemEnum  {
 
     STATE_DEL("删除", 0), STATE_NORMAL("正常", 1);
 

@@ -40,6 +40,12 @@ public class SysMenuReadServiceImpl implements SysMenuReadService {
         // 查询菜单列表集合
         List<SysMenuVO> sysMenuVOList = this.sysMenuReadMapper.selectSysMenuVOList(sysMenuVO);
 
+        if (!CollectionUtils.isEmpty(sysMenuVOList)) {
+            sysMenuVOList.forEach(eachSysMenuVO -> {
+                eachSysMenuVO.setMenuTypeName(SysMenuEnum.getName(eachSysMenuVO.getType()));
+            });
+        }
+
         return ResultVO.getSuccess("查询菜单列表成功", sysMenuVOList);
     }
 
@@ -50,6 +56,9 @@ public class SysMenuReadServiceImpl implements SysMenuReadService {
         SysMenuVO detailSysMenuVO = this.sysMenuReadMapper.selectSysMenuVODetail(sysMenuVO);
 
         if (null != detailSysMenuVO) {
+
+            // 处理菜单类型名称
+            detailSysMenuVO.setMenuTypeName(SysMenuEnum.getName(detailSysMenuVO.getType()));
 
             // 处理创建人昵称和修改人昵称字段
             UserVO userVO = new UserVO();
@@ -66,7 +75,7 @@ public class SysMenuReadServiceImpl implements SysMenuReadService {
             detailSysMenuVO.setSystemName(sysSystem == null ? null : sysSystem.getSystemName());
 
             // 如果是二级以下菜单，则处理上级菜单名称
-            if (!SysMenuEnum.MENU_LEVEL_ONE.equals(detailSysMenuVO.getLevel())) {
+            if (!SysMenuEnum.MENU_LEVEL_ONE.getIntIndex().equals(detailSysMenuVO.getLevel())) {
                 SysMenu parentSysMenu = this.sysMenuReadMapper.selectByPrimaryKey(detailSysMenuVO.getParentMid());
                 detailSysMenuVO.setParentMenuName(parentSysMenu == null ? null : parentSysMenu.getMenuName());
             }
