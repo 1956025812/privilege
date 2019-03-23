@@ -9,11 +9,13 @@ import com.authorization.privilege.mapper.dsprivilegeread.user.UserReadMapper;
 import com.authorization.privilege.service.menu.SysMenuReadService;
 import com.authorization.privilege.vo.ResultVO;
 import com.authorization.privilege.vo.menu.SysMenuVO;
+import com.authorization.privilege.vo.system.SysSystemVO;
 import com.authorization.privilege.vo.user.UserVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -41,8 +43,20 @@ public class SysMenuReadServiceImpl implements SysMenuReadService {
         List<SysMenuVO> sysMenuVOList = this.sysMenuReadMapper.selectSysMenuVOList(sysMenuVO);
 
         if (!CollectionUtils.isEmpty(sysMenuVOList)) {
+
+            // 查询所有的系统key和对应的系统VO对象MAP
+            HashMap<String, SysSystemVO> systemKeyAndSystemVOMap = this.sysSystemReadMapper.selectSystemKeyAndSystemVOMap(new SysSystemVO());
+
             sysMenuVOList.forEach(eachSysMenuVO -> {
+
+                // 处理菜单类型冗余字段
                 eachSysMenuVO.setMenuTypeName(SysMenuEnum.getName(eachSysMenuVO.getType()));
+
+                // 处理系统名称冗余字段
+                eachSysMenuVO.setSystemName(CollectionUtils.isEmpty(systemKeyAndSystemVOMap) ? null :
+                        (systemKeyAndSystemVOMap.get(eachSysMenuVO.getSystemKey()) == null ? null :
+                                systemKeyAndSystemVOMap.get(eachSysMenuVO.getSystemKey()).getSystemName())
+                );
             });
         }
 

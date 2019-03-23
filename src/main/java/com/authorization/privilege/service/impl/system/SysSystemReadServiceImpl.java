@@ -45,17 +45,17 @@ public class SysSystemReadServiceImpl implements SysSystemReadService {
     @Override
     public ResultVO<PageVO<SysSystemVO>> selectSysSystemPage(SysSystemVO sysSystemVO) throws Exception {
 
-        // 查询用户ID和用户VO对象MAP
-        UserVO userVO = new UserVO();
-        Map<String, UserVO> userIdAndUserVOMap = this.userReadMapper.selectUserIdAndUserVOMap(userVO);
-
         // 查询系统分页列表
         PageHelper.startPage(sysSystemVO.getCurrentPage(), sysSystemVO.getPageSize());
         List<SysSystemVO> sysSystemVOList = this.sysSystemReadMapper.selectSysSystemPage(sysSystemVO);
 
-
         // 处理列表冗余字段
         if (!CollectionUtils.isEmpty(sysSystemVOList)) {
+
+            // 查询用户ID和用户VO对象MAP
+            UserVO userVO = new UserVO();
+            Map<String, UserVO> userIdAndUserVOMap = this.userReadMapper.selectUserIdAndUserVOMap(userVO);
+
             sysSystemVOList.forEach(eachSysSystemVO -> {
 
                 // 处理创建人名称
@@ -147,13 +147,15 @@ public class SysSystemReadServiceImpl implements SysSystemReadService {
             titles.add(Arrays.asList("创建时间"));
             table.setHead(titles);
 
-            // 准备冗余字段
-            HashMap<String, UserVO> userIdAndUserVOMap = this.userReadMapper.selectUserIdAndUserVOMap(new UserVO());
 
             // 查数据写EXCEL
             List<List<String>> dataList = new ArrayList<>();
             List<SysSystemVO> sysSystemVOList = this.sysSystemReadMapper.selectSysSystemVOList(sysSystemVO);
             if (!CollectionUtils.isEmpty(sysSystemVOList)) {
+
+                // 准备冗余字段
+                HashMap<String, UserVO> userIdAndUserVOMap = this.userReadMapper.selectUserIdAndUserVOMap(new UserVO());
+
                 sysSystemVOList.forEach(eachSysSystemVO -> {
                     dataList.add(Arrays.asList(
                             eachSysSystemVO.getSystemName(),
