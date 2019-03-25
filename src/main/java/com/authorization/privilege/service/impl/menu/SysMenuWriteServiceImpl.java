@@ -1,6 +1,6 @@
 package com.authorization.privilege.service.impl.menu;
 
-import com.authorization.privilege.constant.menu.SysMenuEnum;
+import com.authorization.privilege.constant.menu.SysMenuEnumsInterface;
 import com.authorization.privilege.entity.dsprivelege.menu.SysMenu;
 import com.authorization.privilege.mapper.dsprivilegewrite.menu.SysMenuWriteMapper;
 import com.authorization.privilege.service.menu.SysMenuWriteService;
@@ -40,9 +40,9 @@ public class SysMenuWriteServiceImpl implements SysMenuWriteService {
         sysMenu.setDescription(sysMenuVO.getDescription());
         sysMenu.setLoginUid(sysMenuVO.getLoginUid());
         sysMenu.setCreateTime(LocalDateTime.now());
-        sysMenu.setState(SysMenuEnum.STATE_NORMAL.getIntIndex());
+        sysMenu.setState(SysMenuEnumsInterface.STATE.STATE_NORMAL.getIntIndex());
 
-        if (sysMenuVO.getLevel() >= SysMenuEnum.MENU_LEVEL_ONE.getIntIndex()) {
+        if (sysMenuVO.getLevel() >= SysMenuEnumsInterface.LEVEL.LEVEL_ONE.getIntIndex()) {
             sysMenu.setParentMid(sysMenuVO.getParentMid());
         }
 

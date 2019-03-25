@@ -1,6 +1,6 @@
 package com.authorization.privilege.service.impl.menu;
 
-import com.authorization.privilege.constant.menu.SysMenuEnum;
+import com.authorization.privilege.constant.menu.SysMenuEnumsInterface;
 import com.authorization.privilege.entity.dsprivelege.menu.SysMenu;
 import com.authorization.privilege.entity.dsprivelege.system.SysSystem;
 import com.authorization.privilege.mapper.dsprivilegeread.menu.SysMenuReadMapper;
@@ -50,7 +50,8 @@ public class SysMenuReadServiceImpl implements SysMenuReadService {
             sysMenuVOList.forEach(eachSysMenuVO -> {
 
                 // 处理菜单类型冗余字段
-                eachSysMenuVO.setMenuTypeName(SysMenuEnum.getName(eachSysMenuVO.getType()));
+//                eachSysMenuVO.setMenuTypeName(SysMenuEnum.getName(eachSysMenuVO.getType()));
+                eachSysMenuVO.setMenuTypeName(SysMenuEnumsInterface.TYPE.getName(eachSysMenuVO.getType()));
 
                 // 处理系统名称冗余字段
                 eachSysMenuVO.setSystemName(CollectionUtils.isEmpty(systemKeyAndSystemVOMap) ? null :
@@ -72,7 +73,7 @@ public class SysMenuReadServiceImpl implements SysMenuReadService {
         if (null != detailSysMenuVO) {
 
             // 处理菜单类型名称
-            detailSysMenuVO.setMenuTypeName(SysMenuEnum.getName(detailSysMenuVO.getType()));
+            detailSysMenuVO.setMenuTypeName(SysMenuEnumsInterface.TYPE.getName(detailSysMenuVO.getType()));
 
             // 处理创建人昵称和修改人昵称字段
             UserVO userVO = new UserVO();
@@ -89,7 +90,7 @@ public class SysMenuReadServiceImpl implements SysMenuReadService {
             detailSysMenuVO.setSystemName(sysSystem == null ? null : sysSystem.getSystemName());
 
             // 如果是二级以下菜单，则处理上级菜单名称
-            if (!SysMenuEnum.MENU_LEVEL_ONE.getIntIndex().equals(detailSysMenuVO.getLevel())) {
+            if (detailSysMenuVO.getLevel() >= SysMenuEnumsInterface.LEVEL.LEVEL_ONE.getIntIndex()) {
                 SysMenu parentSysMenu = this.sysMenuReadMapper.selectByPrimaryKey(detailSysMenuVO.getParentMid());
                 detailSysMenuVO.setParentMenuName(parentSysMenu == null ? null : parentSysMenu.getMenuName());
             }
