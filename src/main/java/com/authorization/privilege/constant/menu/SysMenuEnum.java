@@ -7,11 +7,11 @@ package com.authorization.privilege.constant.menu;
  */
 public enum SysMenuEnum {
 
-    MENU_LEVEL_ONE("", 0),
+    MENU_LEVEL_ONE("", 1),
 
     TYPE_MENU("菜单", 1), TYPE_BUTTON("按钮", 2),
 
-    STATE_DEL("删除", 0), STATE_NORMAL("正常", 0);
+    STATE_DEL("删除", 0), STATE_NORMAL("正常", 1);
 
     private String name;
     private Integer intIndex;

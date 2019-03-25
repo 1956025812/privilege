@@ -10,6 +10,17 @@ import com.authorization.privilege.vo.menu.SysMenuVO;
  */
 public interface SysMenuWriteService {
 
+
+    /**
+     * 新增菜单
+     *
+     * @param sysMenuVO
+     * @return VOID
+     * @throws Exception
+     */
+    ResultVO<Void> saveSysMenuVO(SysMenuVO sysMenuVO) throws Exception;
+
+
     /**
      * 修改菜单
      *
@@ -18,4 +29,6 @@ public interface SysMenuWriteService {
      * @throws Exception
      */
     ResultVO<Void> updateSysMenuVO(SysMenuVO sysMenuVO) throws Exception;
+
+
 }

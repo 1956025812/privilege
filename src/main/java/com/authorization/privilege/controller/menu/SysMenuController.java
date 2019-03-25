@@ -37,6 +37,25 @@ public class SysMenuController extends BaseController {
     private SysMenuWriteService sysMenuWriteService;
 
 
+    @ApiOperation("新增菜单")
+    @ApiImplicitParams({
+            @ApiImplicitParam(paramType = "body", dataType = "String", name = "loginUid", value = "登录用户ID", required = true),
+            @ApiImplicitParam(paramType = "body", dataType = "String", name = "systemKey", value = "系统标识", required = false),
+            @ApiImplicitParam(paramType = "body", dataType = "String", name = "menuName", value = "菜单名称", required = false),
+            @ApiImplicitParam(paramType = "body", dataType = "String", name = "menuType", value = "菜单类型：1：菜单， 2：按钮", required = false),
+            @ApiImplicitParam(paramType = "body", dataType = "String", name = "level", value = "菜单级别", required = false),
+            @ApiImplicitParam(paramType = "body", dataType = "String", name = "parentMid", value = "父菜单ID", required = false),
+            @ApiImplicitParam(paramType = "body", dataType = "String", name = "url", value = "菜单链接", required = false),
+            @ApiImplicitParam(paramType = "body", dataType = "String", name = "sort", value = "菜单排序", required = false),
+            @ApiImplicitParam(paramType = "body", dataType = "String", name = "description", value = "菜单描述", required = false)
+    })
+    @PostMapping("/save")
+    public ResultVO<Void> saveSysMenuVO(@ApiIgnore @RequestBody SysMenuVO sysSystemVO) throws Exception {
+        return this.sysMenuWriteService.saveSysMenuVO(sysSystemVO);
+    }
+
+
+
     @ApiOperation("修改菜单")
     @ApiImplicitParams({
             @ApiImplicitParam(paramType = "body", dataType = "String", name = "loginUid", value = "登录用户ID", required = true),
