@@ -8,7 +8,7 @@ package com.authorization.privilege.constant.menu;
 public interface SysMenuEnumsInterface {
 
     /**
-     * 状态枚举集合
+     * 菜单状态枚举集合
      */
     enum STATE implements SysMenuEnumsInterface {
 
@@ -57,7 +57,7 @@ public interface SysMenuEnumsInterface {
 
 
     /**
-     * 类型枚举集合
+     * 菜单类型枚举集合
      */
     enum TYPE implements SysMenuEnumsInterface {
 

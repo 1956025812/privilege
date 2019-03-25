@@ -4,7 +4,7 @@ import com.alibaba.excel.ExcelWriter;
 import com.alibaba.excel.metadata.Sheet;
 import com.alibaba.excel.metadata.Table;
 import com.alibaba.excel.support.ExcelTypeEnum;
-import com.authorization.privilege.constant.system.SysSystemEnum;
+import com.authorization.privilege.constant.system.SysSystemEnumInterface;
 import com.authorization.privilege.mapper.dsprivilegeread.system.SysSystemReadMapper;
 import com.authorization.privilege.mapper.dsprivilegeread.user.UserReadMapper;
 import com.authorization.privilege.service.system.SysSystemReadService;
@@ -161,7 +161,7 @@ public class SysSystemReadServiceImpl implements SysSystemReadService {
                             eachSysSystemVO.getSystemName(),
                             eachSysSystemVO.getSystemKey(),
                             eachSysSystemVO.getDescription(),
-                            SysSystemEnum.getName(eachSysSystemVO.getState()),
+                            SysSystemEnumInterface.STATE.getName(eachSysSystemVO.getState()),
                             CollectionUtils.isEmpty(userIdAndUserVOMap) ? null :
                                     (userIdAndUserVOMap.get(eachSysSystemVO.getCreateUid()) == null ? null :
                                             userIdAndUserVOMap.get(eachSysSystemVO.getCreateUid()).getNickname()),

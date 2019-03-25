@@ -1,6 +1,6 @@
 package com.authorization.privilege.service.impl.system;
 
-import com.authorization.privilege.constant.system.SysSystemEnum;
+import com.authorization.privilege.constant.system.SysSystemEnumInterface;
 import com.authorization.privilege.entity.dsprivelege.system.SysSystem;
 import com.authorization.privilege.mapper.dsprivilegeread.system.SysSystemReadMapper;
 import com.authorization.privilege.mapper.dsprivilegewrite.system.SysSystemWriteMapper;
@@ -41,7 +41,7 @@ public class SysSystemWriteServiceImpl implements SysSystemWriteService {
         sysSystem.setDescription(sysSystemVO.getDescription());
         sysSystem.setCreateUid(sysSystemVO.getLoginUid());
         sysSystem.setCreateTime(LocalDateTime.now());
-        sysSystem.setState(SysSystemEnum.STATE_NORMAL.getIntIndex());
+        sysSystem.setState(SysSystemEnumInterface.STATE.STATE_NORMAL.getIntIndex());
         this.sysSystemWriteMapper.insertSelective(sysSystem);
 
         return ResultVO.getSuccess("新增系统成功");
@@ -76,7 +76,7 @@ public class SysSystemWriteServiceImpl implements SysSystemWriteService {
         SysSystemVO newSysSystemVO = new SysSystemVO();
         newSysSystemVO.setSid(sysSystemVO.getSid());
         newSysSystemVO.setSids(sysSystemVO.getSids());
-        newSysSystemVO.setState(SysSystemEnum.STATE_DEL.getIntIndex());
+        newSysSystemVO.setState(SysSystemEnumInterface.STATE.STATE_DEL.getIntIndex());
         newSysSystemVO.setUpdateUid(sysSystemVO.getLoginUid());
         newSysSystemVO.setUpdateTime(LocalDateTime.now());
         this.sysSystemWriteMapper.delSysSystem(newSysSystemVO);
