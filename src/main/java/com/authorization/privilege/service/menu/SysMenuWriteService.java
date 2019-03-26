@@ -31,4 +31,12 @@ public interface SysMenuWriteService {
     ResultVO<Void> updateSysMenuVO(SysMenuVO sysMenuVO) throws Exception;
 
 
+    /**
+     * 删除菜单
+     *
+     * @param sysMenuVO
+     * @return VOID
+     * @throws Exception
+     */
+    ResultVO<Void> delSysMenuVO(SysMenuVO sysMenuVO) throws Exception;
 }

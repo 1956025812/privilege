@@ -72,6 +72,18 @@ public class SysMenuController extends BaseController {
 
 
 
+    @ApiOperation("删除菜单")
+    @ApiImplicitParams({
+            @ApiImplicitParam(paramType = "body", dataType = "String", name = "loginUid", value = "登录用户ID", required = true),
+            @ApiImplicitParam(paramType = "body", dataType = "String", name = "mid", value = "菜单ID", required = false),
+    })
+    @PostMapping("/del")
+    public ResultVO<Void> delSysMenuVO(@ApiIgnore @RequestBody SysMenuVO sysMenuVO) throws Exception {
+        return this.sysMenuWriteService.delSysMenuVO(sysMenuVO);
+    }
+
+
+
     @ApiOperation("查询菜单列表")
     @ApiImplicitParams({
             @ApiImplicitParam(paramType = "query", dataType = "String", name = "loginUid", value = "登录用户ID", required = true),

@@ -114,6 +114,18 @@
   </select>
 
 
-
+  <!-- 查询菜单列表数量 -->
+  <select id="selectCountOfSysMenuList" parameterType="com.authorization.privilege.vo.menu.SysMenuVO" resultType="java.lang.Integer">
+      SELECT
+          COUNT(1)
+      FROM
+          sys_menu AS M
+      <trim prefix="WHERE" prefixOverrides="AND|OR">
+          AND M.state > 0
+          <if test="parentMid != null and parentMid != ''">
+              AND M.parent_mid = #{parentMid}
+          </if>
+      </trim>
+  </select>
 
 </mapper>

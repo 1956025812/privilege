@@ -39,4 +39,14 @@ public interface SysMenuReadMapper {
      * @throws Exception
      */
     SysMenuVO selectSysMenuVODetail(SysMenuVO sysMenuVO) throws Exception;
+
+
+    /**
+     * 查询菜单列表数量
+     *
+     * @param newSysMenuVO
+     * @return 菜单列表数量
+     * @throws Exception
+     */
+    Integer selectCountOfSysMenuList(SysMenuVO newSysMenuVO) throws Exception;
 }
