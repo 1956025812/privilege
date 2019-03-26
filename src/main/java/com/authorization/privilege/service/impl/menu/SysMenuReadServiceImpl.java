@@ -50,7 +50,6 @@ public class SysMenuReadServiceImpl implements SysMenuReadService {
             sysMenuVOList.forEach(eachSysMenuVO -> {
 
                 // 处理菜单类型冗余字段
-//                eachSysMenuVO.setMenuTypeName(SysMenuEnum.getName(eachSysMenuVO.getType()));
                 eachSysMenuVO.setMenuTypeName(SysMenuEnumsInterface.TYPE.getName(eachSysMenuVO.getType()));
 
                 // 处理系统名称冗余字段
