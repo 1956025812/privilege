@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.authorization.privilege.mapper.dsprivilegeread.role.SysRoleReadMapper">
+
+  <resultMap id="BaseResultMap" type="com.authorization.privilege.entity.dsprivelege.role.SysRole">
+    <id column="rid" jdbcType="VARCHAR" property="rid" />
+    <result column="role_name" jdbcType="VARCHAR" property="roleName" />
+    <result column="description" jdbcType="VARCHAR" property="description" />
+    <result column="sid" jdbcType="VARCHAR" property="sid" />
+    <result column="state" jdbcType="INTEGER" property="state" />
+    <result column="create_uid" jdbcType="VARCHAR" property="createUid" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="update_uid" jdbcType="VARCHAR" property="updateUid" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+  </resultMap>
+
+
+  <sql id="Base_Column_List">
+    rid, role_name, description, sid, state, create_uid, create_time, update_uid, update_time
+  </sql>
+
+
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    SELECT
+        <include refid="Base_Column_List" />
+    FROM
+        sys_role
+    WHERE
+        rid = #{rid,jdbcType=VARCHAR}
+  </select>
+
+</mapper>
