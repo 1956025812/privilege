@@ -6,7 +6,7 @@
     <id column="rid" jdbcType="VARCHAR" property="rid" />
     <result column="role_name" jdbcType="VARCHAR" property="roleName" />
     <result column="description" jdbcType="VARCHAR" property="description" />
-    <result column="sid" jdbcType="VARCHAR" property="sid" />
+    <result column="system_key" jdbcType="VARCHAR" property="systemKey" />
     <result column="state" jdbcType="INTEGER" property="state" />
     <result column="create_uid" jdbcType="VARCHAR" property="createUid" />
     <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
@@ -16,7 +16,7 @@
 
 
   <sql id="Base_Column_List">
-    rid, role_name, description, sid, state, create_uid, create_time, update_uid, update_time
+    rid, role_name, description, system_key, state, create_uid, create_time, update_uid, update_time
   </sql>
 
 
@@ -33,8 +33,8 @@
       <if test="description != null">
         description,
       </if>
-      <if test="sid != null">
-        sid,
+      <if test="systemKey != null">
+        system_key,
       </if>
       <if test="state != null">
         state,
@@ -62,8 +62,8 @@
       <if test="description != null">
         #{description,jdbcType=VARCHAR},
       </if>
-      <if test="sid != null">
-        #{sid,jdbcType=VARCHAR},
+      <if test="systemKey != null">
+        #{systemKey,jdbcType=VARCHAR},
       </if>
       <if test="state != null">
         #{state,jdbcType=INTEGER},
@@ -95,8 +95,8 @@
       <if test="description != null">
         description = #{description,jdbcType=VARCHAR},
       </if>
-      <if test="sid != null">
-        sid = #{sid,jdbcType=VARCHAR},
+      <if test="systemKey != null">
+        system_key = #{systemKey,jdbcType=VARCHAR},
       </if>
       <if test="state != null">
         state = #{state,jdbcType=INTEGER},
@@ -127,7 +127,7 @@
     SET
       role_name = #{roleName,jdbcType=VARCHAR},
       description = #{description,jdbcType=VARCHAR},
-      sid = #{sid,jdbcType=VARCHAR},
+      system_key = #{systemKey,jdbcType=VARCHAR},
       state = #{state,jdbcType=INTEGER},
       create_uid = #{createUid,jdbcType=VARCHAR},
       create_time = #{createTime,jdbcType=TIMESTAMP},
