@@ -2,6 +2,9 @@ package com.authorization.privilege.mapper.dsprivilegeread.role;
 
 
 import com.authorization.privilege.entity.dsprivelege.role.SysRole;
+import com.authorization.privilege.vo.role.SysRoleVO;
+
+import java.util.List;
 
 /**
  * @author qjwyss
@@ -18,5 +21,17 @@ public interface SysRoleReadMapper {
      * @throws Exception
      */
     SysRole selectByPrimaryKey(String rid) throws Exception;
+
+
+    /**
+     * 查询角色列表
+     *
+     * @param sysRoleVO
+     * @return SysRoleVO集合
+     * @throws Exception
+     */
+    List<SysRoleVO> selectSysRoleList(SysRoleVO sysRoleVO) throws Exception;
+
+
 
 }
