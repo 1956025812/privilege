@@ -85,8 +85,10 @@ public class SysMenuReadServiceImpl implements SysMenuReadService {
             }
 
             // 处理系统名称字段
-            SysSystem sysSystem = this.sysSystemReadMapper.selectByPrimaryKey(detailSysMenuVO.getSystemId());
-            detailSysMenuVO.setSystemName(sysSystem == null ? null : sysSystem.getSystemName());
+            SysSystemVO sysSystemVO = new SysSystemVO();
+            sysSystemVO.setSystemKey(detailSysMenuVO.getSystemKey());
+            SysSystemVO sysSystemVODetail = this.sysSystemReadMapper.selectSysSystemVODetail(sysSystemVO);
+            detailSysMenuVO.setSystemName(sysSystemVODetail == null ? null : sysSystemVODetail.getSystemName());
 
             // 如果是二级以下菜单，则处理上级菜单名称
             if (detailSysMenuVO.getLevel() >= SysMenuEnumsInterface.LEVEL.LEVEL_ONE.getIntIndex()) {

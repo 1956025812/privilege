@@ -5,7 +5,6 @@
 
   <resultMap id="BaseResultMap" type="com.authorization.privilege.entity.dsprivelege.menu.SysMenu" >
     <id column="mid" property="mid" jdbcType="VARCHAR" />
-    <result column="system_id" property="systemId" jdbcType="VARCHAR" />
     <result column="system_key" property="systemKey" jdbcType="VARCHAR" />
     <result column="menu_name" property="menuName" jdbcType="VARCHAR" />
     <result column="type" property="type" jdbcType="INTEGER" />
@@ -23,7 +22,7 @@
 
 
   <sql id="Base_Column_List" >
-    mid, system_id, system_key, menu_name, type, level, url, parent_mid, sort, state, description,
+    mid, system_key, menu_name, type, level, url, parent_mid, sort, state, description,
     create_uid, create_time, update_uid, update_time
   </sql>
 
@@ -35,9 +34,6 @@
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="mid != null" >
         mid,
-      </if>
-      <if test="systemId != null" >
-        system_id,
       </if>
       <if test="systemKey != null" >
         system_key,
@@ -82,9 +78,6 @@
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="mid != null" >
         #{mid,jdbcType=VARCHAR},
-      </if>
-      <if test="systemId != null" >
-        #{systemId,jdbcType=VARCHAR},
       </if>
       <if test="systemKey != null" >
         #{systemKey,jdbcType=VARCHAR},
@@ -134,9 +127,6 @@
   <update id="updateByPrimaryKeySelective" parameterType="com.authorization.privilege.entity.dsprivelege.menu.SysMenu" >
     UPDATE sys_menu
     <set >
-      <if test="systemId != null" >
-        system_id = #{systemId,jdbcType=VARCHAR},
-      </if>
       <if test="systemKey != null" >
         system_key = #{systemKey,jdbcType=VARCHAR},
       </if>
@@ -188,7 +178,6 @@
     UPDATE
       sys_menu
     SET
-      system_id = #{systemId,jdbcType=VARCHAR},
       system_key = #{systemKey,jdbcType=VARCHAR},
       menu_name = #{menuName,jdbcType=VARCHAR},
       type = #{type,jdbcType=INTEGER},

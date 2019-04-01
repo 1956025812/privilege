@@ -17,9 +17,6 @@ public class SysMenu extends BaseVO implements Serializable {
     @ApiModelProperty("菜单ID")
     private String mid;
 
-    @ApiModelProperty("系统ID")
-    private String systemId;
-
     @ApiModelProperty("系统标识")
     private String systemKey;
 
@@ -65,14 +62,6 @@ public class SysMenu extends BaseVO implements Serializable {
 
     public void setMid(String mid) {
         this.mid = mid == null ? null : mid.trim();
-    }
-
-    public String getSystemId() {
-        return systemId;
-    }
-
-    public void setSystemId(String systemId) {
-        this.systemId = systemId;
     }
 
     public String getSystemKey() {

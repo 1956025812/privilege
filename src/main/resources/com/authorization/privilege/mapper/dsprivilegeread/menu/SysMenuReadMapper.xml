@@ -5,7 +5,6 @@
 
   <resultMap id="BaseResultMap" type="com.authorization.privilege.entity.dsprivelege.menu.SysMenu" >
     <id column="mid" property="mid" jdbcType="VARCHAR" />
-    <result column="system_id" property="systemId" jdbcType="VARCHAR" />
     <result column="system_key" property="systemKey" jdbcType="VARCHAR" />
     <result column="menu_name" property="menuName" jdbcType="VARCHAR" />
     <result column="type" property="type" jdbcType="INTEGER" />
@@ -25,7 +24,6 @@
   <!-- 查询菜单VO对象集合返回MAP -->
   <resultMap id="SelectSysMenuVOListMap" type="com.authorization.privilege.vo.menu.SysMenuVO">
     <id column="mid" property="mid" jdbcType="VARCHAR" />
-    <result column="system_id" property="systemId" jdbcType="VARCHAR" />
     <result column="system_key" property="systemKey" jdbcType="VARCHAR" />
     <result column="menu_name" property="menuName" jdbcType="VARCHAR" />
     <result column="level" property="level" jdbcType="INTEGER" />
@@ -39,7 +37,6 @@
   <!-- 查询菜单详情返回MAP -->
   <resultMap id="SelectSysMenuVODetailMap" type="com.authorization.privilege.vo.menu.SysMenuVO">
       <id column="mid" property="mid" jdbcType="VARCHAR" />
-      <result column="system_id" property="systemId" jdbcType="VARCHAR" />
       <result column="system_key" property="systemKey" jdbcType="VARCHAR" />
       <result column="menu_name" property="menuName" jdbcType="VARCHAR" />
       <result column="type" property="type" jdbcType="INTEGER" />
@@ -56,7 +53,7 @@
 
 
   <sql id="Base_Column_List" >
-    mid, system_id, system_key, menu_name, type, level, url, parent_mid, sort, state, description,
+    mid, system_key, menu_name, type, level, url, parent_mid, sort, state, description,
     create_uid, create_time, update_uid, update_time
   </sql>
 
@@ -75,16 +72,13 @@
   <!-- 查询菜单VO对象集合 -->
   <select id="selectSysMenuVOList" parameterType="com.authorization.privilege.vo.menu.SysMenuVO" resultMap="SelectSysMenuVOListMap">
     SELECT
-        M.mid, M.system_id, M.system_key, M.menu_name, M.`level`, M.url, M.parent_mid, M.`type`, M.sort
+        M.mid, M.system_key, M.menu_name, M.`level`, M.url, M.parent_mid, M.`type`, M.sort
     FROM
         sys_menu AS M
     WHERE
         M.state = 1
         <if test="type != null">
           AND M.type = #{type}
-        </if>
-        <if test="systemId != null and systemId != ''">
-          AND M.system_id = #{systemId}
         </if>
         <if test="systemKey != null and systemKey != ''">
           AND M.system_key = #{systemKey}
@@ -102,7 +96,7 @@
   <!-- 查询菜单详情 -->
   <select id="selectSysMenuVODetail" parameterType="com.authorization.privilege.vo.menu.SysMenuVO" resultMap="SelectSysMenuVODetailMap">
       SELECT
-        M.mid, M.system_id, M.system_key, M.menu_name, M.`level`, M.url, M.parent_mid, M.`type`, M.sort, M.description,
+        M.mid, M.system_key, M.menu_name, M.`level`, M.url, M.parent_mid, M.`type`, M.sort, M.description,
         M.create_uid, M.create_time, M.update_uid, M.update_time
       FROM
         sys_menu AS M
