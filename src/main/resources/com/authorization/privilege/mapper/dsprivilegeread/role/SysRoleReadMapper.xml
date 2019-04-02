@@ -57,6 +57,9 @@
         <if test="systemKey != null and systemKey != ''">
           AND system_key = #{systemKey}
         </if>
+        <if test="roleName != null and roleName != ''">
+          AND role_name LIKE CONCAT("%", #{roleName} ,"%")
+        </if>
   </select>
 
 
