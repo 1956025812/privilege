@@ -3,7 +3,9 @@ package com.authorization.privilege.mapper.dsprivilegeread.role;
 
 import com.authorization.privilege.entity.dsprivelege.role.SysRole;
 import com.authorization.privilege.vo.role.SysRoleVO;
+import org.apache.ibatis.annotations.MapKey;
 
+import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -33,5 +35,13 @@ public interface SysRoleReadMapper {
     List<SysRoleVO> selectSysRoleList(SysRoleVO sysRoleVO) throws Exception;
 
 
-
+    /**
+     * 查询角色ID和角色VO对象MAP
+     *
+     * @param sysRoleVO
+     * @return 角色ID和角色VO对象MAP
+     * @throws Exception
+     */
+    @MapKey("rid")
+    HashMap<String, SysRoleVO> selectRoleIdAndRoleVOMap(SysRoleVO sysRoleVO) throws Exception;
 }

@@ -47,6 +47,7 @@ public class SysRoleReadServiceImpl implements SysRoleReadService {
 
             HashMap<String, SysSystemVO> systemKeyAndSystemVOMap = this.sysSystemReadMapper.selectSystemKeyAndSystemVOMap(new SysSystemVO());
             HashMap<String, UserVO> userIdAndUserVOMap = this.userReadMapper.selectUserIdAndUserVOMap(new UserVO());
+            HashMap<String, SysRoleVO> roleIdAndRoleVOMap = this.sysRoleReadMapper.selectRoleIdAndRoleVOMap(new SysRoleVO());
 
             sysRoleVOList.forEach(eachSysRoleVO -> {
 
@@ -55,6 +56,11 @@ public class SysRoleReadServiceImpl implements SysRoleReadService {
                         (systemKeyAndSystemVOMap.get(eachSysRoleVO.getSystemKey()) == null ? null :
                                 systemKeyAndSystemVOMap.get(eachSysRoleVO.getSystemKey()).getSystemName())
                 );
+
+                // 处理上级角色冗余字段
+                eachSysRoleVO.setParentRoleName(CollectionUtils.isEmpty(roleIdAndRoleVOMap) ? null :
+                        (roleIdAndRoleVOMap.get(eachSysRoleVO.getParentRid()) == null ? null :
+                                roleIdAndRoleVOMap.get(eachSysRoleVO.getParentRid()).getRoleName()));
 
                 // 处理创建人冗余字段
                 eachSysRoleVO.setCreateName(CollectionUtils.isEmpty(userIdAndUserVOMap) ? null :

@@ -18,6 +18,9 @@ public class SysRoleVO extends SysRole {
     @ApiModelProperty("角色状态名称")
     private String roleStateName;
 
+    @ApiModelProperty("上级角色名称")
+    private String parentRoleName;
+
 
     public String getSystemName() {
         return systemName;
@@ -33,5 +36,13 @@ public class SysRoleVO extends SysRole {
 
     public void setRoleStateName(String roleStateName) {
         this.roleStateName = roleStateName;
+    }
+
+    public String getParentRoleName() {
+        return parentRoleName;
+    }
+
+    public void setParentRoleName(String parentRoleName) {
+        this.parentRoleName = parentRoleName;
     }
 }
