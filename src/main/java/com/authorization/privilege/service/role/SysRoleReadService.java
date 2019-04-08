@@ -1,8 +1,11 @@
 package com.authorization.privilege.service.role;
 
+import com.authorization.privilege.entity.dsprivelege.role.SysRole;
 import com.authorization.privilege.vo.PageVO;
 import com.authorization.privilege.vo.ResultVO;
 import com.authorization.privilege.vo.role.SysRoleVO;
+
+import java.util.List;
 
 /**
  * @author duxuebo
@@ -19,4 +22,14 @@ public interface SysRoleReadService {
      * @throws Exception
      */
     ResultVO<PageVO<SysRoleVO>> selectSysRoleVOPage(SysRoleVO sysRoleVO) throws Exception;
+
+
+    /**
+     * 查询角色列表
+     *
+     * @param sysRoleVO
+     * @return SysRoleVO集合
+     * @throws Exception
+     */
+    ResultVO<List<SysRoleVO>> selectSysRoleVOList(SysRoleVO sysRoleVO) throws Exception;
 }

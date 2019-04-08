@@ -1,6 +1,7 @@
 package com.authorization.privilege.controller.role;
 
 import com.authorization.privilege.controller.BaseController;
+import com.authorization.privilege.entity.dsprivelege.role.SysRole;
 import com.authorization.privilege.service.role.SysRoleReadService;
 import com.authorization.privilege.service.role.SysRoleWriteService;
 import com.authorization.privilege.vo.PageVO;
@@ -15,6 +16,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import springfox.documentation.annotations.ApiIgnore;
+
+import java.util.List;
 
 /**
  * @author duxuebo
@@ -51,4 +54,13 @@ public class SysRoleController extends BaseController {
 
 
 
+    @ApiOperation("查询角色列表")
+    @ApiImplicitParams({
+            @ApiImplicitParam(paramType = "query", dataType = "String", name = "loginUid", value = "登录用户ID", required = true),
+            @ApiImplicitParam(paramType = "query", dataType = "String", name = "systemKey", value = "系统标识", required = false)
+    })
+    @GetMapping("/list")
+    public ResultVO<List<SysRoleVO>> selectSysRoleVOList(@ApiIgnore SysRoleVO sysRoleVO) throws Exception {
+        return this.sysRoleReadService.selectSysRoleVOList(sysRoleVO);
+    }
 }

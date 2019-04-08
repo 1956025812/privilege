@@ -1,6 +1,7 @@
 package com.authorization.privilege.service.impl.role;
 
 import com.authorization.privilege.constant.role.SysRoleEnumsInterface;
+import com.authorization.privilege.entity.dsprivelege.role.SysRole;
 import com.authorization.privilege.mapper.dsprivilegeread.role.SysRoleReadMapper;
 import com.authorization.privilege.mapper.dsprivilegeread.system.SysSystemReadMapper;
 import com.authorization.privilege.mapper.dsprivilegeread.user.UserReadMapper;
@@ -80,5 +81,14 @@ public class SysRoleReadServiceImpl implements SysRoleReadService {
         );
 
         return ResultVO.getSuccess("查询角色分页列表成功", pageVO);
+    }
+
+
+
+    @Override
+    public ResultVO<List<SysRoleVO>> selectSysRoleVOList(SysRoleVO sysRoleVO) throws Exception {
+
+        List<SysRoleVO> sysRoleList = this.sysRoleReadMapper.selectSysRoleList(sysRoleVO);
+        return ResultVO.getSuccess("查询角色列表成功", sysRoleList);
     }
 }
