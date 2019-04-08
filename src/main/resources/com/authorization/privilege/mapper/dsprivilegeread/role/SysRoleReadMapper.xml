@@ -70,6 +70,9 @@
         <if test="roleName != null and roleName != ''">
           AND role_name LIKE CONCAT("%", #{roleName} ,"%")
         </if>
+        <if test="state != null">
+          AND state = #{state}
+        </if>
         <if test="startTime != null">
           AND create_time >= #{startTime}
         </if>
