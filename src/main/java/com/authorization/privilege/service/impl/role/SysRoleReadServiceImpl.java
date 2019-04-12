@@ -91,4 +91,21 @@ public class SysRoleReadServiceImpl implements SysRoleReadService {
         List<SysRoleVO> sysRoleList = this.sysRoleReadMapper.selectSysRoleList(sysRoleVO);
         return ResultVO.getSuccess("查询角色列表成功", sysRoleList);
     }
+
+
+
+    @Override
+    public ResultVO<SysRoleVO> selectSysRoleVODetail(SysRoleVO sysRoleVO) throws Exception {
+
+        SysRoleVO sysRoleVODetail = this.sysRoleReadMapper.selectSysRoleVO(sysRoleVO);
+
+        if (null != sysRoleVODetail) {
+
+            // 处理该角色下的菜单集合 TODO
+
+
+        }
+
+        return ResultVO.getSuccess("查询角色详情成功", sysRoleVODetail);
+    }
 }

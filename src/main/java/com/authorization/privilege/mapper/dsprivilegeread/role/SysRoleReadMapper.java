@@ -44,4 +44,14 @@ public interface SysRoleReadMapper {
      */
     @MapKey("rid")
     HashMap<String, SysRoleVO> selectRoleIdAndRoleVOMap(SysRoleVO sysRoleVO) throws Exception;
+
+
+    /**
+     * 查询角色VO对象
+     *
+     * @param sysRoleVO
+     * @return SysRoleVO
+     * @throws Exception
+     */
+    SysRoleVO selectSysRoleVO(SysRoleVO sysRoleVO) throws Exception;
 }

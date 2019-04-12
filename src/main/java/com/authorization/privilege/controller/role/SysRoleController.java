@@ -63,4 +63,18 @@ public class SysRoleController extends BaseController {
     public ResultVO<List<SysRoleVO>> selectSysRoleVOList(@ApiIgnore SysRoleVO sysRoleVO) throws Exception {
         return this.sysRoleReadService.selectSysRoleVOList(sysRoleVO);
     }
+
+
+    @ApiOperation("查询角色详情")
+    @ApiImplicitParams({
+            @ApiImplicitParam(paramType = "query", dataType = "String", name = "loginUid", value = "登录用户ID", required = true),
+            @ApiImplicitParam(paramType = "query", dataType = "String", name = "rid", value = "角色ID", required = true)
+    })
+    @GetMapping("/detail")
+    public ResultVO<SysRoleVO> selectSysRoleVODetail(@ApiIgnore SysRoleVO sysRoleVO) throws Exception {
+        return this.sysRoleReadService.selectSysRoleVODetail(sysRoleVO);
+    }
+
+
+
 }

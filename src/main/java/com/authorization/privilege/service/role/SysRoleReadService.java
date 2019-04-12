@@ -32,4 +32,14 @@ public interface SysRoleReadService {
      * @throws Exception
      */
     ResultVO<List<SysRoleVO>> selectSysRoleVOList(SysRoleVO sysRoleVO) throws Exception;
+
+
+    /**
+     * 查询角色详情
+     *
+     * @param sysRoleVO
+     * @return SysRoleVO
+     * @throws Exception
+     */
+    ResultVO<SysRoleVO> selectSysRoleVODetail(SysRoleVO sysRoleVO) throws Exception;
 }

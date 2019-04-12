@@ -38,6 +38,21 @@
 
 
 
+  <!-- 查询角色VO对象返回MAP -->
+  <resultMap id="SelectSysRoleVOMap" type="com.authorization.privilege.vo.role.SysRoleVO">
+      <id column="rid" jdbcType="VARCHAR" property="rid" />
+      <result column="role_name" jdbcType="VARCHAR" property="roleName" />
+      <result column="description" jdbcType="VARCHAR" property="description" />
+      <result column="system_key" jdbcType="VARCHAR" property="systemKey" />
+      <result column="parent_rid" jdbcType="VARCHAR" property="parentRid" />
+      <result column="state" jdbcType="INTEGER" property="state" />
+      <result column="create_uid" jdbcType="VARCHAR" property="createUid" />
+      <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+      <result column="update_uid" jdbcType="VARCHAR" property="updateUid" />
+      <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+  </resultMap>
+
+
   <sql id="Base_Column_List">
     rid, role_name, description, system_key, state, create_uid, create_time, update_uid, update_time
   </sql>
@@ -95,6 +110,22 @@
     WHERE
         state > 0
   </select>
+
+
+
+  <!-- 查询角色VO对象 -->
+  <select id="selectSysRoleVO" parameterType="com.authorization.privilege.vo.role.SysRoleVO" resultMap="SelectSysRoleVOMap">
+      SELECT
+          rid, role_name, description, system_key, state, create_uid, create_time, update_uid, update_time
+      FROM
+          sys_role
+      <trim prefix="WHERE" prefixOverrides="AND|OR">
+          <if test="rid != null and rid != ''">
+              AND rid = #{rid}
+          </if>
+      </trim>
+  </select>
+
 
 
 </mapper>
