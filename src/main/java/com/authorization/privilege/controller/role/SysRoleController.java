@@ -57,7 +57,9 @@ public class SysRoleController extends BaseController {
     @ApiOperation("查询角色列表")
     @ApiImplicitParams({
             @ApiImplicitParam(paramType = "query", dataType = "String", name = "loginUid", value = "登录用户ID", required = true),
-            @ApiImplicitParam(paramType = "query", dataType = "String", name = "systemKey", value = "系统标识", required = false)
+            @ApiImplicitParam(paramType = "query", dataType = "String", name = "systemKey", value = "系统标识", required = false),
+            @ApiImplicitParam(paramType = "query", dataType = "String", name = "parentRid", value = "父角色ID", required = false),
+            @ApiImplicitParam(paramType = "query", dataType = "String", name = "level", value = "角色级别", required = false)
     })
     @GetMapping("/list")
     public ResultVO<List<SysRoleVO>> selectSysRoleVOList(@ApiIgnore SysRoleVO sysRoleVO) throws Exception {

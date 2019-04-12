@@ -75,7 +75,7 @@
   <!-- 查询角色列表 -->
   <select id="selectSysRoleList" parameterType="com.authorization.privilege.vo.role.SysRoleVO" resultMap="SelectSysRoleListMap">
     SELECT
-        rid, role_name, system_key, parent_rid, state, create_uid, create_time
+        rid, role_name, system_key, parent_rid, state
     FROM
         sys_role
     WHERE
@@ -92,12 +92,16 @@
         <if test="state != null">
           AND state = #{state}
         </if>
+        <if test="level != null">
+          AND level = #{level}
+        </if>
         <if test="startTime != null">
           AND create_time >= #{startTime}
         </if>
         <if test="endTime != null">
           AND create_time <![CDATA[ <= ]]> #{endTime}
         </if>
+      ORDER BY create_time DESC
   </select>
 
 
