@@ -32,6 +32,9 @@ public class SysRole extends BaseVO implements Serializable {
     @ApiModelProperty("状态: 0：删除，1：启用，2：禁用")
     private Integer state;
 
+    @ApiModelProperty("角色级别 从1开始")
+    private Integer level;
+
     @ApiModelProperty("创建人ID")
     private String createUid;
 
@@ -90,6 +93,14 @@ public class SysRole extends BaseVO implements Serializable {
 
     public void setState(Integer state) {
         this.state = state;
+    }
+
+    public Integer getLevel() {
+        return level;
+    }
+
+    public void setLevel(Integer level) {
+        this.level = level;
     }
 
     public String getCreateUid() {

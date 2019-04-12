@@ -9,6 +9,7 @@
     <result column="system_key" jdbcType="VARCHAR" property="systemKey" />
     <result column="parent_rid" jdbcType="VARCHAR" property="parentRid" />
     <result column="state" jdbcType="INTEGER" property="state" />
+    <result column="level" jdbcType="INTEGER" property="level" />
     <result column="create_uid" jdbcType="VARCHAR" property="createUid" />
     <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
     <result column="update_uid" jdbcType="VARCHAR" property="updateUid" />
@@ -17,7 +18,7 @@
 
 
   <sql id="Base_Column_List">
-    rid, role_name, description, system_key, parent_rid, state, create_uid, create_time, update_uid, update_time
+    rid, role_name, description, system_key, parent_rid, state, level, create_uid, create_time, update_uid, update_time
   </sql>
 
 
@@ -42,6 +43,9 @@
       </if>
       <if test="state != null">
         state,
+      </if>
+      <if test="level != null">
+        level,
       </if>
       <if test="createUid != null">
         create_uid,
@@ -74,6 +78,9 @@
       </if>
       <if test="state != null">
         #{state,jdbcType=INTEGER},
+      </if>
+      <if test="level != null">
+        #{level,jdbcType=INTEGER},
       </if>
       <if test="createUid != null">
         #{createUid,jdbcType=VARCHAR},
@@ -111,6 +118,9 @@
       <if test="state != null">
         state = #{state,jdbcType=INTEGER},
       </if>
+      <if test="level != null">
+        level = #{level,jdbcType=INTEGER},
+      </if>
       <if test="createUid != null">
         create_uid = #{createUid,jdbcType=VARCHAR},
       </if>
@@ -140,6 +150,7 @@
       system_key = #{systemKey,jdbcType=VARCHAR},
       parent_rid = #{parentRid,jdbcType=VARCHAR},
       state = #{state,jdbcType=INTEGER},
+      level = #{level,jdbcType=INTEGER},
       create_uid = #{createUid,jdbcType=VARCHAR},
       create_time = #{createTime,jdbcType=TIMESTAMP},
       update_uid = #{updateUid,jdbcType=VARCHAR},

@@ -9,6 +9,7 @@
     <result column="system_key" jdbcType="VARCHAR" property="systemKey" />
     <result column="parent_rid" jdbcType="VARCHAR" property="parentRid" />
     <result column="state" jdbcType="INTEGER" property="state" />
+    <result column="level" jdbcType="INTEGER" property="level" />
     <result column="create_uid" jdbcType="VARCHAR" property="createUid" />
     <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
     <result column="update_uid" jdbcType="VARCHAR" property="updateUid" />
@@ -54,7 +55,7 @@
 
 
   <sql id="Base_Column_List">
-    rid, role_name, description, system_key, parent_rid, state, create_uid, create_time, update_uid, update_time
+    rid, role_name, description, system_key, parent_rid, state, level, create_uid, create_time, update_uid, update_time
   </sql>
 
 
