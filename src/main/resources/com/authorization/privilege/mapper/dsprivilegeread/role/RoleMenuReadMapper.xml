@@ -4,19 +4,20 @@
 
   <resultMap id="BaseResultMap" type="com.authorization.privilege.entity.dsprivelege.role.RoleMenu">
     <id column="rmid" jdbcType="BIGINT" property="rmid" />
-    <result column="rid" jdbcType="BIGINT" property="rid" />
-    <result column="mid" jdbcType="BIGINT" property="mid" />
+    <result column="system_key" jdbcType="VARCHAR" property="systemKey" />
+    <result column="rid" jdbcType="VARCHAR" property="rid" />
+    <result column="mid" jdbcType="VARCHAR" property="mid" />
     <result column="state" jdbcType="INTEGER" property="state" />
-    <result column="create_uid" jdbcType="BIGINT" property="createUid" />
+    <result column="create_uid" jdbcType="VARCHAR" property="createUid" />
     <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
-    <result column="update_uid" jdbcType="BIGINT" property="updateUid" />
+    <result column="update_uid" jdbcType="VARCHAR" property="updateUid" />
     <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
   </resultMap>
 
 
 
   <sql id="Base_Column_List">
-    rmid, rid, mid, state, create_uid, create_time, update_uid, update_time
+    rmid, system_key, rid, mid, state, create_uid, create_time, update_uid, update_time
   </sql>
 
 

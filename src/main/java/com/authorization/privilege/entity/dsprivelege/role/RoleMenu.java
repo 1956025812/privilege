@@ -17,6 +17,9 @@ public class RoleMenu extends BaseVO implements Serializable {
     @ApiModelProperty("角色菜单关联ID")
     private String rmid;
 
+    @ApiModelProperty("系统标识")
+    private String systemKey;
+
     @ApiModelProperty("角色ID")
     private String rid;
 
@@ -44,6 +47,14 @@ public class RoleMenu extends BaseVO implements Serializable {
 
     public void setRmid(String rmid) {
         this.rmid = rmid == null ? null : rmid.trim();
+    }
+
+    public String getSystemKey() {
+        return systemKey;
+    }
+
+    public void setSystemKey(String systemKey) {
+        this.systemKey = systemKey;
     }
 
     public String getRid() {

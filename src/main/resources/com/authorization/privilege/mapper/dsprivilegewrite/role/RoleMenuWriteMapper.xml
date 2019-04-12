@@ -4,20 +4,21 @@
 
   
   <resultMap id="BaseResultMap" type="com.authorization.privilege.entity.dsprivelege.role.RoleMenu">
-    <id column="rmid" jdbcType="BIGINT" property="rmid" />
-    <result column="rid" jdbcType="BIGINT" property="rid" />
-    <result column="mid" jdbcType="BIGINT" property="mid" />
+    <id column="rmid" jdbcType="VARCHAR" property="rmid" />
+    <result column="system_key" jdbcType="VARCHAR" property="systemKey" />
+    <result column="rid" jdbcType="VARCHAR" property="rid" />
+    <result column="mid" jdbcType="VARCHAR" property="mid" />
     <result column="state" jdbcType="INTEGER" property="state" />
-    <result column="create_uid" jdbcType="BIGINT" property="createUid" />
+    <result column="create_uid" jdbcType="VARCHAR" property="createUid" />
     <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
-    <result column="update_uid" jdbcType="BIGINT" property="updateUid" />
+    <result column="update_uid" jdbcType="VARCHAR" property="updateUid" />
     <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
   </resultMap>
 
 
 
   <sql id="Base_Column_List">
-    rmid, rid, mid, state, create_uid, create_time, update_uid, update_time
+    rmid, system_key, rid, mid, state, create_uid, create_time, update_uid, update_time
   </sql>
 
 
@@ -28,6 +29,9 @@
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="rmid != null">
         rmid,
+      </if>
+      <if test="system_key != null">
+        system_key,
       </if>
       <if test="rid != null">
         rid,
@@ -53,25 +57,28 @@
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="rmid != null">
-        #{rmid,jdbcType=BIGINT},
+        #{rmid,jdbcType=VARCHAR},
+      </if>
+      <if test="systemKey != null">
+        #{systemKey,jdbcType=VARCHAR},
       </if>
       <if test="rid != null">
-        #{rid,jdbcType=BIGINT},
+        #{rid,jdbcType=VARCHAR},
       </if>
       <if test="mid != null">
-        #{mid,jdbcType=BIGINT},
+        #{mid,jdbcType=VARCHAR},
       </if>
       <if test="state != null">
         #{state,jdbcType=INTEGER},
       </if>
       <if test="createUid != null">
-        #{createUid,jdbcType=BIGINT},
+        #{createUid,jdbcType=VARCHAR},
       </if>
       <if test="createTime != null">
         #{createTime,jdbcType=TIMESTAMP},
       </if>
       <if test="updateUid != null">
-        #{updateUid,jdbcType=BIGINT},
+        #{updateUid,jdbcType=VARCHAR},
       </if>
       <if test="updateTime != null">
         #{updateTime,jdbcType=TIMESTAMP},
@@ -86,29 +93,32 @@
     UPDATE role_menu
     <set>
       <if test="rid != null">
-        rid = #{rid,jdbcType=BIGINT},
+        rid = #{rid,jdbcType=VARCHAR},
+      </if>
+      <if test="systemKey != null">
+        rid = #{systemKey,jdbcType=VARCHAR},
       </if>
       <if test="mid != null">
-        mid = #{mid,jdbcType=BIGINT},
+        mid = #{mid,jdbcType=VARCHAR},
       </if>
       <if test="state != null">
         state = #{state,jdbcType=INTEGER},
       </if>
       <if test="createUid != null">
-        create_uid = #{createUid,jdbcType=BIGINT},
+        create_uid = #{createUid,jdbcType=VARCHAR},
       </if>
       <if test="createTime != null">
         create_time = #{createTime,jdbcType=TIMESTAMP},
       </if>
       <if test="updateUid != null">
-        update_uid = #{updateUid,jdbcType=BIGINT},
+        update_uid = #{updateUid,jdbcType=VARCHAR},
       </if>
       <if test="updateTime != null">
         update_time = #{updateTime,jdbcType=TIMESTAMP},
       </if>
     </set>
     WHERE
-        rmid = #{rmid,jdbcType=BIGINT}
+        rmid = #{rmid,jdbcType=VARCHAR}
   </update>
 
 
@@ -117,15 +127,16 @@
   <update id="updateByPrimaryKey" parameterType="com.authorization.privilege.entity.dsprivelege.role.RoleMenu">
     UPDATE role_menu
     SET
-      rid = #{rid,jdbcType=BIGINT},
-      mid = #{mid,jdbcType=BIGINT},
+      rid = #{rid,jdbcType=VARCHAR},
+      system_key = #{systemKey,jdbcType=VARCHAR},
+      mid = #{mid,jdbcType=VARCHAR},
       state = #{state,jdbcType=INTEGER},
-      create_uid = #{createUid,jdbcType=BIGINT},
+      create_uid = #{createUid,jdbcType=VARCHAR},
       create_time = #{createTime,jdbcType=TIMESTAMP},
-      update_uid = #{updateUid,jdbcType=BIGINT},
+      update_uid = #{updateUid,jdbcType=VARCHAR},
       update_time = #{updateTime,jdbcType=TIMESTAMP}
     WHERE
-      rmid = #{rmid,jdbcType=BIGINT}
+      rmid = #{rmid,jdbcType=VARCHAR}
   </update>
 
 </mapper>
