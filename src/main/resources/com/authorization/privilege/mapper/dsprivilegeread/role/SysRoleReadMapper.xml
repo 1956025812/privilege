@@ -54,7 +54,7 @@
 
 
   <sql id="Base_Column_List">
-    rid, role_name, description, system_key, state, create_uid, create_time, update_uid, update_time
+    rid, role_name, description, system_key, parent_rid, state, create_uid, create_time, update_uid, update_time
   </sql>
 
 
@@ -116,7 +116,7 @@
   <!-- 查询角色VO对象 -->
   <select id="selectSysRoleVO" parameterType="com.authorization.privilege.vo.role.SysRoleVO" resultMap="SelectSysRoleVOMap">
       SELECT
-          rid, role_name, description, system_key, state, create_uid, create_time, update_uid, update_time
+          rid, role_name, description, system_key, parent_rid, state, create_uid, create_time, update_uid, update_time
       FROM
           sys_role
       <trim prefix="WHERE" prefixOverrides="AND|OR">

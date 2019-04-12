@@ -13,6 +13,7 @@ import com.authorization.privilege.vo.system.SysSystemVO;
 import com.authorization.privilege.vo.user.UserVO;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
@@ -101,7 +102,30 @@ public class SysRoleReadServiceImpl implements SysRoleReadService {
 
         if (null != sysRoleVODetail) {
 
-            // 处理该角色下的菜单集合 TODO
+            // 处理系统名称
+            SysSystemVO sysSystemVO = new SysSystemVO();
+            sysSystemVO.setSystemKey(sysRoleVODetail.getSystemKey());
+            SysSystemVO sysSystemVODetail = this.sysSystemReadMapper.selectSysSystemVODetail(sysSystemVO);
+            sysRoleVODetail.setSystemName(sysSystemVODetail == null ? null : sysSystemVODetail.getSystemName());
+
+            // 处理上级角色名称
+            if (StringUtils.isNotEmpty(sysRoleVODetail.getParentRid())) {
+                SysRole parentSysRole = this.sysRoleReadMapper.selectByPrimaryKey(sysRoleVODetail.getParentRid());
+                sysRoleVODetail.setParentRoleName(parentSysRole == null ? null : parentSysRole.getRoleName());
+            }
+
+            // 处理创建人名称和修改人名称
+            HashMap<String, UserVO> userIdAndUserVOMap = this.userReadMapper.selectUserIdAndUserVOMap(new UserVO());
+            sysRoleVODetail.setCreateName(CollectionUtils.isEmpty(userIdAndUserVOMap) ? null :
+                    (userIdAndUserVOMap.get(sysRoleVODetail.getCreateUid()) == null ? null :
+                            userIdAndUserVOMap.get(sysRoleVODetail.getCreateUid()).getNickname())
+            );
+            sysRoleVODetail.setUpdateName(CollectionUtils.isEmpty(userIdAndUserVOMap) ? null :
+                    (userIdAndUserVOMap.get(sysRoleVODetail.getUpdateUid()) == null ? null :
+                            userIdAndUserVOMap.get(sysRoleVODetail.getUpdateUid()).getNickname())
+            );
+
+            // 处理菜单列表
 
 
         }
