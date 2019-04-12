@@ -2,6 +2,7 @@ package com.authorization.privilege.service.impl.role;
 
 import com.authorization.privilege.constant.role.SysRoleEnumsInterface;
 import com.authorization.privilege.entity.dsprivelege.role.SysRole;
+import com.authorization.privilege.mapper.dsprivilegeread.role.RoleMenuReadMapper;
 import com.authorization.privilege.mapper.dsprivilegeread.role.SysRoleReadMapper;
 import com.authorization.privilege.mapper.dsprivilegeread.system.SysSystemReadMapper;
 import com.authorization.privilege.mapper.dsprivilegeread.user.UserReadMapper;
@@ -37,6 +38,9 @@ public class SysRoleReadServiceImpl implements SysRoleReadService {
 
     @Autowired
     private UserReadMapper userReadMapper;
+
+    @Autowired
+    private RoleMenuReadMapper roleMenuReadMapper;
 
 
     @Override

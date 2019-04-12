@@ -23,11 +23,20 @@ public class RoleMenu extends BaseVO implements Serializable {
     @ApiModelProperty("菜单ID")
     private String mid;
 
+    @ApiModelProperty("状态：0:删除， 1：正常")
+    private Integer state;
+
     @ApiModelProperty("创建人ID")
-    private String creatorId;
+    private String createUid;
 
     @ApiModelProperty("创建时间")
     private LocalDateTime createTime;
+
+    @ApiModelProperty("修改人ID")
+    private String updateUid;
+
+    @ApiModelProperty("修改时间")
+    private LocalDateTime updateTime;
 
     public String getRmid() {
         return rmid;
@@ -53,12 +62,20 @@ public class RoleMenu extends BaseVO implements Serializable {
         this.mid = mid == null ? null : mid.trim();
     }
 
-    public String getCreatorId() {
-        return creatorId;
+    public Integer getState() {
+        return state;
     }
 
-    public void setCreatorId(String creatorId) {
-        this.creatorId = creatorId == null ? null : creatorId.trim();
+    public void setState(Integer state) {
+        this.state = state;
+    }
+
+    public String getCreateUid() {
+        return createUid;
+    }
+
+    public void setCreateUid(String createUid) {
+        this.createUid = createUid;
     }
 
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
@@ -68,5 +85,22 @@ public class RoleMenu extends BaseVO implements Serializable {
 
     public void setCreateTime(LocalDateTime createTime) {
         this.createTime = createTime;
+    }
+
+    public String getUpdateUid() {
+        return updateUid;
+    }
+
+    public void setUpdateUid(String updateUid) {
+        this.updateUid = updateUid;
+    }
+
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
+    public LocalDateTime getUpdateTime() {
+        return updateTime;
+    }
+
+    public void setUpdateTime(LocalDateTime updateTime) {
+        this.updateTime = updateTime;
     }
 }
