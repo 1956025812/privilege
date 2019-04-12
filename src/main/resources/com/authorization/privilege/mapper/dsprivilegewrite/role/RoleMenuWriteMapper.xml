@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.authorization.privilege.mapper.dsprivilegewrite.role.RoleMenuWriteMapper">
+
+  
+  <resultMap id="BaseResultMap" type="com.authorization.privilege.entity.dsprivelege.role.RoleMenu">
+    <id column="rmid" jdbcType="BIGINT" property="rmid" />
+    <result column="rid" jdbcType="BIGINT" property="rid" />
+    <result column="mid" jdbcType="BIGINT" property="mid" />
+    <result column="state" jdbcType="INTEGER" property="state" />
+    <result column="create_uid" jdbcType="BIGINT" property="createUid" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="update_uid" jdbcType="BIGINT" property="updateUid" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+  </resultMap>
+
+
+
+  <sql id="Base_Column_List">
+    rmid, rid, mid, state, create_uid, create_time, update_uid, update_time
+  </sql>
+
+
+
+  <!-- 新增角色菜单关联对象 -->
+  <insert id="insertSelective" parameterType="com.authorization.privilege.entity.dsprivelege.role.RoleMenu">
+    INSERT INTO role_menu
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="rmid != null">
+        rmid,
+      </if>
+      <if test="rid != null">
+        rid,
+      </if>
+      <if test="mid != null">
+        mid,
+      </if>
+      <if test="state != null">
+        state,
+      </if>
+      <if test="createUid != null">
+        create_uid,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="updateUid != null">
+        update_uid,
+      </if>
+      <if test="updateTime != null">
+        update_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="rmid != null">
+        #{rmid,jdbcType=BIGINT},
+      </if>
+      <if test="rid != null">
+        #{rid,jdbcType=BIGINT},
+      </if>
+      <if test="mid != null">
+        #{mid,jdbcType=BIGINT},
+      </if>
+      <if test="state != null">
+        #{state,jdbcType=INTEGER},
+      </if>
+      <if test="createUid != null">
+        #{createUid,jdbcType=BIGINT},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateUid != null">
+        #{updateUid,jdbcType=BIGINT},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+
+
+
+  <!-- 修改角色菜单关联对象(可选) -->
+  <update id="updateByPrimaryKeySelective" parameterType="com.authorization.privilege.entity.dsprivelege.role.RoleMenu">
+    UPDATE role_menu
+    <set>
+      <if test="rid != null">
+        rid = #{rid,jdbcType=BIGINT},
+      </if>
+      <if test="mid != null">
+        mid = #{mid,jdbcType=BIGINT},
+      </if>
+      <if test="state != null">
+        state = #{state,jdbcType=INTEGER},
+      </if>
+      <if test="createUid != null">
+        create_uid = #{createUid,jdbcType=BIGINT},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateUid != null">
+        update_uid = #{updateUid,jdbcType=BIGINT},
+      </if>
+      <if test="updateTime != null">
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    WHERE
+        rmid = #{rmid,jdbcType=BIGINT}
+  </update>
+
+
+
+  <!-- 修改角色菜单关联对象 -->
+  <update id="updateByPrimaryKey" parameterType="com.authorization.privilege.entity.dsprivelege.role.RoleMenu">
+    UPDATE role_menu
+    SET
+      rid = #{rid,jdbcType=BIGINT},
+      mid = #{mid,jdbcType=BIGINT},
+      state = #{state,jdbcType=INTEGER},
+      create_uid = #{createUid,jdbcType=BIGINT},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_uid = #{updateUid,jdbcType=BIGINT},
+      update_time = #{updateTime,jdbcType=TIMESTAMP}
+    WHERE
+      rmid = #{rmid,jdbcType=BIGINT}
+  </update>
+
+</mapper>
