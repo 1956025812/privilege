@@ -25,8 +25,7 @@
     <result column="system_key" jdbcType="VARCHAR" property="systemKey" />
     <result column="parent_rid" jdbcType="VARCHAR" property="parentRid" />
     <result column="state" jdbcType="INTEGER" property="state" />
-    <result column="create_uid" jdbcType="VARCHAR" property="createUid" />
-    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="level" jdbcType="INTEGER" property="level" />
   </resultMap>
 
 
@@ -75,7 +74,7 @@
   <!-- 查询角色列表 -->
   <select id="selectSysRoleList" parameterType="com.authorization.privilege.vo.role.SysRoleVO" resultMap="SelectSysRoleListMap">
     SELECT
-        rid, role_name, system_key, parent_rid, state
+        rid, role_name, system_key, parent_rid, state, `level`
     FROM
         sys_role
     WHERE
