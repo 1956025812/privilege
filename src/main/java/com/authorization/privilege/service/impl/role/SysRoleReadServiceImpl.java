@@ -118,6 +118,9 @@ public class SysRoleReadServiceImpl implements SysRoleReadService {
                 sysRoleVODetail.setParentRoleName(parentSysRole == null ? null : parentSysRole.getRoleName());
             }
 
+            // 处理状态名称
+            sysRoleVODetail.setRoleStateName(SysRoleEnumsInterface.State.getName(sysRoleVODetail.getState()));
+
             // 处理创建人名称和修改人名称
             HashMap<String, UserVO> userIdAndUserVOMap = this.userReadMapper.selectUserIdAndUserVOMap(new UserVO());
             sysRoleVODetail.setCreateName(CollectionUtils.isEmpty(userIdAndUserVOMap) ? null :
@@ -128,9 +131,6 @@ public class SysRoleReadServiceImpl implements SysRoleReadService {
                     (userIdAndUserVOMap.get(sysRoleVODetail.getUpdateUid()) == null ? null :
                             userIdAndUserVOMap.get(sysRoleVODetail.getUpdateUid()).getNickname())
             );
-
-            // 处理菜单列表
-
 
         }
 
