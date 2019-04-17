@@ -1,7 +1,6 @@
 package com.authorization.privilege.controller.role;
 
 import com.authorization.privilege.controller.BaseController;
-import com.authorization.privilege.entity.dsprivelege.role.SysRole;
 import com.authorization.privilege.service.role.SysRoleReadService;
 import com.authorization.privilege.service.role.SysRoleWriteService;
 import com.authorization.privilege.vo.PageVO;
@@ -13,6 +12,8 @@ import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import springfox.documentation.annotations.ApiIgnore;
@@ -34,6 +35,20 @@ public class SysRoleController extends BaseController {
 
     @Autowired
     private SysRoleWriteService sysRoleWriteService;
+
+
+    @ApiOperation("修改角色")
+    @ApiImplicitParams({
+            @ApiImplicitParam(paramType = "query", dataType = "String", name = "loginUid", value = "登录用户ID", required = true),
+            @ApiImplicitParam(paramType = "query", dataType = "String", name = "rid", value = "角色ID", required = false),
+            @ApiImplicitParam(paramType = "query", dataType = "String", name = "roleName", value = "角色名称", required = false),
+            @ApiImplicitParam(paramType = "query", dataType = "String", name = "description", value = "角色描述", required = false)
+    })
+    @PostMapping("/update")
+    public ResultVO<Void> updateSysRole(@ApiIgnore @RequestBody SysRoleVO sysRoleVO) throws Exception {
+        return this.sysRoleWriteService.updateSysRole(sysRoleVO);
+    }
+
 
 
     @ApiOperation("查询角色分页列表")
