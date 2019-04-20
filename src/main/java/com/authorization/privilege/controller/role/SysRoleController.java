@@ -51,6 +51,18 @@ public class SysRoleController extends BaseController {
 
 
 
+    @ApiOperation("删除角色")
+    @ApiImplicitParams({
+            @ApiImplicitParam(paramType = "query", dataType = "String", name = "loginUid", value = "登录用户ID", required = true),
+            @ApiImplicitParam(paramType = "query", dataType = "String", name = "rid", value = "角色ID", required = false)
+    })
+    @PostMapping("/del")
+    public ResultVO<Void> delRole(@ApiIgnore @RequestBody SysRoleVO sysRoleVO) throws Exception {
+        return this.sysRoleWriteService.delRole(sysRoleVO);
+    }
+
+
+
     @ApiOperation("查询角色分页列表")
     @ApiImplicitParams({
             @ApiImplicitParam(paramType = "query", dataType = "String", name = "loginUid", value = "登录用户ID", required = true),

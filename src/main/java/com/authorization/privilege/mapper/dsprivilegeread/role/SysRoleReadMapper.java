@@ -54,4 +54,14 @@ public interface SysRoleReadMapper {
      * @throws Exception
      */
     SysRoleVO selectSysRoleVO(SysRoleVO sysRoleVO) throws Exception;
+
+
+    /**
+     * 查询角色列表数量
+     *
+     * @param sysRoleVO
+     * @return 角色列表数量
+     * @throws Exception
+     */
+    Integer selectCountOfSysRoleList(SysRoleVO sysRoleVO) throws Exception;
 }

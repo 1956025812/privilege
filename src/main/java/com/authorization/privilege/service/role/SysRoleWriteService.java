@@ -20,4 +20,13 @@ public interface SysRoleWriteService {
      */
     ResultVO<Void> updateSysRole(SysRoleVO sysRoleVO) throws Exception;
 
+
+    /**
+     * 删除角色
+     *
+     * @param sysRoleVO
+     * @return VOID
+     * @throws Exception
+     */
+    ResultVO<Void> delRole(SysRoleVO sysRoleVO) throws Exception;
 }

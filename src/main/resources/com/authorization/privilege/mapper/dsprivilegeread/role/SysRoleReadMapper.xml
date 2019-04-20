@@ -132,4 +132,18 @@
 
 
 
+  <!-- 查询角色列表数量 -->
+  <select id="selectCountOfSysRoleList" parameterType="com.authorization.privilege.vo.role.SysRoleVO" resultType="java.lang.Integer">
+      SELECT
+          COUNT(1)
+      FROM
+          sys_role
+      <trim prefix="WHERE" prefixOverrides="AND|OR">
+          AND state > 0
+          <if test="parentRid != null and parentRid != ''">
+              AND parent_rid = #{parentRid}
+          </if>
+      </trim>
+  </select>
+
 </mapper>

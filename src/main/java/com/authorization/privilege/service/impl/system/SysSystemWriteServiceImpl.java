@@ -21,6 +21,7 @@ import java.time.LocalDateTime;
  * @description 系统对象写接口实现类
  */
 @Service
+@Transactional(rollbackFor = Exception.class)
 public class SysSystemWriteServiceImpl implements SysSystemWriteService {
 
     @Autowired
@@ -30,7 +31,7 @@ public class SysSystemWriteServiceImpl implements SysSystemWriteService {
     private SysSystemReadMapper sysSystemReadMapper;
 
 
-    @Transactional(rollbackFor = Exception.class)
+
     @Override
     public ResultVO<Void> saveSysSystem(SysSystemVO sysSystemVO) throws Exception {
 
@@ -48,7 +49,7 @@ public class SysSystemWriteServiceImpl implements SysSystemWriteService {
     }
 
 
-    @Transactional(rollbackFor = Exception.class)
+
     @Override
     public ResultVO<Void> updateSysSystem(SysSystemVO sysSystemVO) throws Exception {
 
@@ -69,7 +70,7 @@ public class SysSystemWriteServiceImpl implements SysSystemWriteService {
     }
 
 
-    @Transactional(rollbackFor = Exception.class)
+
     @Override
     public ResultVO<Void> delSysSystem(SysSystemVO sysSystemVO) throws Exception {
 

@@ -20,6 +20,7 @@ import java.time.LocalDateTime;
  * @description 菜单写SERVICE接口实现类
  */
 @Service
+@Transactional(rollbackFor = Exception.class)
 public class SysMenuWriteServiceImpl implements SysMenuWriteService {
 
     @Autowired
@@ -29,7 +30,7 @@ public class SysMenuWriteServiceImpl implements SysMenuWriteService {
     private SysMenuReadMapper sysMenuReadMapper;
 
 
-    @Transactional(rollbackFor = Exception.class)
+
     @Override
     public ResultVO<Void> saveSysMenuVO(SysMenuVO sysMenuVO) throws Exception {
 
@@ -57,7 +58,6 @@ public class SysMenuWriteServiceImpl implements SysMenuWriteService {
 
 
 
-    @Transactional(rollbackFor = Exception.class)
     @Override
     public ResultVO<Void> updateSysMenuVO(SysMenuVO sysMenuVO) throws Exception {
 
@@ -76,7 +76,6 @@ public class SysMenuWriteServiceImpl implements SysMenuWriteService {
 
 
 
-    @Transactional(rollbackFor = Exception.class)
     @Override
     public ResultVO<Void> delSysMenuVO(SysMenuVO sysMenuVO) throws Exception {
 
