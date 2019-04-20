@@ -57,6 +57,7 @@ public class SysRoleController extends BaseController {
             @ApiImplicitParam(paramType = "query", dataType = "Long", name = "currentPage", value = "当前页码", required = true),
             @ApiImplicitParam(paramType = "query", dataType = "Long", name = "pageSize", value = "每页记录数", required = true),
             @ApiImplicitParam(paramType = "query", dataType = "String", name = "systemKey", value = "系统标识", required = false),
+            @ApiImplicitParam(paramType = "query", dataType = "String", name = "level", value = "系统标识", required = false),
             @ApiImplicitParam(paramType = "query", dataType = "String", name = "parentRid", value = "父角色ID", required = false),
             @ApiImplicitParam(paramType = "query", dataType = "String", name = "roleName", value = "角色名称", required = false),
             @ApiImplicitParam(paramType = "query", dataType = "String", name = "startTime", value = "创建开始时间", required = false),
