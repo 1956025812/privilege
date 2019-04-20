@@ -8,6 +8,8 @@ import com.authorization.privilege.vo.role.SysRoleVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
+
 /**
  * @author duxuebo
  * @date 2019/4/1
@@ -27,6 +29,8 @@ public class SysRoleWriteServiceImpl implements SysRoleWriteService {
         sysRole.setRid(sysRoleVO.getRid());
         sysRole.setRoleName(sysRoleVO.getRoleName());
         sysRole.setDescription(sysRoleVO.getDescription());
+        sysRole.setUpdateUid(sysRoleVO.getLoginUid());
+        sysRole.setUpdateTime(LocalDateTime.now());
 
         this.sysRoleWriteMapper.updateByPrimaryKeySelective(sysRole);
 
