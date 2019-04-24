@@ -12,6 +12,16 @@ public interface SysRoleWriteService {
 
 
     /**
+     * 新增角色
+     *
+     * @param sysRoleVO
+     * @return VOID
+     * @throws Exception
+     */
+    ResultVO<Void> saveSysRole(SysRoleVO sysRoleVO) throws Exception;
+
+
+    /**
      * 修改角色
      *
      * @param sysRoleVO
@@ -29,4 +39,7 @@ public interface SysRoleWriteService {
      * @throws Exception
      */
     ResultVO<Void> delRole(SysRoleVO sysRoleVO) throws Exception;
+
+
+
 }

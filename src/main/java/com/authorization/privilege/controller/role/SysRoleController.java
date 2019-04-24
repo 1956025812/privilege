@@ -37,6 +37,22 @@ public class SysRoleController extends BaseController {
     private SysRoleWriteService sysRoleWriteService;
 
 
+    @ApiOperation("新增角色")
+    @ApiImplicitParams({
+            @ApiImplicitParam(paramType = "query", dataType = "String", name = "loginUid", value = "登录用户ID", required = true),
+            @ApiImplicitParam(paramType = "query", dataType = "String", name = "systemKey", value = "系统标识", required = false),
+            @ApiImplicitParam(paramType = "query", dataType = "String", name = "parentRid", value = "父角色ID", required = false),
+            @ApiImplicitParam(paramType = "query", dataType = "String", name = "level", value = "角色级别", required = false),
+            @ApiImplicitParam(paramType = "query", dataType = "String", name = "roleName", value = "角色名称", required = false),
+            @ApiImplicitParam(paramType = "query", dataType = "String", name = "description", value = "角色描述", required = false)
+    })
+    @PostMapping("/save")
+    public ResultVO<Void> saveSysRole(@ApiIgnore @RequestBody SysRoleVO sysRoleVO) throws Exception {
+        return this.sysRoleWriteService.saveSysRole(sysRoleVO);
+    }
+
+
+
     @ApiOperation("修改角色")
     @ApiImplicitParams({
             @ApiImplicitParam(paramType = "query", dataType = "String", name = "loginUid", value = "登录用户ID", required = true),

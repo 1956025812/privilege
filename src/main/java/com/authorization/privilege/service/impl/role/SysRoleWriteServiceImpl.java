@@ -5,6 +5,7 @@ import com.authorization.privilege.entity.dsprivelege.role.SysRole;
 import com.authorization.privilege.mapper.dsprivilegeread.role.SysRoleReadMapper;
 import com.authorization.privilege.mapper.dsprivilegewrite.role.SysRoleWriteMapper;
 import com.authorization.privilege.service.role.SysRoleWriteService;
+import com.authorization.privilege.util.CommonUtil;
 import com.authorization.privilege.vo.ResultVO;
 import com.authorization.privilege.vo.role.SysRoleVO;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,6 +31,25 @@ public class SysRoleWriteServiceImpl implements SysRoleWriteService {
 
 
     @Override
+    public ResultVO<Void> saveSysRole(SysRoleVO sysRoleVO) throws Exception {
+
+        SysRole sysRole = new SysRole();
+        sysRole.setRid(CommonUtil.generatorId());
+        sysRole.setSystemKey(sysRoleVO.getSystemKey());
+        sysRole.setParentRid(sysRoleVO.getParentRid());
+        sysRole.setRoleName(sysRoleVO.getRoleName());
+        sysRole.setDescription(sysRoleVO.getDescription());
+        sysRole.setLevel(sysRoleVO.getLevel());
+        sysRole.setState(SysRoleEnumsInterface.State.START.getIntIndex());
+        sysRole.setCreateUid(sysRoleVO.getLoginUid());
+        sysRole.setCreateTime(LocalDateTime.now());
+        this.sysRoleWriteMapper.insertSelective(sysRole);
+
+        return ResultVO.getSuccess("新增角色成功");
+    }
+
+
+    @Override
     public ResultVO<Void> updateSysRole(SysRoleVO sysRoleVO) throws Exception {
 
         SysRole sysRole = new SysRole();
@@ -38,7 +58,6 @@ public class SysRoleWriteServiceImpl implements SysRoleWriteService {
         sysRole.setDescription(sysRoleVO.getDescription());
         sysRole.setUpdateUid(sysRoleVO.getLoginUid());
         sysRole.setUpdateTime(LocalDateTime.now());
-
         this.sysRoleWriteMapper.updateByPrimaryKeySelective(sysRole);
 
         return ResultVO.getSuccess("修改角色成功");
