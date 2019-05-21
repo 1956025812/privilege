@@ -44,12 +44,36 @@
       <result column="url" property="url" jdbcType="VARCHAR" />
       <result column="parent_mid" property="parentMid" jdbcType="VARCHAR" />
       <result column="sort" property="sort" jdbcType="INTEGER" />
+      <result column="state" property="state" jdbcType="INTEGER" />
       <result column="description" property="description" jdbcType="VARCHAR" />
       <result column="create_uid" property="createUid" jdbcType="VARCHAR" />
       <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
       <result column="update_uid" property="updateUid" jdbcType="VARCHAR" />
       <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
   </resultMap>
+
+
+  <!-- 单表查询菜单列表返回MAP -->
+  <resultMap id="SelectSysMenuListMap" type="com.authorization.privilege.vo.menu.SysMenuVO">
+      <id column="mid" property="mid" jdbcType="VARCHAR" />
+      <result column="system_key" property="systemKey" jdbcType="VARCHAR" />
+      <result column="menu_name" property="menuName" jdbcType="VARCHAR" />
+      <result column="type" property="type" jdbcType="INTEGER" />
+      <result column="level" property="level" jdbcType="INTEGER" />
+      <result column="url" property="url" jdbcType="VARCHAR" />
+      <result column="parent_mid" property="parentMid" jdbcType="VARCHAR" />
+      <result column="sort" property="sort" jdbcType="INTEGER" />
+      <result column="create_uid" property="createUid" jdbcType="VARCHAR" />
+      <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+
+
+  <!-- 查询菜单ID和菜单VO对象MAP集合返回MAP -->
+  <resultMap id="SelectMenuIdAndSysMenuVOMapMap" type="com.authorization.privilege.vo.menu.SysMenuVO">
+      <id column="mid" property="mid" jdbcType="VARCHAR" />
+      <result column="menu_name" property="menuName" jdbcType="VARCHAR" />
+  </resultMap>
+
 
 
   <sql id="Base_Column_List" >
@@ -121,5 +145,44 @@
           </if>
       </trim>
   </select>
+
+
+  <!-- 单表查询菜单列表 -->
+  <select id="selectSysMenuList" parameterType="com.authorization.privilege.vo.menu.SysMenuVO" resultMap="SelectSysMenuListMap">
+      SELECT
+          mid, system_key, menu_name, `type`, `level`, parent_mid, sort, state, create_uid, create_time
+      FROM
+          sys_menu
+      WHERE
+          state > 0
+          <if test="systemKey != null and systemKey != ''">
+              AND system_key = #{systemKey}
+          </if>
+          <if test="menuName != null and menuName != ''">
+              AND menu_name LIKE CONCAT("%", #{menuName} ,"%")
+          </if>
+          <if test="parentMid != null and parentMid != ''">
+              AND parent_mid = #{parentMid}
+          </if>
+          <if test="state != null">
+              AND state = #{state}
+          </if>
+          <if test="level != null">
+              AND `level` = #{level}
+          </if>
+  </select>
+
+
+  <!-- 查询菜单ID和菜单VO对象MAP集合 -->
+  <select id="selectMenuIdAndSysMenuVOMap" parameterType="com.authorization.privilege.vo.menu.SysMenuVO"
+          resultMap="SelectMenuIdAndSysMenuVOMapMap">
+      SELECT
+          mid, menu_name
+      FROM
+          sys_menu
+      WHERE
+          state > 0
+  </select>
+
 
 </mapper>

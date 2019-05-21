@@ -2,7 +2,9 @@ package com.authorization.privilege.mapper.dsprivilegeread.menu;
 
 import com.authorization.privilege.entity.dsprivelege.menu.SysMenu;
 import com.authorization.privilege.vo.menu.SysMenuVO;
+import org.apache.ibatis.annotations.MapKey;
 
+import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -49,4 +51,25 @@ public interface SysMenuReadMapper {
      * @throws Exception
      */
     Integer selectCountOfSysMenuList(SysMenuVO newSysMenuVO) throws Exception;
+
+
+    /**
+     * 单表查询菜单列表
+     *
+     * @param sysMenuVO
+     * @return SysMenuVO集合
+     * @throws Exception
+     */
+    List<SysMenuVO> selectSysMenuList(SysMenuVO sysMenuVO) throws Exception;
+
+
+    /**
+     * 查询菜单ID和菜单VO对象MAP集合
+     *
+     * @param sysMenuVO
+     * @return 菜单ID和菜单VO对象MAP集合
+     * @throws Exception
+     */
+    @MapKey("mid")
+    HashMap<String, SysMenuVO> selectMenuIdAndSysMenuVOMap(SysMenuVO sysMenuVO) throws Exception;
 }

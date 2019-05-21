@@ -1,16 +1,19 @@
 package com.authorization.privilege.service.impl.menu;
 
 import com.authorization.privilege.constant.menu.SysMenuEnumsInterface;
+import com.authorization.privilege.constant.role.SysRoleEnumsInterface;
 import com.authorization.privilege.entity.dsprivelege.menu.SysMenu;
-import com.authorization.privilege.entity.dsprivelege.system.SysSystem;
 import com.authorization.privilege.mapper.dsprivilegeread.menu.SysMenuReadMapper;
 import com.authorization.privilege.mapper.dsprivilegeread.system.SysSystemReadMapper;
 import com.authorization.privilege.mapper.dsprivilegeread.user.UserReadMapper;
 import com.authorization.privilege.service.menu.SysMenuReadService;
+import com.authorization.privilege.vo.PageVO;
 import com.authorization.privilege.vo.ResultVO;
 import com.authorization.privilege.vo.menu.SysMenuVO;
 import com.authorization.privilege.vo.system.SysSystemVO;
 import com.authorization.privilege.vo.user.UserVO;
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
@@ -35,6 +38,53 @@ public class SysMenuReadServiceImpl implements SysMenuReadService {
 
     @Autowired
     private SysSystemReadMapper sysSystemReadMapper;
+
+
+    @Override
+    public ResultVO<PageVO<SysMenuVO>> selectSysMenuVOPage(SysMenuVO sysMenuVO) throws Exception {
+
+        PageHelper.startPage(sysMenuVO.getCurrentPage(), sysMenuVO.getPageSize());
+        List<SysMenuVO> sysMenuVOList = this.sysMenuReadMapper.selectSysMenuList(sysMenuVO);
+
+        if(!CollectionUtils.isEmpty(sysMenuVOList)) {
+
+            HashMap<String, SysSystemVO> systemKeyAndSystemVOMap = this.sysSystemReadMapper.selectSystemKeyAndSystemVOMap(new SysSystemVO());
+            HashMap<String, UserVO> userIdAndUserVOMap = this.userReadMapper.selectUserIdAndUserVOMap(new UserVO());
+            HashMap<String, SysMenuVO> menuIdAndSysMenuVOMap = this.sysMenuReadMapper.selectMenuIdAndSysMenuVOMap(new SysMenuVO());
+
+            sysMenuVOList.forEach(eachSysMenuVO -> {
+
+                // 处理所属系统冗余字段
+                eachSysMenuVO.setSystemName(CollectionUtils.isEmpty(systemKeyAndSystemVOMap) ? null :
+                        (systemKeyAndSystemVOMap.get(eachSysMenuVO.getSystemKey()) == null ? null :
+                                systemKeyAndSystemVOMap.get(eachSysMenuVO.getSystemKey()).getSystemName())
+                );
+
+                // 处理上级角色冗余字段
+                eachSysMenuVO.setParentMenuName(CollectionUtils.isEmpty(menuIdAndSysMenuVOMap) ? null :
+                        (menuIdAndSysMenuVOMap.get(eachSysMenuVO.getParentMid()) == null ? null :
+                                menuIdAndSysMenuVOMap.get(eachSysMenuVO.getParentMid()).getMenuName()));
+
+                // 处理创建人冗余字段
+                eachSysMenuVO.setCreateName(CollectionUtils.isEmpty(userIdAndUserVOMap) ? null :
+                        (userIdAndUserVOMap.get(eachSysMenuVO.getCreateUid()) == null ? null :
+                                userIdAndUserVOMap.get(eachSysMenuVO.getCreateUid()).getNickname()));
+
+                // 处理状态名称冗余字段
+                eachSysMenuVO.setMenuStateName(SysMenuEnumsInterface.STATE.getName(eachSysMenuVO.getState()));
+            });
+        }
+
+        PageInfo<SysMenuVO> pageInfo = new PageInfo<>(sysMenuVOList);
+        PageVO<SysMenuVO> pageVO = new PageVO<>(
+                pageInfo.getPageNum(), pageInfo.getPageSize(), pageInfo.getTotal(),
+                pageInfo.getPages(), pageInfo.getList()
+        );
+
+        return ResultVO.getSuccess("查询菜单分页列表成功", pageVO);
+    }
+
+
 
     @Override
     public ResultVO<List<SysMenuVO>> selectSysMenuVOList(SysMenuVO sysMenuVO) throws Exception {

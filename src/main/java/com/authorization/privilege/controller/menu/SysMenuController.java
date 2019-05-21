@@ -3,6 +3,7 @@ package com.authorization.privilege.controller.menu;
 import com.authorization.privilege.controller.BaseController;
 import com.authorization.privilege.service.menu.SysMenuReadService;
 import com.authorization.privilege.service.menu.SysMenuWriteService;
+import com.authorization.privilege.vo.PageVO;
 import com.authorization.privilege.vo.ResultVO;
 import com.authorization.privilege.vo.menu.SysMenuVO;
 import io.swagger.annotations.Api;
@@ -80,6 +81,23 @@ public class SysMenuController extends BaseController {
     @PostMapping("/del")
     public ResultVO<Void> delSysMenuVO(@ApiIgnore @RequestBody SysMenuVO sysMenuVO) throws Exception {
         return this.sysMenuWriteService.delSysMenuVO(sysMenuVO);
+    }
+
+
+    @ApiOperation("查询菜单列表")
+    @ApiImplicitParams({
+            @ApiImplicitParam(paramType = "query", dataType = "String", name = "loginUid", value = "登录用户ID", required = true),
+            @ApiImplicitParam(paramType = "query", dataType = "Long", name = "currentPage", value = "当前页码", required = true),
+            @ApiImplicitParam(paramType = "query", dataType = "Long", name = "pageSize", value = "每页记录数", required = true),
+            @ApiImplicitParam(paramType = "query", dataType = "String", name = "systemKey", value = "系统标识", required = false),
+            @ApiImplicitParam(paramType = "query", dataType = "String", name = "level", value = "层级", required = false),
+            @ApiImplicitParam(paramType = "query", dataType = "String", name = "parentMid", value = "父菜单ID", required = false),
+            @ApiImplicitParam(paramType = "query", dataType = "String", name = "menuName", value = "菜单名称", required = false),
+            @ApiImplicitParam(paramType = "query", dataType = "String", name = "type", value = "类型: 1：菜单; 2：按钮", required = false)
+    })
+    @GetMapping("/page")
+    public ResultVO<PageVO<SysMenuVO>> selectSysMenuVOPage(@ApiIgnore SysMenuVO sysMenuVO) throws Exception {
+        return this.sysMenuReadService.selectSysMenuVOPage(sysMenuVO);
     }
 
 

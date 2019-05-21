@@ -21,6 +21,9 @@ public class SysMenuVO extends SysMenu {
     @ApiModelProperty("菜单类型名称")
     private String menuTypeName;
 
+    @ApiModelProperty("状态名称： 0：删除， 1：正常")
+    private String menuStateName;
+
     public String getSystemName() {
         return systemName;
     }
@@ -43,5 +46,13 @@ public class SysMenuVO extends SysMenu {
 
     public void setMenuTypeName(String menuTypeName) {
         this.menuTypeName = menuTypeName;
+    }
+
+    public String getMenuStateName() {
+        return menuStateName;
+    }
+
+    public void setMenuStateName(String menuStateName) {
+        this.menuStateName = menuStateName;
     }
 }
