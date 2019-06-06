@@ -72,7 +72,7 @@ public class ExcelWriteTest {
     public void writeExcelOneSheetMoreWrite() throws IOException {
 
         // 生成EXCEL并指定输出路径
-        OutputStream out = new FileOutputStream("E:\\temp\\withoutHead2.xlsx");
+        OutputStream out = new FileOutputStream("E:\\temp\\100W.xlsx");
         ExcelWriter writer = new ExcelWriter(out, ExcelTypeEnum.XLSX);
 
         // 设置SHEET
@@ -89,8 +89,8 @@ public class ExcelWriteTest {
         table.setHead(titles);
 
         // 模拟分批查询：总记录数50条，每次查询20条，  分三次查询 最后一次查询记录数是10
-        Integer totalRowCount = 50;
-        Integer pageSize = 20;
+        Integer totalRowCount = 1000000;
+        Integer pageSize = 200000;
         Integer writeCount = totalRowCount % pageSize == 0 ? (totalRowCount / pageSize) : (totalRowCount / pageSize + 1);
 
         // 注： 此处仅仅为了模拟数据，实用环境不需要将最后一次分开，合成一个即可， 参数为： currentPage = i+1;  pageSize = pageSize
@@ -101,7 +101,7 @@ public class ExcelWriteTest {
 
                 List<List<String>> userList = new ArrayList<>();
                 for (int j = 0; j < pageSize; j++) {
-                    userList.add(Arrays.asList("ID_" + Math.random(), "小明", String.valueOf(Math.random()), new Date().toString()));
+                    userList.add(Arrays.asList("ID_" + (int)(1+Math.random()*(1000-1+1)), "小明", String.valueOf((int)(1+Math.random()*(1000-1+1))), new Date().toString()));
                 }
                 writer.write0(userList, sheet, table);
 
@@ -111,7 +111,7 @@ public class ExcelWriteTest {
                 List<List<String>> userList = new ArrayList<>();
                 Integer lastWriteRowCount = totalRowCount - (writeCount - 1) * pageSize;
                 for (int j = 0; j < lastWriteRowCount; j++) {
-                    userList.add(Arrays.asList("ID_" + Math.random(), "小明", String.valueOf(Math.random()), new Date().toString()));
+                    userList.add(Arrays.asList("ID_" + (int)(1+Math.random()*(1000-1+1)), "小明", String.valueOf((int)(1+Math.random()*(1000-1+1))), new Date().toString()));
                 }
                 writer.write0(userList, sheet, table);
             }
@@ -134,7 +134,7 @@ public class ExcelWriteTest {
     public void writeExcelMoreSheetMoreWrite() throws IOException {
 
         // 生成EXCEL并指定输出路径
-        OutputStream out = new FileOutputStream("E:\\temp\\withoutHead3.xlsx");
+        OutputStream out = new FileOutputStream("E:\\temp\\50W.xlsx");
         ExcelWriter writer = new ExcelWriter(out, ExcelTypeEnum.XLSX);
 
         // 设置SHEET名称
@@ -151,8 +151,8 @@ public class ExcelWriteTest {
 
         // 模拟分批查询：总记录数250条，每个SHEET存100条，每次查询20条  则生成3个SHEET，前俩个SHEET查询次数为5， 最后一个SHEET查询次数为3 最后一次写的记录数是10
         // 注：该版本为了较少数据判断的复杂度，暂时perSheetRowCount要能够整除pageSize， 不去做过多处理  合理分配查询数据量大小不会内存溢出即可。
-        Integer totalRowCount = 250;
-        Integer perSheetRowCount = 100;
+        Integer totalRowCount = 500000;
+        Integer perSheetRowCount = 1000000;
         Integer pageSize = 20;
         Integer sheetCount = totalRowCount % perSheetRowCount == 0 ? (totalRowCount / perSheetRowCount) : (totalRowCount / perSheetRowCount + 1);
         Integer previousSheetWriteCount = perSheetRowCount / pageSize;
