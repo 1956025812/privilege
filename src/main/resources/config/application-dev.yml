@@ -5,17 +5,17 @@ spring:
     # 权限系统写数据源(主)
     dsprivilegewrite:
       driverClassName: com.mysql.jdbc.Driver
-      username: 用户名
-      password: 密码
+      username: root
+      password: 123456
       # spring2.0此处为jdbc-url
-      jdbc-url: jdbc:mysql://IP:3306/privilege_write?useUnicode=true&characterEncoding=UTF-8&allowMultiQueries=true
+      jdbc-url: jdbc:mysql://localhost:3306/privilege_write?useUnicode=true&characterEncoding=UTF-8&allowMultiQueries=true
       type: com.alibaba.druid.pool.DruidDataSource
 
     # 权限系统读数据源
     dsprivilegeread:
       driverClassName: com.mysql.jdbc.Driver
-      username: 用户名
-      password: 密码
+      username: root
+      password: 123456
       # spring2.0此处为jdbc-url
-      jdbc-url: jdbc:mysql://IP:3306/privilege_write?useUnicode=true&characterEncoding=UTF-8&allowMultiQueries=true
+      jdbc-url: jdbc:mysql://localhost:3306/privilege_write?useUnicode=true&characterEncoding=UTF-8&allowMultiQueries=true
       type: com.alibaba.druid.pool.DruidDataSource

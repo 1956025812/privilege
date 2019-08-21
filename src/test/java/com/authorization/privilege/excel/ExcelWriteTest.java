@@ -31,7 +31,7 @@ public class ExcelWriteTest {
     @Test
     public void writeExcelOneSheetOnceWrite() throws IOException {
 
-        // 生成EXCEL并指定输出路径
+        /*// 生成EXCEL并指定输出路径
         OutputStream out = new FileOutputStream("E:\\temp\\withoutHead1.xlsx");
         ExcelWriter writer = new ExcelWriter(out, ExcelTypeEnum.XLSX);
 
@@ -55,7 +55,7 @@ public class ExcelWriteTest {
         }
 
         writer.write0(userList, sheet, table);
-        writer.finish();
+        writer.finish();*/
     }
 
 
@@ -71,7 +71,7 @@ public class ExcelWriteTest {
     @Test
     public void writeExcelOneSheetMoreWrite() throws IOException {
 
-        // 生成EXCEL并指定输出路径
+        /*// 生成EXCEL并指定输出路径
         OutputStream out = new FileOutputStream("E:\\temp\\100W.xlsx");
         ExcelWriter writer = new ExcelWriter(out, ExcelTypeEnum.XLSX);
 
@@ -117,7 +117,7 @@ public class ExcelWriteTest {
             }
         }
 
-        writer.finish();
+        writer.finish();*/
     }
 
 
@@ -133,7 +133,7 @@ public class ExcelWriteTest {
     @Test
     public void writeExcelMoreSheetMoreWrite() throws IOException {
 
-        // 生成EXCEL并指定输出路径
+       /* // 生成EXCEL并指定输出路径
         OutputStream out = new FileOutputStream("E:\\temp\\50W.xlsx");
         ExcelWriter writer = new ExcelWriter(out, ExcelTypeEnum.XLSX);
 
@@ -206,7 +206,7 @@ public class ExcelWriteTest {
             }
         }
 
-        writer.finish();
+        writer.finish();*/
     }
 
 

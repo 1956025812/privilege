@@ -29,7 +29,7 @@ public class ExcelReadTest {
     @Test
     public void readExcelTest() throws Exception {
 
-        InputStream inputStream = new FileInputStream(new File("E:\\temp\\7.xlsx"));
+       /* InputStream inputStream = new FileInputStream(new File("E:\\temp\\7.xlsx"));
 
         System.out.println("开始读取");
 
@@ -65,7 +65,7 @@ public class ExcelReadTest {
             }
         });
 
-        System.out.println("读取完毕");
+        System.out.println("读取完毕");*/
     }
 
 }
